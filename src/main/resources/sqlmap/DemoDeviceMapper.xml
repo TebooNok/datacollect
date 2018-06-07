@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pginfo.datacollect.dao.SinkDataMapper" >
+<mapper namespace="com.pginfo.datacollect.dao.DemoDeviceMapper" >
     <resultMap id="DemoDeviceResultMap" type="com.pginfo.datacollect.domain.DemoDevice" >
         <result column="id" property="deviceId" jdbcType="INTEGER" />
         <result column="time" property="timestamp" jdbcType="INTEGER" />

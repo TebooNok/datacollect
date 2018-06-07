@@ -16,6 +16,8 @@ public class QueryAlarmInfoRequest extends BaseRequest {
 
     private String alarmEndTime = null;
 
+    private int alarmDeviceId;
+
     private int alarmPosition = 0;
 
     private int alarmDirection = 0;
@@ -89,5 +91,13 @@ public class QueryAlarmInfoRequest extends BaseRequest {
 
     public void setAlarmDirection(int alarmDirection) {
         this.alarmDirection = alarmDirection;
+    }
+
+    public int getAlarmDeviceId() {
+        return alarmDeviceId;
+    }
+
+    public void setAlarmDeviceId(int alarmDeviceId) {
+        this.alarmDeviceId = alarmDeviceId;
     }
 }

@@ -16,7 +16,7 @@ public class AlarmInfo {
 
     private int alarmDeviceId;
 
-    private Long height;
+    private long height;
 
     private String alarmDateTime;
 
@@ -69,11 +69,11 @@ public class AlarmInfo {
         this.alarmDeviceId = alarmDeviceId;
     }
 
-    public Long getHeight() {
+    public long getHeight() {
         return height;
     }
 
-    public void setHeight(Long height) {
+    public void setHeight(long height) {
         this.height = height;
     }
 

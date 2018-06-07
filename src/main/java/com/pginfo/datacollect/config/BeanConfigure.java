@@ -118,7 +118,7 @@ public class BeanConfigure {
 
     // 状态，和mysql保持同步
     // 缓存当前传感器信息(状态和设备名)，不向mongo同步
-    // @Bean
+    @Bean
     Map<Integer, MonitorDevice> monitorDeviceMap() {
         Map<Integer, MonitorDevice> monitorDeviceMap = new ConcurrentHashMap<>();
 

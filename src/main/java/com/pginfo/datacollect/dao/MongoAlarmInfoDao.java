@@ -92,8 +92,7 @@ public class MongoAlarmInfoDao {
 
         String alarmStartTime = request.getAlarmStartTime();
         String alarmEndTime = request.getAlarmEndTime();
-        int alarmPosition = request.getAlarmPosition();
-        int alarmDirection = request.getAlarmDirection();
+        int alarmDeviceId = request.getAlarmDeviceId();
         int alarmType = request.getAlarmType();
         int alarmLevel = request.getAlarmLevel();
 
@@ -107,12 +106,8 @@ public class MongoAlarmInfoDao {
             query.addCriteria(Criteria.where("alarmDateTime").lte(alarmEndTime));
         }
 
-        if(alarmPosition != 0){
-            query.addCriteria(Criteria.where("alarmDevicePosition").is(alarmPosition));
-        }
-
-        if(alarmDirection != 0){
-            query.addCriteria(Criteria.where("alarmDeviceDirection").is(alarmDirection));
+        if(alarmDeviceId != 0){
+            query.addCriteria(Criteria.where("alarmDeviceId").is(alarmDeviceId));
         }
 
         if(alarmType != 0){

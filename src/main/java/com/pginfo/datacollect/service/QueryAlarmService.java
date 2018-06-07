@@ -3,6 +3,7 @@ package com.pginfo.datacollect.service;
 
 import com.pginfo.datacollect.dao.MongoAlarmInfoDao;
 import com.pginfo.datacollect.domain.AlarmInfo;
+import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.QueryAlarmInfoRequest;
 import com.pginfo.datacollect.dto.QueryAlarmInfoResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -18,10 +19,13 @@ public class QueryAlarmService {
 
     private final Map<Integer, AlarmInfo> alarmInfoMap;
 
+    private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
+
     private final MongoAlarmInfoDao mongoAlarmInfoDao;
 
-    public QueryAlarmService(Map<Integer, AlarmInfo> alarmInfoMap, MongoAlarmInfoDao mongoAlarmInfoDao) {
+    public QueryAlarmService(Map<Integer, AlarmInfo> alarmInfoMap, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap, MongoAlarmInfoDao mongoAlarmInfoDao) {
         this.alarmInfoMap = alarmInfoMap;
+        this.monitorDeviceSettingMap = monitorDeviceSettingMap;
         this.mongoAlarmInfoDao = mongoAlarmInfoDao;
     }
 
@@ -107,6 +111,21 @@ public class QueryAlarmService {
         List<AlarmInfo> resultList = null;
         List<AlarmInfo> returnList = new ArrayList<>();
 
+        // 根据位置和方向定位ID
+        int alarmPosition = request.getAlarmPosition();
+        int alarmDirection = request.getAlarmDirection();
+        request.setAlarmDeviceId(0);
+
+        if(alarmDirection != 0 && alarmPosition != 0){
+            for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
+                MonitorDeviceSetting setting = entry.getValue();
+                if(setting.getDevicePosition() == alarmPosition && setting.getDeviceDirection() == alarmDirection){
+                    request.setAlarmDeviceId(setting.getDeviceId());
+                    break;
+                }
+            }
+        }
+
         // 只有已确认的告警在mongo中，
         if (alarmStatus == 3) {
             resultList = mongoAlarmInfoDao.getByFilterByDescTime(request);
@@ -139,7 +158,7 @@ public class QueryAlarmService {
             int endIndex = (page) * dataNum;
             int size = returnList.size();
             if ((page - 1) * dataNum > size) {
-                return new ArrayList<AlarmInfo>();
+                return new ArrayList<>();
             } else {
                 return returnList.subList((page - 1) * dataNum, endIndex > size ? size : endIndex);
             }
@@ -158,8 +177,7 @@ public class QueryAlarmService {
 
         String alarmStartTime = request.getAlarmStartTime();
         String alarmEndTime = request.getAlarmEndTime();
-        int alarmPosition = request.getAlarmPosition();
-        int alarmDirection = request.getAlarmDirection();
+        int alarmDeviceId = request.getAlarmDeviceId();
         int alarmType = request.getAlarmType();
         int alarmLevel = request.getAlarmLevel();
         int alarmStatus = request.getAlarmStatus();
@@ -176,14 +194,14 @@ public class QueryAlarmService {
             }
         }
 
-        if(alarmPosition != 0){
-            if(alarmInfo.getAlarmDevicePosition() != alarmPosition){
+        if(alarmDeviceId != 0){
+            if(alarmInfo.getAlarmDeviceId() != alarmDeviceId){
                 return false;
             }
         }
 
-        if(alarmDirection != 0){
-            if(alarmInfo.getAlarmDeviceDirection() != alarmDirection){
+        if(alarmStatus != 0){
+            if(alarmInfo.getAlarmStatus() != alarmStatus){
                 return false;
             }
         }
@@ -195,10 +213,9 @@ public class QueryAlarmService {
         }
 
         if(alarmLevel != 0){
-            if(alarmInfo.getAlarmLevel() != alarmLevel){
-                return false;
-            }
+            return alarmInfo.getAlarmLevel() == alarmLevel;
         }
+
         return true;
     }
 
