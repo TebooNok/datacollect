@@ -48,4 +48,9 @@ public class LocalUtils {
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(Constants.TIME_FORMAT))
                     .format(DateTimeFormatter.ofPattern(Constants.TIME_IGNORE_SECONDS));
     }
+
+    // 获取今日 yyyy:MM:dd
+    public static String formatCurrentDay() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.TIME_TODAY));
+    }
 }

@@ -7,6 +7,8 @@ public class BaseResponse implements Serializable {
 
     private String message;
 
+    private Integer total;
+
     // 生成导出文件的url
     private String url;
 
@@ -24,5 +26,13 @@ public class BaseResponse implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }

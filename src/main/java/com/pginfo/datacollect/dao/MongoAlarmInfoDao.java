@@ -2,7 +2,11 @@ package com.pginfo.datacollect.dao;
 
 import com.pginfo.datacollect.domain.AlarmInfo;
 import com.pginfo.datacollect.domain.AlarmThre;
+import com.pginfo.datacollect.dto.QueryAlarmInfoRequest;
+import com.pginfo.datacollect.util.LocalUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -28,6 +32,8 @@ public class MongoAlarmInfoDao {
 
     // 存入一条告警
     public void saveAlarmInfo(AlarmInfo alarmInfo) {
+
+        mongoTemplate.save(alarmInfo, SAVED_ALARMINFO);
     }
 
     // 读取各个设备当前告警状态
@@ -62,7 +68,62 @@ public class MongoAlarmInfoDao {
 
     }
 
-    public List<AlarmInfo> getSavedAlarmInfo(int alarmDeviceId) {
-        return null;
+    // 返回今天入库的告警
+    public List<AlarmInfo> getSavedToday() {
+
+        String day = LocalUtils.formatCurrentDay();
+
+        Criteria criteria=new Criteria("alarmDateTime");
+        criteria.regex(day);
+        Query query = new Query(criteria);
+        return mongoTemplate.find(query, AlarmInfo.class, SAVED_ALARMINFO);
+    }
+
+    // 根据时间序返回
+    public List<AlarmInfo> getSavedByDescTime() {
+
+        Query query = new Query();
+        query.with(new Sort(Sort.Direction.DESC,   "alarmDateTime"));
+        return mongoTemplate.find(query,AlarmInfo.class,SAVED_ALARMINFO);
+    }
+
+    // 条件查询
+    public List<AlarmInfo> getByFilterByDescTime(QueryAlarmInfoRequest request) {
+
+        String alarmStartTime = request.getAlarmStartTime();
+        String alarmEndTime = request.getAlarmEndTime();
+        int alarmPosition = request.getAlarmPosition();
+        int alarmDirection = request.getAlarmDirection();
+        int alarmType = request.getAlarmType();
+        int alarmLevel = request.getAlarmLevel();
+
+        Query query = new Query();
+
+        if(!StringUtils.isEmpty(alarmStartTime)){
+            query.addCriteria(Criteria.where("alarmDateTime").gte(alarmStartTime));
+        }
+
+        if(!StringUtils.isEmpty(alarmEndTime)){
+            query.addCriteria(Criteria.where("alarmDateTime").lte(alarmEndTime));
+        }
+
+        if(alarmPosition != 0){
+            query.addCriteria(Criteria.where("alarmDevicePosition").is(alarmPosition));
+        }
+
+        if(alarmDirection != 0){
+            query.addCriteria(Criteria.where("alarmDeviceDirection").is(alarmDirection));
+        }
+
+        if(alarmType != 0){
+            query.addCriteria(Criteria.where("alarmType").is(alarmType));
+        }
+
+        if(alarmLevel != 0){
+            query.addCriteria(Criteria.where("alarmLevel").is(alarmLevel));
+        }
+
+        query.with(new Sort(Sort.Direction.DESC,   "alarmDateTime"));
+        return mongoTemplate.find(query,AlarmInfo.class,SAVED_ALARMINFO);
     }
 }

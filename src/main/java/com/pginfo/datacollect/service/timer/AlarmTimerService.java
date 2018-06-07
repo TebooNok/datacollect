@@ -64,7 +64,7 @@ public class AlarmTimerService {
                     info.setAlarmStatus(1);
                     alarmInfoMap.put(id, info);
 
-                    mongoAlarmInfoDao.saveAlarmInfo(info);
+                    mongoAlarmInfoDao.saveCurrentAlarmInfo(info);
                 }
                 else if(Math.abs(height) > alarmThre.getAlarmLevel2())
                 {
@@ -78,7 +78,7 @@ public class AlarmTimerService {
                     info.setAlarmStatus(1);
                     alarmInfoMap.put(id, info);
 
-                    mongoAlarmInfoDao.saveAlarmInfo(info);
+                    mongoAlarmInfoDao.saveCurrentAlarmInfo(info);
                 }
                 else if(Math.abs(height) > alarmThre.getAlarmLevel3())
                 {
@@ -92,7 +92,7 @@ public class AlarmTimerService {
                     info.setAlarmStatus(1);
                     alarmInfoMap.put(id, info);
 
-                    mongoAlarmInfoDao.saveAlarmInfo(info);
+                    mongoAlarmInfoDao.saveCurrentAlarmInfo(info);
                 }
             }
         }

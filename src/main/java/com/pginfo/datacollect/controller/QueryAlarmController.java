@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,16 +23,16 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class RequestAlarmController {
+public class QueryAlarmController {
 
-    private Logger logger = LoggerFactory.getLogger(RequestAlarmController.class);
+    private Logger logger = LoggerFactory.getLogger(QueryAlarmController.class);
 
     private final QueryAlarmService queryAlarmService;
 
     private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
 
     @Autowired
-    public RequestAlarmController(QueryAlarmService queryAlarmService, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
+    public QueryAlarmController(QueryAlarmService queryAlarmService, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
         this.queryAlarmService = queryAlarmService;
         this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
@@ -63,7 +64,7 @@ public class RequestAlarmController {
                     returnList = queryAlarmService.todayAlarm();
                     break;
                 case 4: // 条件查询
-                    returnList = queryAlarmService.filterAlarm(request);
+                    returnList = queryAlarmService.filterAlarm(request, queryAlarmInfoResponse);
                     break;
                 case 5: // 实时告警，最新一条告警
                     returnList = queryAlarmService.currentAlarm();
@@ -77,16 +78,16 @@ public class RequestAlarmController {
             return queryAlarmInfoResponse;
         }
 
-        // 按时间降序排序
-        returnList.sort((AlarmInfo o1, AlarmInfo o2) -> {
-            return o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0;
-        });
+        if (!CollectionUtils.isEmpty(returnList)) {
+            // 按时间降序排序
+            returnList.sort((AlarmInfo o1, AlarmInfo o2) -> o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0);
 
-        // 传入位置信息
-        for(AlarmInfo info:returnList){
-            MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(info.getAlarmDeviceId());
-            info.setAlarmDeviceDirection(monitorDeviceSetting.getDevicePosition());
-            info.setAlarmDevicePosition(monitorDeviceSetting.getDevicePosition());
+            // 传入位置信息
+            for (AlarmInfo info : returnList) {
+                MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(info.getAlarmDeviceId());
+                info.setAlarmDeviceDirection(monitorDeviceSetting.getDevicePosition());
+                info.setAlarmDevicePosition(monitorDeviceSetting.getDevicePosition());
+            }
         }
 
         queryAlarmInfoResponse.setAlarmInfoList(returnList);

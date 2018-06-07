@@ -235,4 +235,95 @@ public class DatacollectApplicationTests {
             System.out.println(mongoSinkData.getDeviceId() + ", time = " + mongoSinkData.getDateTime());
         }
     }
+
+    @Test
+    public void testSubList(){
+        List<String> strings = new ArrayList<>();
+        strings.add("str1");
+        strings.add("str2");
+        strings.add("str3");
+        strings.add("str4");
+        strings.add("str5");
+        strings.add("str6");
+        strings.add("str7");
+        strings.add("str8");
+        if(strings.size() > 6){
+            List<String> ret = strings.subList(0,6);
+            for(String str:ret)
+            {
+                System.out.println(str);
+            }
+        }
+
+        if(null == strings.subList(1,1)){
+            System.out.println("null");
+        }
+
+        System.out.println(strings.subList(1,1).size());
+    }
+
+    @Test
+    public void testAddAll(){
+        List<String> strings1 = new ArrayList<>();
+        List<String> strings2 = new ArrayList<>();
+        strings1.add("str1");
+        strings1.add("str2");
+        strings1.add("str3");
+        strings1.add("str4");
+        strings2.add("str5");
+        strings2.add("str6");
+        strings2.add("str7");
+        strings2.add("str8");
+
+        strings1.addAll(strings2);
+
+        for(String str:strings1){
+            System.out.println(str);
+        }
+    }
+
+    @Test
+    public void testPage(){
+
+        List<String> returnList = new ArrayList<>();
+        for(int i = 1; i <= 0; i++){
+            returnList.add("str" + String.valueOf(i));
+        }
+
+        int page = 1;
+        int dataNum = 10;
+
+        if (page > 0) {
+            int endIndex = page * dataNum;
+            int size = returnList.size();
+
+            System.out.println("endIndex = " + endIndex);
+            System.out.println("dataNum = " + dataNum);
+            if ((page - 1) * dataNum > size) {
+                System.out.println("error");
+                return;
+            }else {
+                System.out.println((page - 1) * dataNum);
+                System.out.println(endIndex > size ? size : endIndex);
+                for (String str : returnList.subList((page - 1) * dataNum, endIndex > size ? size : endIndex)) {
+                    System.out.println(str);
+                }
+                return;
+            }
+        }
+
+        // 不启用分页，返回前N条
+        if (returnList.size() > dataNum) {
+
+            for(String str:returnList.subList(0, dataNum)){
+                System.out.println(str);
+            }
+            return;
+        } else {
+            for(String str:returnList){
+                System.out.println(str);
+            }
+            return;
+        }
+    }
 }

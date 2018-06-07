@@ -15,6 +15,7 @@ public interface Constants {
      */
     public static final String TIME_IGNORE_SECONDS="yyyy-MM-dd HH:mm";
 
+    public static final String TIME_TODAY = "yyyy-MM-dd";
     /**
      * 过期时间
      */

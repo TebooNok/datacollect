@@ -22,16 +22,16 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class RequestDataController {
+public class QueryDataController {
 
-    private Logger logger = LoggerFactory.getLogger(RequestDataController.class);
+    private Logger logger = LoggerFactory.getLogger(QueryDataController.class);
 
     private final QuerySinkDataService querySinkDataService;
 
     private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
 
     @Autowired
-    public RequestDataController(QuerySinkDataService querySinkDataService, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
+    public QueryDataController(QuerySinkDataService querySinkDataService, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
         this.querySinkDataService = querySinkDataService;
         this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
