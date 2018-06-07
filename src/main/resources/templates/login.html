@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="format-detection" content="telephone=no">
+        <meta charset="UTF-8">
+
+        <meta name="description" content="Violate Responsive Admin Template">
+        <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
+        <title></title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/form.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="css/generics.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/sunthree.css">
+    <link rel="stylesheet" href="css/sun.css">
+    </head>
+    <body id="login_box">
+    <div class="login_conbox"></div>
+        <div id="login">
+
+            <form class="box  animated active" id="box-login">
+                <label class="login_admin"></label>
+                <input type="text" class="login-control login_but40"id="login_adminadd" placeholder="username">
+                <label class="login_pass"></label>
+                <input type="password" class="login-control"  placeholder="............">
+                <div class="login_zidong ">
+                    <div class="">
+                    <span class="login_dengl">
+                        <i class="openicon" name="checkremember"></i>
+                        <span>下次自动登陆</span>
+                    </span>
+                    </div>
+                    <i class="log_forget"><a>忘记密码</a></i>
+                </div>
+                <div class="clearfix"></div>
+                <div class="threshold_but2">
+                    <button class="threshold_butqud"></button>
+
+                </div>
+            </form>
+
+
+        </div>
+        
+        <!-- Javascript Libraries -->
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script> <!-- jQuery Library -->
+        
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js"></script>
+        
+        <!--  Form Related -->
+        <script src="js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
+    <script>
+        $(function () {
+           $('form').find("[name='checkremember']").click(
+               function(){
+                   $(this).parent().toggleClass('checked')
+               }
+           )
+        })
+    </script>
+    </body>
+</html>

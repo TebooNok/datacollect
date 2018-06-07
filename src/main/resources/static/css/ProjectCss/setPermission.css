@@ -1,0 +1,111 @@
+.search{
+    padding-left: 15px;
+    padding-top: 15px
+}
+.sinput{
+    width: 200px;
+}
+.yhh-data-table-frame{
+    background-color: rgba(18, 122, 92, 0);
+}
+.row{
+    margin-bottom: -15px;
+}
+.yhh-data-table-frame>table.yhh-data-table th, .yhh-data-table-frame>table.yhh-data-table thead td, .yhh-data-table-frame>table.yhh-data-table tfoot td{
+    background-color: rgba(18, 122, 92, 0);
+}
+.yhh-data-table-frame>table.yhh-data-table tbody th, .yhh-data-table-frame>table.yhh-data-table tbody td{
+    padding: 3px 0px 3px 10px;
+}
+.paginate-containter .paginate-box .paginate-btn.disabled-btn{
+    background-color: #009b96;
+    color: #fff;
+    cursor: default
+}
+.paginate-containter .paginate-box .paginate-btn.current-btn:hover{
+    background-color: #DDE4FE;
+    color: #1E90FF
+}
+.paginate-containter .paginate-box .go-page-box{
+    margin-left: 15px
+}
+.paginate-containter .paginate-box *{
+    vertical-align: top;
+    display: inline-block
+}
+.paginate-containter .paginate-box .paginate-btn:hover{
+    color: #fff;
+}
+.yhh-data-table-frame>table.yhh-data-table td{
+    background-color: transparent;
+    color: inherit
+}
+.yhh-data-table-frame>table.yhh-data-table tr.even td{
+    background-color: rgba(11, 34, 103, 0.93)
+}
+.yhh-data-table-frame>.data-table-top-box>.per-length-box dt.sel-choosen-box{
+    background-color: #124673
+}
+.yhh-data-table-frame>.data-table-top-box>.per-length-box .sel-option{
+    background-color: #124673
+}
+.paginate-containter .paginate-box .paginate-btn{
+    background-color: #009b96
+}
+.paginate-containter .paginate-box input[type=text].go-page-input{
+    background-color: transparent;
+}
+.layui-layer-content{
+    color:black;
+}
+.layui-layer-rim{
+    border: 6px solid rgb(12, 32, 92);
+}
+.neir{
+    margin-left: 0px;
+}
+.breadcrumb{
+    float: none;
+}
+.yhh-data-table-frame>table.yhh-data-table th, .yhh-data-table-frame>table.yhh-data-table thead td, .yhh-data-table-frame>table.yhh-data-table tfoot td{
+    text-align: center;
+}
+.yhh-data-table-frame>table.yhh-data-table tr.odd td{
+    text-align: center;
+    font-size: 12px;
+    border-bottom: 0.1px solid #ccc
+}
+.yhh-data-table-frame>table.yhh-data-table tr.even td{
+    text-align: center;
+    font-size: 12px;
+}
+.yhh-data-table-frame>table.yhh-data-table thead th, .yhh-data-table-frame>table.yhh-data-table thead td, .yhh-data-table-frame>table.yhh-data-table tfoot th, .yhh-data-table-frame>table.yhh-data-table tfoot td{
+    font-weight: 300;
+    background: rgba(112, 113, 114, 0.44)
+}
+.yhh-data-table-frame>table.yhh-data-table th, .yhh-data-table-frame>table.yhh-data-table thead td, .yhh-data-table-frame>table.yhh-data-table tfoot td{
+    border: none;
+}
+.yhh-data-table-frame>table.yhh-data-table td, .yhh-data-table-frame>table.yhh-data-table th{
+    border: none;
+}
+.yhh-data-table-frame>table.yhh-data-table tr.even td{
+    background: transparent;
+    border-bottom: 0.1px solid #ccc
+}
+.backSearch{
+    background-image: url("../../images/ProjectImg/search.png");
+    background-repeat: no-repeat
+}
+.Higeradmins{
+    background-image: url("../../images/advancedAdmin.png");
+    background-repeat: no-repeat
+}
+.admins{
+    background-image: url("../../images/commomAdmin.png");
+    background-repeat: no-repeat
+}
+.yhh-data-table-frame>.data-table-top-box, .yhh-data-table-frame>.data-table-bottom-box, .yhh-data-table-frame>.data-table-top-box>.per-length-box, .yhh-data-table-frame>.data-table-bottom-box>.info-box, .yhh-data-table-frame>.data-table-bottom-box>.paginate-box{
+    margin-top: 2px
+;
+}

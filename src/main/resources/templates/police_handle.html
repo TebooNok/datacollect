@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]>
+<html class="ie9">
+<![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8">
+    <meta name="description" content="Violate Responsive Admin Template">
+    <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
+    <title>报警——处理人</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="css/sun.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/sunthree.css">
+</head>
+<body>
+<div class="ifream_head" >
+    <header  class=" headtwo">
+        <img src="images/top1.png" class="img-responsive">
+    </header>
+    <section class="container togethers">
+        <ul class="breadcrumb breadcrumb-left nav_menu1">
+            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext" target="myFrameName">首页</a></li>
+            <li class="nav_menu_li ifream_listnav">
+                <a  class="home-btn home_btnnext" target="myFrameName" >菜单</a>
+                <ul class="nav_twomenu bg2">
+                    <li>
+                        <a  target="myFrameName">设置</a>
+                        <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
+                            <li><a href="setPermission.html" target="myFrameName">权限</a> </li>
+                            <li><a href="threshold-value.html" target="myFrameName">阈值</a> </li>
+                            <li id="sbsz"><a href="device_setup.html" target="myFrameName">设备设置</a> </li>
+                        </ul>
+                    </li>
+                    <li><a  target="myFrameName">查询</a>
+                        <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
+                            <li><a href="searchDuan.html" target="myFrameName">时间段查询</a> </li>
+                            <li><a href="searchPoint.html" target="myFrameName">时间点查询</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="police.html" target="myFrameName" onClick="jump('charts.html')">报警</a>
+                        <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
+                            <li><a href="police_handle.html" target="myFrameName">报警处理人</a> </li>
+                            <li><a href="police_sure.html" target="myFrameName">报警确认人</a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+            <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
+            <li><a href="#" class="date-btn date_btnnext">2018年5月27号</a></li>
+            <li><a href="#" class="loginout-btn home_btnnext">Admin</a></li>
+        </ol>
+    </section>
+</div>
+
+<section class="p-relative container mg_t22" role="main" >
+    <div class="head_titall">
+        <ol class="head_titall_title">
+            <li class="home"><a href="index.html">首页</a></li>
+            <li> > </li>
+            <li ><a href="police.html">报警</a></li>
+            <li> > </li>
+            <li class="active"><a href="police_handle.html">报警处理人</a></li>
+
+        </ol>
+    </div>
+    <div class="clearfix"></div>
+    <section id="main" class="p-relative together_content container" role="main">
+        <section id="content" class="container together_pad">
+        <div class="block-area" id="text-input">
+            <div class="row device_list2">
+                <div class="col-lg-4 police_tit">
+                    <label class="police_type">报警类型</label>
+                    <input type="text" class="form-control m-b-10" placeholder="">
+                </div>
+                <div class="col-lg-4 police_tit">
+                    <label class="police_type">报警位置</label>
+                    <input type="text" class="form-control m-b-10" placeholder="">
+                </div>
+                <div class="col-lg-4 police_tit police_tit_time">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <div >
+                                <label class=" police_type">报警时间</label>
+                                <div class="polist_onelist_three">
+                                    <input type="text" class="form-control" id="test1" placeholder="yyyy-MM-dd">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="row device_list2">
+                <div class="layui-form-item layui-form-text">
+                    <label class="police_detailyj">处理意见</label>
+                    <div class="polist_threelist">
+                        <textarea placeholder="请输入内容" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="threshold_but">
+                <button class="threshold_butbc">保存</button>
+                <button  class="threshold_butqx">取消</button>
+            </div>
+
+
+        </div>
+
+
+    </section>
+</section>
+</section>
+<script src="js/jquery.min.js"></script> <!-- jQuery Library -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/layui/layui.js"></script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#test1'
+        });
+        laydate.render({
+            elem: '#test2'
+        });
+        laydate.render({
+            elem: '#test3'
+        });
+    });
+</script>
+</body>
+</html>
+

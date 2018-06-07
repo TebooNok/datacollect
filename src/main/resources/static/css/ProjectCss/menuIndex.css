@@ -1,0 +1,67 @@
+.search{
+    padding-left: 15px;
+    padding-top: 15px
+}
+.sinput{
+    width: 200px;
+}
+.yhh-data-table-frame{
+    background-color: rgba(18, 122, 92, 0);
+}
+.row{
+    margin-bottom: -15px;
+}
+.yhh-data-table-frame>table.yhh-data-table th, .yhh-data-table-frame>table.yhh-data-table thead td, .yhh-data-table-frame>table.yhh-data-table tfoot td{
+    background-color: rgba(18, 122, 92, 0);
+}
+.yhh-data-table-frame>table.yhh-data-table tbody th, .yhh-data-table-frame>table.yhh-data-table tbody td{
+    padding: 3px 0px 3px 10px;
+}
+.paginate-containter .paginate-box .paginate-btn.disabled-btn{
+    background-color: #009b96;
+    color: #7F7B7B;
+    cursor: default
+}
+.paginate-containter .paginate-box .paginate-btn.current-btn:hover{
+    background-color: #DDE4FE;
+    color: #1E90FF
+}
+.paginate-containter .paginate-box .go-page-box{
+    margin-left: 15px
+}
+.paginate-containter .paginate-box *{
+    vertical-align: top;
+    display: inline-block
+}
+.paginate-containter .paginate-box .paginate-btn:hover{
+    color: #1E90FF
+}
+.yhh-data-table-frame>table.yhh-data-table td{
+    background-color: transparent;
+    color: inherit
+}
+.yhh-data-table-frame>table.yhh-data-table tr.even td{
+    background-color: rgba(11, 34, 103, 0.93)
+}
+.yhh-data-table-frame>.data-table-top-box>.per-length-box dt.sel-choosen-box{
+    background-color: #124673
+}
+.yhh-data-table-frame>.data-table-top-box>.per-length-box .sel-option{
+    background-color: #124673
+}
+.paginate-containter .paginate-box .paginate-btn{
+    background-color: #009b96
+}
+.paginate-containter .paginate-box input[type=text].go-page-input{
+    background-color: transparent;
+}
+.layui-layer-content{
+    color:black;
+}
+.layui-layer-rim{
+    border: 6px solid rgb(12, 32, 92);
+}
+.myFrame{
+	width: 100%;
+	height: 800px;
+}

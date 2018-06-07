@@ -1,0 +1,30 @@
+.layui-form-label{
+    float: left;
+    display: block;
+    padding: 9px 15px;
+    width: 95px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: left;
+}
+.btn-sm, .btn-group-sm>.btn{
+    line-height: 1.9;
+}
+.bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="col-"]{
+    border: 1px solid #e6e6e6;
+}
+.select> .inner{
+    max-height: 200px;
+}
+.layui-tab-card>.layui-tab-title{
+    background: transparent;
+}
+.layui-tab-card{
+    border-style: none
+}
+.layui-tab-content{
+    padding: 35px 10px 10px 10px;
+}
+.logo{
+    height: 33px;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 
+<head>
+  <META content="IE=11.0000" http-equiv="X-UA-Compatible">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" rel="external nofollow" />
+  <style type="text/css">
+  .dropdown-menu {
+    width: 500px;
+    height: 170px;
+    padding: 0;
+  }
+ 
+  .dropdown-menu .all {
+    width: 100%;
+    height: 44px;
+    background-color: #f9f9fa;
+    line-height: 44px;
+    padding-left: 10px;
+  }
+ 
+  .dropdown-menu input[type="checkbox"] {
+    margin-left: 20px;
+  }
+ 
+  label.checkbox {
+    display: inline-block;
+  }
+ 
+  .choose_bank label {
+    margin-bottom: 16px;
+  }
+  </style>
+</head>
+ 
+<body>
+  <div class="btn-group choose_bank" style="height: 22px;">
+    <button class="btn btn-mini" style="padding: 0;width: 120px;background-color: #fff;border: 1px solid #ccc">全部</button>
+    <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown" style="height: 22px">
+      <span class="caret"></span>
+    </button>
+    <div class="dropdown-menu">
+      <label class="all">
+        <input type="checkbox"> 全部
+      </label>
+      <label>
+        <input type="checkbox"> 工商银行
+      </label>
+      <label>
+        <input type="checkbox"> 农业银行
+      </label>
+      <label>
+        <input type="checkbox"> 中国银行
+      </label>
+      <label>
+        <input type="checkbox"> 建设银行
+      </label>
+      <label>
+        <input type="checkbox"> 交通银行
+      </label>
+      <label>
+        <input type="checkbox"> 邮政银行
+      </label>
+      <label>
+        <input type="checkbox"> 招商银行
+      </label>
+      <label>
+        <input type="checkbox"> 中信银行
+      </label>
+      <label>
+        <input type="checkbox"> 民生银行
+      </label>
+      <label>
+        <input type="checkbox"> 光大银行
+      </label>
+      <label>
+        <input type="checkbox"> 平安银行
+      </label>
+      <label>
+        <input type="checkbox"> 北京银行
+      </label>
+    </div>
+  </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+var banks = $('.all').siblings().children();
+$('.all>input').click(function() {
+  var flag = $(this).prop('checked');
+  banks.prop('checked', flag);
+})
+banks.click(function() {
+  // 如果有一个没选中，全选按钮不选中
+  // 如果全部选中，全选按钮被选中
+  var num = 0;
+  banks.each(function() {
+    if ($(this).prop("checked")) {
+      num++;
+    }
+  })
+  if (num == banks.length) {
+    $('.all>input').prop('checked', true);
+  } else {
+    $('.all>input').prop('checked', false);
+  }
+})
+</script>
+ 
+</html>

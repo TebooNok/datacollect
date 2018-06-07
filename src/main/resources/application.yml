@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+spring.data.mongodb.uri: mongodb://127.0.0.1:27017/test
+spring.thymeleaf.mode: HTML
+
+mybatis:
+  config-location: classpath:conf/mybatis-config.xml
+  type-aliases-package: com.pginfo.datacollect.domain
+  mapper-locations: classpath:sqlmap/*.xml
+
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://xxx.xxx.xxx.xx:13306/pggj_squatting
+    username: root
+    password: 123456
+
+
+

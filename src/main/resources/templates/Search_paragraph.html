@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]>
+<html class="ie9">
+<![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8">
+    <meta name="description" content="Violate Responsive Admin Template">
+    <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
+    <title>查询</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="table/css/font-awesome.4.6.0.css">
+    <link type="text/css" rel="stylesheet" href="js/layui/css/layui.css" media="all">
+    <link href="css/sun.css" rel="stylesheet">
+    <link href="css/ProjectCss/Search.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/sunthree.css">
+</head>
+<body class="" style="background: transparent;">
+<header class="head_titall">
+    <ol class="head_titall_title">
+        <li class="home"><a href="index.html">首页</a></li>
+        <li> > </li>
+        <li ><a href="Search.html">查询</a></li>
+        <li> > </li>
+        <li class="active">时间点查询</li>
+    </ol>
+</header>
+<div class="clearfix"></div>
+<section id="main" class="p-relative together_content" role="main">
+    <section id="content" class="container together_pad">
+        <div class="block-area" id="text-input">
+            <div class="layui-tab ">
+                <ul class="layui-tab-title police_click">
+                    <li > 时间段查询</li>
+                    <li class="layui-this">时间点查询</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="row">
+                            <div class="col-lg-2 threshold_upline">
+                                <label>创建时间：</label>
+                                <input type="text" style="background: transparent;width: 60%" class="layui-input form-control m-b-10" id="test1" placeholder="yyyy-MM-dd">
+                            </div>
+                            <div class="col-lg-2 threshold_upline">
+                                <label>至：</label>
+                                <input type="text" style="background: transparent;width: 60%;" class="layui-input form-control m-b-10" id="test2" placeholder="yyyy-MM-dd">
+                            </div>
+                            <div class="col-lg-2 threshold_upline">
+                                <label>设备编号：</label>
+                                <div class="device_setid m-b-15" style="width: 60%">
+                                    <select class="select">
+                                        <option>4号</option>
+                                        <option>5号</option>
+                                        <option>6号</option>
+                                        <option>7号</option>
+                                        <option>8号</option>
+                                        <option>9号</option>
+                                        <option>的撒号</option>
+                                        <option>3号</option>
+                                        <option>4号</option>
+                                        <option>1号</option>
+                                        <option>2号</option>
+                                        <option>3号</option>
+                                        <option>4号</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 threshold_upline">
+                                <button class="btn btn-primary" onclick="search()">搜索</button>
+                            </div>
+                            <!--<div id="chart" style="height: 500px;background-color: #CCCCCC;width:100%;padding:20px;"></div>-->
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="row">
+                            <div class="col-lg-2 threshold_upline">
+                                <label>创建时间：</label>
+                                <input type="text" style="background: transparent;width: 60%" class="layui-input form-control m-b-10" id="date-Beging" placeholder="yyyy-MM-dd HH">
+                            </div>
+                            <div class="col-lg-2 threshold_upline">
+                                <label>至：</label>
+                                <input type="text" style="background: transparent;width: 60%;" class="layui-input form-control m-b-10" id="date-End" placeholder="yyyy-MM-dd HH">
+                            </div>
+                            <div class="col-lg-2 threshold_upline">
+                                <label>设备编号：</label>
+                                <div class="device_setid m-b-15" style="width: 60%">
+                                    <select class="select">
+                                        <option>4号</option>
+                                        <option>5号</option>
+                                        <option>6号</option>
+                                        <option>7号</option>
+                                        <option>8号</option>
+                                        <option>9号</option>
+                                        <option>的撒号</option>
+                                        <option>3号</option>
+                                        <option>4号</option>
+                                        <option>1号</option>
+                                        <option>2号</option>
+                                        <option>3号</option>
+                                        <option>4号</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 threshold_upline">
+                                <button class="btn btn-primary" onclick="search()">搜索</button>
+                            </div>
+                            <!--<div id="chart" style="height: 300px;background-color: #CCCCCC;width:100%;padding:20px;"></div>-->
+                        </div>
+                    </div>
+                </div>
+    </section>
+</section>
+<script src="js/jquery.min.js"></script> <!-- jQuery Library -->
+<script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/select.min.js"></script>
+<script src="js/device_setup.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/new-line2.js"></script>
+</body>
+</html>
+

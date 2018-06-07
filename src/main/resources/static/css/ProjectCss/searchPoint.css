@@ -1,0 +1,26 @@
+.borderButton{
+
+}
+.searchButton{
+    background: #23aaea !important
+}
+.resetButton{
+    background: #5e5955 !important;
+}
+.search1{
+    border: 0px;
+    box-shadow: none;
+}
+#testtable3 > tbody >tr {
+line-height: 30px
+}
+.export{
+    padding: 2px 20px;
+    margin-bottom: 10px;
+    color: #67b930;
+    border: 1px solid #3a5f22;
+    background: #fff!important;
+    border-color: #67b930!important;
+    border-radius: 10px!important;
+    height: 32px;
+}

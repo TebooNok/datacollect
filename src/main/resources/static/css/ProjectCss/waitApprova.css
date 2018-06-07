@@ -1,0 +1,56 @@
+
+.yhh-data-table-frame>table.yhh-data-table th, .yhh-data-table-frame>table.yhh-data-table thead td, .yhh-data-table-frame>table.yhh-data-table tfoot td{
+    text-align: center;
+}
+.yhh-data-table-frame>table.yhh-data-table tr.odd td{
+    text-align: center;
+    font-size: 12px;
+    border-bottom: 1px solid #e6ebee;
+    color: #555555;
+}
+.yhh-data-table-frame>table.yhh-data-table tr.even td{
+    text-align: center;
+    font-size: 12px;
+}
+.yhh-data-table-frame>table.yhh-data-table thead th, .yhh-data-table-frame>table.yhh-data-table thead td, .yhh-data-table-frame>table.yhh-data-table tfoot th, .yhh-data-table-frame>table.yhh-data-table tfoot td{
+    background: rgb(237, 237, 237);
+    border-top: 1px solid #27a8ea;
+    border-top: 1px solid #27a8ea;
+    color: #535353;
+    font-weight: bold;
+    font-size: 14px;
+}
+.yhh-data-table-frame>table.yhh-data-table th, .yhh-data-table-frame>table.yhh-data-table thead td, .yhh-data-table-frame>table.yhh-data-table tfoot td{
+    border: none;
+}
+.yhh-data-table-frame>table.yhh-data-table td, .yhh-data-table-frame>table.yhh-data-table th{
+    border: none;
+}
+.yhh-data-table-frame>table.yhh-data-table tr.even td{
+    background: transparent;
+    border-bottom: 1px solid #e6ebee;
+    color: #555555;
+}
+.backSearch{
+    background-image: url("../../images/ProjectImg/search.png");
+    background-repeat: no-repeat
+}
+.Higeradmins{
+    background-image: url("../../images/advancedAdmin.png");
+    background-repeat: no-repeat
+}
+.admins{
+    background-image: url("../../images/commomAdmin.png");
+    background-repeat: no-repeat
+}
+.noWord{
+    width: 81px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    position: relative;
+    left: 25px;
+}

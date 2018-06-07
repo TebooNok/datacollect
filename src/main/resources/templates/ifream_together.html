@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8">
+    <meta name="description" content="Violate Responsive Admin Template">
+    <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
+    <title>高速铁路桥梁沉降监测系统</title>
+    <!-- CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/sunthree.css">
+
+</head>
+<body id="skin-blur-violate">
+<div class="ifream_head" >
+<header  class=" headtwo">
+    <img src="images/top.png" class="img-responsive">
+</header>
+    <section class="container togethers">
+        <ul class="breadcrumb breadcrumb-left nav_menu1">
+            <li class="nav_menu_li"><a href="index.html" class="home-btn" target="myFrameName">首页</a></li>
+            <li class="nav_menu_li ifream_listnav">
+                <a  class="menu-btn" target="myFrameName">菜单</a>
+                <ul class="nav_twomenu">
+                    <li>
+                        <a href="set.html" target="myFrameName">设置</a>
+                        <ul class="nav_threemenu ifream_nav_bg3">
+                            <li><a href="setPermission.html" target="myFrameName">权限</a> </li>
+                            <li><a href="threshold-value.html" target="myFrameName">阈值</a> </li>
+                            <li id="sbsz"><a href="device_setup.html" target="myFrameName">设备设置</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:;" target="myFrameName">查询</a>
+                        <ul class="nav_threemenu nav_threebg">
+                            <li><a href="Search_dot.html" target="myFrameName">时间段查询</a> </li>
+                            <li><a href="Search_dot.html" target="myFrameName">时间点查询</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="police.html" target="myFrameName">报警</a>
+                        <ul class="nav_threemenu nav_threebg">
+                            <li><a href="police_detail.html" target="myFrameName">报警详情</a> </li>
+                            <li><a href="police_handle.html" target="myFrameName">报警处理人</a> </li>
+                            <li><a href="police_sure.html" target="myFrameName">报警确认人</a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+            <li><a href="#" class="date-btn">2018年5月27号</a></li>
+            <li><a href="#" class="loginout-btn">退出</a></li>
+        </ol>
+    </section>
+</div>
+    <!-- Content -->
+<section class="p-relative container together_headallbox" id="sectionId" role="main">
+    <iframe id="myFrameId" class="myFrame" name="myFrameName" scrolling="no"   frameborder="0"  src="index.html"   ></iframe>
+</section>
+<script src="js/jquery.min.js"></script> <!-- jQuery Library -->
+<script src="js/bootstrap.min.js"></script>
+<script>
+    function changeFrameHeight(){
+        var ifm= document.getElementById("sectionId");
+        ifm.height=document.documentElement.clientHeight-156+'px' //56是头顶的高度，和网友估计不一样。
+    }
+    $(function(){
+        changeFrameHeight()
+        window.onresize=function(){
+        changeFrameHeight()
+        }});
+</script>
+
+</body>
+</html>

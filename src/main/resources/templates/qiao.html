@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试文件1234</title>
+</head>
+<body style="text-align: center;">
+<canvas id="canvas" width="980" height="150" style="background-color: #144783;margin: 0 auto;"></canvas>
+</body>
+<script>
+    /*
+    * 画桥墩*/
+    var canvas=document.getElementById("canvas");
+    var cxt=canvas.getContext("2d");
+    //创建image对象
+    var imgObj = new Image();
+    imgObj.src = "./images/car.png";
+    imgObj.onload = function(){
+        cxt.drawImage(this, 0, 16);//this即是imgObj,保持图片的原始大小：470*480
+        //ctx.drawImage(this, 0, 0,1024,768);//改变图片的大小到1024*768
+    }
+    var drawPolygon = function(ctx, conf){
+        var start = conf && conf.start || 10; //x轴起始点
+        var width = conf && conf.width || 2;
+        var itemWidth = conf && conf.itemWidth || 0;//桥墩宽度
+        var strokeStyle = conf && conf.strokeStyle;
+        var fillStyle = conf && conf.fillStyle;
+        var index = conf && conf.index;
+        var shadowColor = conf && conf.shadowColor;
+        // 添加图片
+        //开始路径
+        ctx.beginPath();
+        ctx.moveTo(start, 56);
+        ctx.lineTo(100+itemWidth,70);
+        ctx.lineTo(100+itemWidth,130);
+        ctx.lineTo(110+itemWidth,130);
+        ctx.lineTo(110+itemWidth,70);
+        ctx.lineTo(120+itemWidth,56);
+        ctx.shadowOffsetX = -8;
+        ctx.shadowOffsetY = 0;
+        ctx.shadowBlur    = 0;
+        ctx.shadowColor   = shadowColor;
+        ctx.closePath();
+        //路径闭合
+        if(strokeStyle) {
+            ctx.strokeStyle = strokeStyle;
+            ctx.lineWidth = width;
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+        }
+        if(fillStyle) {
+            ctx.fillStyle = fillStyle;
+            ctx.fill();
+        }
+    }
+    setInterval(function(){
+        var index = Math.round(Math.random()*21);
+
+        for(var i=0; i<21; i++) {
+            if( i == index ) {
+                if( i % 2 == 0) {
+                    drawPolygon(cxt, {
+                        start: 92 + i * 38,
+                        itemWidth: i * 38,
+                        strokeStyle: '',
+                        fillStyle: '#ffffff',
+                        index: i + 1,
+                        shadowColor: '#eb048c'
+                    })
+                } else {
+                    drawPolygon(cxt, {
+                        start: 92 + i * 38,
+                        itemWidth: i * 38,
+                        strokeStyle: '',
+                        fillStyle: '#eb048c',
+                        index: i + 1,
+                        shadowColor: '#888888'
+                    })
+                }
+
+            } else {
+                drawPolygon(cxt, {
+                    start: 92 + i * 38,
+                    itemWidth: i * 38,
+                    strokeStyle: '',
+                    fillStyle: '#ffffff',
+                    index: i + 1,
+                    shadowColor: '#888888'
+                })
+            }
+        }
+    },3000)
+    for(var i=0; i<21; i++) {
+        if( i == 12 ) {
+            drawPolygon(cxt, {
+                start: 92 + i * 38,
+                itemWidth: i * 38,
+                strokeStyle: '',
+                fillStyle: '#ffffff',
+                index: i + 1,
+                shadowColor: '#eb048c'
+            })
+        } else {
+            drawPolygon(cxt, {
+                start: 92 + i * 38,
+                itemWidth: i * 38,
+                strokeStyle: '',
+                fillStyle: '#ffffff',
+                index: i + 1,
+                shadowColor: '#888888'
+            })
+        }
+    }
+</script>
+</html>
