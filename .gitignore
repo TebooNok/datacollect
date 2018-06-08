@@ -23,3 +23,12 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+#####Win#####
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+###macOS###
+*/.DS_Store
+.DS_Store
