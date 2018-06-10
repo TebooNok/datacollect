@@ -1,12 +1,10 @@
 package com.pginfo.datacollect.controller;
 
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.*;
-import org.apache.shiro.subject.Subject;
 import com.pginfo.datacollect.bean.ResponseBean;
 import com.pginfo.datacollect.service.UserService;
-import com.pginfo.datacollect.service.UserBean;
+import com.pginfo.datacollect.user.UserBean;
 import com.pginfo.datacollect.exception.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

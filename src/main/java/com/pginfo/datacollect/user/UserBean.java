@@ -1,4 +1,4 @@
-package com.pginfo.datacollect.service;
+package com.pginfo.datacollect.user;
 
 public class UserBean {
     private String username;
