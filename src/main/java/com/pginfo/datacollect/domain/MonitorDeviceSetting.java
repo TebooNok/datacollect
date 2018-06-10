@@ -21,6 +21,8 @@ public class MonitorDeviceSetting {
     // 基于哪个解调仪, 0表示不关联解调仪
     private int demoBase;
 
+    private int deviceStatus;
+
     public int getDeviceId() {
         return deviceId;
     }
@@ -67,5 +69,13 @@ public class MonitorDeviceSetting {
 
     public void setDemoBase(int demoBase) {
         this.demoBase = demoBase;
+    }
+
+    public int getDeviceStatus() {
+        return deviceStatus;
+    }
+
+    public void setDeviceStatus(int deviceStatus) {
+        this.deviceStatus = deviceStatus;
     }
 }

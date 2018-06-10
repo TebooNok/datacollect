@@ -1,4 +1,4 @@
-package com.pginfo.datacollect.bean;
+package com.pginfo.datacollect.dto;
 
 public class ResponseBean {
 
@@ -9,12 +9,12 @@ public class ResponseBean {
     private String msg;
 
     // 返回的数据
-    private Object data;
+    private Object token;
 
     public ResponseBean(int code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
-        this.data = data;
+        this.token = data;
     }
 
     public int getCode() {
@@ -33,11 +33,11 @@ public class ResponseBean {
         this.msg = msg;
     }
 
-    public Object getData() {
-        return data;
+    public Object getToken() {
+        return token;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setToken(Object token) {
+        this.token = token;
     }
 }

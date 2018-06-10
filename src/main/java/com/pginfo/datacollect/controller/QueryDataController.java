@@ -5,6 +5,7 @@ import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.QueryDataRequest;
 import com.pginfo.datacollect.dto.QueryDataResponse;
 import com.pginfo.datacollect.service.QuerySinkDataService;
+import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.LocalUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class QueryDataController {
     }
 
     @RequestMapping(value = "queryData.do", method = RequestMethod.POST, produces = "application/json")
-    public Object querySinkDataList(QueryDataRequest queryDataRequest) {
+    public QueryDataResponse querySinkDataList(QueryDataRequest queryDataRequest) {
 //        int deviceId = Integer.parseInt(request.getParameter("deviceId"));
 //        long height = Long.parseLong(request.getParameter("height"));
 //        String startTime = request.getParameter("startTime");
@@ -46,16 +47,14 @@ public class QueryDataController {
 
 //        logger.debug("Request->> Device=" + deviceId + ", Height=" + height + ", StartTime=" + startTime + ", EndTime=" + endTime+ ", RefreshFlag=" + refreshFlag);
 
-        QueryDataResponse queryDataResponse = new QueryDataResponse();
+        QueryDataResponse queryDataResponse = new QueryDataResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
 
         // 如果请求体参数有误，则返回错误信息
         String errorMessage = validateRequest(queryDataRequest);
         if (!StringUtils.isEmpty(errorMessage)) {
 
-            queryDataResponse.setMessage("[Validate param error.] " + errorMessage);
-            queryDataResponse.setMongoSinkDataList(null);
             logger.error("[Validate param error.] " + errorMessage);
-            return queryDataResponse;
+            return new QueryDataResponse(Constants.INTERNAL_ERROR_CODE, "[Validate param error.] " + errorMessage, null);
         }
 
         int mode = queryDataRequest.getMode();
@@ -78,17 +77,14 @@ public class QueryDataController {
                     break;
             }
         } catch (Exception e) {
-            queryDataResponse.setMessage("[Internal query service error.] " + e.getMessage());
-            queryDataResponse.setMongoSinkDataList(null);
+
             logger.error("[Internal query service error.] " + e.getMessage());
             logger.error(LocalUtils.errorTrackSpace(e));
-            return queryDataResponse;
+            return new QueryDataResponse(Constants.INTERNAL_ERROR_CODE, "[Internal query service error.] " + e.getMessage(), null);
         }
 
         // 按时间降序排序
-        returnList.sort((MongoSinkData o1, MongoSinkData o2) ->{
-            return o1.getDateTime().compareTo(o2.getDateTime())>0?-1:0;
-        });
+        returnList.sort((MongoSinkData o1, MongoSinkData o2) -> o1.getDateTime().compareTo(o2.getDateTime())>0?-1:0);
 
         // 传入位置信息
         for(MongoSinkData data:returnList){
@@ -98,7 +94,6 @@ public class QueryDataController {
         }
 
         queryDataResponse.setMongoSinkDataList(returnList);
-        queryDataResponse.setMessage("OK");
         return queryDataResponse;
         //return queryService.queryAll();
     }

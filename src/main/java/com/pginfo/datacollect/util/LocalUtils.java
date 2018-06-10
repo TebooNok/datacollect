@@ -3,6 +3,8 @@ package com.pginfo.datacollect.util;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocalUtils {
 
@@ -53,4 +55,5 @@ public class LocalUtils {
     public static String formatCurrentDay() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.TIME_TODAY));
     }
+
 }

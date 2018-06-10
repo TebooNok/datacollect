@@ -73,6 +73,7 @@ public class DeviceTimerService {
                 {
                     // 更新时间戳
                     demoDeviceMap.get(demoDevice.getDeviceId()).setTimestamp(demoDevice.getTimestamp());
+                    demoDeviceMap.get(demoDevice.getDeviceId()).setStatus(1);
                 }
             }
         }

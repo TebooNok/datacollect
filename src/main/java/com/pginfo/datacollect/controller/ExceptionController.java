@@ -1,7 +1,7 @@
 package com.pginfo.datacollect.controller;
 
 import org.apache.shiro.ShiroException;
-import com.pginfo.datacollect.bean.ResponseBean;
+import com.pginfo.datacollect.dto.ResponseBean;
 import com.pginfo.datacollect.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -7,6 +7,7 @@ import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.QueryAlarmInfoRequest;
 import com.pginfo.datacollect.dto.QueryAlarmInfoResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -23,6 +24,7 @@ public class QueryAlarmService {
 
     private final MongoAlarmInfoDao mongoAlarmInfoDao;
 
+    @Autowired
     public QueryAlarmService(Map<Integer, AlarmInfo> alarmInfoMap, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap, MongoAlarmInfoDao mongoAlarmInfoDao) {
         this.alarmInfoMap = alarmInfoMap;
         this.monitorDeviceSettingMap = monitorDeviceSettingMap;

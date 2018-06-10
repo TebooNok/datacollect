@@ -2,10 +2,10 @@ package com.pginfo.datacollect.controller;
 
 import com.pginfo.datacollect.domain.AlarmInfo;
 import com.pginfo.datacollect.domain.MonitorDeviceSetting;
-import com.pginfo.datacollect.dto.ErrorResponse;
 import com.pginfo.datacollect.dto.QueryAlarmInfoRequest;
 import com.pginfo.datacollect.dto.QueryAlarmInfoResponse;
 import com.pginfo.datacollect.service.QueryAlarmService;
+import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.LocalUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -38,15 +38,14 @@ public class QueryAlarmController {
     }
 
     @RequestMapping(value = "queryAlarm.do", method = RequestMethod.POST, produces = "application/json")
-    public Object queryAlarmInfoList(QueryAlarmInfoRequest request) {
+    public QueryAlarmInfoResponse queryAlarmInfoList(QueryAlarmInfoRequest request) {
 
-        QueryAlarmInfoResponse queryAlarmInfoResponse = new QueryAlarmInfoResponse();
+        QueryAlarmInfoResponse queryAlarmInfoResponse = new QueryAlarmInfoResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
+
         String message = validateRequest(request);
         if (!StringUtils.isEmpty(message)) {
-            queryAlarmInfoResponse.setMessage("[Validate param error.] " + message);
-            queryAlarmInfoResponse.setAlarmInfoList(null);
             logger.error("[Validate param error.] " + message);
-            return queryAlarmInfoResponse;
+            return new QueryAlarmInfoResponse(Constants.INTERNAL_ERROR_CODE, "[Validate param error.] " + message, null);
         }
 
         int mode = request.getMode();
@@ -71,11 +70,11 @@ public class QueryAlarmController {
                     break;
             }
         } catch (Exception e) {
-            queryAlarmInfoResponse.setMessage("[Internal query service error.] " + e.getMessage());
-            queryAlarmInfoResponse.setAlarmInfoList(null);
+
             logger.error("[Internal query service error.] " + e.getMessage());
             logger.error(LocalUtils.errorTrackSpace(e));
-            return queryAlarmInfoResponse;
+
+            return new QueryAlarmInfoResponse(Constants.INTERNAL_ERROR_CODE, "[Internal query service error.] " + e.getMessage(), null);
         }
 
         if (!CollectionUtils.isEmpty(returnList)) {
@@ -91,7 +90,6 @@ public class QueryAlarmController {
         }
 
         queryAlarmInfoResponse.setAlarmInfoList(returnList);
-        queryAlarmInfoResponse.setMessage("OK");
 
         return queryAlarmInfoResponse;
     }
@@ -101,10 +99,4 @@ public class QueryAlarmController {
         return null;
     }
 
-
-    @RequestMapping(value = "setAlarmThre.do", method = RequestMethod.POST, produces = "application/json")
-    public Object setAlarmThre() {
-        ErrorResponse errorResponse = new ErrorResponse("This interface has not implement.");
-        return errorResponse;
-    }
 }
