@@ -2,9 +2,9 @@ package com.pginfo.datacollect.controller;
 
 
 import org.apache.shiro.authz.annotation.*;
-import com.pginfo.datacollect.dto.ResponseBean;
+import com.pginfo.datacollect.bean.ResponseBean;
 import com.pginfo.datacollect.service.UserService;
-import com.pginfo.datacollect.service.UserBean;
+import com.pginfo.datacollect.user.UserBean;
 import com.pginfo.datacollect.exception.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class WebController {
     public void setService(UserService userService) {
         this.userService = userService;
     }
-    @PostMapping("/login.do")
+    @PostMapping("/login")
     public ResponseBean login(@RequestParam("username") String username,
                               @RequestParam("password") String password) {
         UserBean userBean = userService.getUser(username);

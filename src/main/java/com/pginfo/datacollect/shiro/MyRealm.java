@@ -8,14 +8,10 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import com.pginfo.datacollect.service.UserService;
-import com.pginfo.datacollect.service.UserBean;
+import com.pginfo.datacollect.user.UserBean;
 import com.pginfo.datacollect.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class MyRealm extends AuthorizingRealm {
