@@ -1,8 +1,8 @@
 package com.pginfo.datacollect.controller;
 
 
+import com.pginfo.datacollect.dto.ResponseBean;
 import org.apache.shiro.authz.annotation.*;
-import com.pginfo.datacollect.bean.ResponseBean;
 import com.pginfo.datacollect.service.UserService;
 import com.pginfo.datacollect.user.UserBean;
 import com.pginfo.datacollect.exception.UnauthorizedException;
