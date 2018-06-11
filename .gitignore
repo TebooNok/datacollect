@@ -32,3 +32,4 @@ Desktop.ini
 ###macOS###
 */.DS_Store
 .DS_Store
+.vscode/settings.json

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * 继承SpringBootServletInitializer并重写configure方法使项目可以运行在tomcat容器中
@@ -18,6 +19,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @MapperScan("com.pginfo.datacollect.dao")
 @SpringBootApplication// (exclude = DataSourceAutoConfiguration.class)
 @EnableScheduling
+@EnableSwagger2
 public class DatacollectApplication extends SpringBootServletInitializer {
 
     @Override
