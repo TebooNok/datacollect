@@ -3,10 +3,7 @@ package com.pginfo.datacollect.controller;
 import com.pginfo.datacollect.domain.DemoDevice;
 import com.pginfo.datacollect.domain.MonitorDevice;
 import com.pginfo.datacollect.domain.MonitorDeviceSetting;
-import com.pginfo.datacollect.dto.QueryDemoDeviceRequest;
-import com.pginfo.datacollect.dto.QueryDemoDeviceResponse;
-import com.pginfo.datacollect.dto.QueryMonitorDeviceRequest;
-import com.pginfo.datacollect.dto.QueryMonitorDeviceResponse;
+import com.pginfo.datacollect.dto.*;
 import com.pginfo.datacollect.service.QueryDeviceService;
 import com.pginfo.datacollect.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +41,7 @@ public class QueryDeviceController {
     }
 
     @RequestMapping(value = "queryDemoDevice.do", method = RequestMethod.POST, produces = "application/json")
-    public QueryDemoDeviceResponse queryMonitorDevice(QueryDemoDeviceRequest request) {
+    public QueryDemoDeviceResponse queryDemoDevice(QueryDemoDeviceRequest request) {
 
         QueryDemoDeviceResponse response = new QueryDemoDeviceResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
 
@@ -56,5 +53,13 @@ public class QueryDeviceController {
         }catch (Exception e){
             return new QueryDemoDeviceResponse(Constants.INTERNAL_ERROR_CODE, e.getMessage(), null);
         }
+    }
+
+    @RequestMapping(value = "queryDeviceStatus.do", method = RequestMethod.POST, produces = "application/json")
+    public QueryDeviceStatusResponse queryDeviceStatus(QueryDemoDeviceRequest request) throws Exception {
+
+        QueryDeviceStatusResponse response = new QueryDeviceStatusResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
+        queryDeviceService.getDeviceNumber(response);
+        return response;
     }
 }

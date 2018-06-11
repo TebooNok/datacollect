@@ -13,37 +13,39 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/generics.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="js/layui/css/layui.css">
     <link rel="stylesheet" href="css/sunthree.css">
     <link rel="stylesheet" href="css/sun.css">
+    <style>
+        input,span{
+            color: white
+        }
+    </style>
     </head>
     <body id="login_box">
     <div class="login_conbox"></div>
         <div id="login">
 
-            <form class="box  animated active" id="box-login">
+            <form class="box  animated active" id="box-login" action="">
                 <label class="login_admin"></label>
-                <input type="text" class="login-control login_but40"id="login_adminadd" placeholder="username">
+                <input type="text" class="login-control login_but40" id="login_adminadd" placeholder="请输入用户名">
                 <label class="login_pass"></label>
-                <input type="password" class="login-control"  placeholder="............">
+                <input type="password" class="login-control" id="pwd"  placeholder="请输入密码">
                 <div class="login_zidong ">
                     <div class="">
-                    <span class="login_dengl">
-                        <i class="openicon" name="checkremember"></i>
+                    <span id="nestLogin" class="login_dengl">
+                        <i class="openicon" id="next" name="checkremember"></i>
                         <span>下次自动登陆</span>
                     </span>
                     </div>
-                    <i class="log_forget"><a>忘记密码</a></i>
+                  <!-- <i class="log_forget"><a>忘记密码</a></i>-->
                 </div>
                 <div class="clearfix"></div>
                 <div class="threshold_but2">
-                    <button class="threshold_butqud"></button>
-
+                    <button class="threshold_butqud" onclick="login()"></button>
                 </div>
             </form>
-
-
         </div>
-        
         <!-- Javascript Libraries -->
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script> <!-- jQuery Library -->
@@ -53,6 +55,7 @@
         
         <!--  Form Related -->
         <script src="js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
+    <script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
     <script>
         $(function () {
            $('form').find("[name='checkremember']").click(
@@ -61,6 +64,23 @@
                }
            )
         })
+        function login(){
+           var userName = $("#login_adminadd").val()
+            var pwd = $("#pwd").val()
+            var nextLogin = 0
+            if($("#nestLogin").hasClass("checked")){
+                var nextLogin = 1
+            }else{
+                var nextLogin = 0
+            }
+            if((userName ==='' || pwd ==='') ){
+                layer.alert('用户名和密码不能为空', {icon:0 });
+                console.log(userName,pwd,nextLogin)
+            }else {
+                layer.alert('登录成功', {icon:0 });
+                console.log(userName,pwd,nextLogin)
+            }
+        }
     </script>
-    </body>
+    <script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
 </html>

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <!--[if IE 9 ]><html class="ie9"><![endif]-->
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1,minmum-scale=1,maxmum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta charset="UTF-8">
     <meta name="description" content="Violate Responsive Admin Template">
     <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
-    <title>首页-桥梁检测系统</title>
+    <title>首页-桥梁监测系统</title>
     <!-- CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script src="js/echarts.min.js"></script>
     <link rel="stylesheet" href="css/sunthree.css">
     <!--加载meta IE兼容文件-->
     <!--[if lt IE 9]>
@@ -20,374 +21,272 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-<style>
-    * {
-        color: #fff
-    }
-    a {
-        color: #fff
-    }
-</style>
+    <style>
+        * {
+            color: #fff
+        }
+
+        a {
+            color: #fff
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin-top: 18px;
+        }
+
+        .table {
+            width: 98%;
+            margin: 0 auto;
+            margin-bottom: 0px;
+
+        }
+
+        .breadcrumb>li+li:before {
+            padding: 0;
+        }
+
+        .index_addselect.bootstrap-select.btn-group .btn .filter-option {
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body id="skin-blur-violate">
-<div class="ifream_head" >
-    <header  class=" headtwo">
-        <img src="images/top.png" class="img-responsive">
-    </header>
-    <section class="container togethers">
-        <ul class="breadcrumb breadcrumb-left nav_menu1">
-            <li class="nav_menu_li"><a href="index.html" class="home-btn" target="myFrameName">首页</a></li>
-            <li class="nav_menu_li ifream_listnav">
-                <a  class="menu-btn" target="myFrameName" >菜单</a>
-                <ul class="nav_twomenu">
-                    <li>
-                        <a  target="myFrameName">设置</a>
-                        <ul class="nav_threemenu ifream_nav_bg3">
-                            <li><a href="setPermission.html" target="myFrameName">权限</a> </li>
-                            <li><a href="threshold-value.html" target="myFrameName">阈值</a> </li>
-                            <li id="sbsz"><a href="device_setup.html" target="myFrameName">设备设置</a> </li>
-                        </ul>
-                    </li>
-                    <li><a  target="myFrameName">查询</a>
-                        <ul class="nav_threemenu nav_threebg">
-                            <li><a href="searchDuan.html" target="myFrameName">时间段查询</a> </li>
-                            <li><a href="searchPoint.html" target="myFrameName">时间点查询</a> </li>
-                        </ul>
-                    </li>
-                    <li><a href="police.html" target="myFrameName" onClick="jump('charts.html')">报警</a>
-                        <ul class="nav_threemenu nav_threebg">
-                            <li><a href="police_handle.html" target="myFrameName">报警处理人</a> </li>
-                            <li><a href="police_sure.html" target="myFrameName">报警确认人</a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- Breadcrumb -->
-        <ol class="breadcrumb">
-            <!-- <li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li> -->
-            <li><a href="#" class="date-btn">2018年5月27号</a></li>
-            <li><a href="#" class="loginout-btn">退出</a></li>
-        </ol>
-    </section>
-</div>
-<section id="main" class="p-relative" role="main">
-    <!-- Content -->
-    <section id="content" class="container">
-        <!-- Breadcrumb -->
-
-
-        <!-- Main Widgets -->
-
-        <div class="block-area index_contentbox">
-            <div class="row">
-                <div class="col-md-3 menu-left-01">
-                    <!-- USA Map -->
-                    <div class="tile today-blam bg-line">
-                        <h3 class="blam-title">今日沉降报警</h3>
-                        <div id="usa-map-new">
-                            <p>0</p>
-                            <p>0</p>
-                            <p>0</p>
-                            <p>6</p>
-                        </div>
-                    </div>
-
-                    <!-- Dynamic Chart -->
-                    <div class="tile blam-list">
-                        <div class="p-t-10 p-r-5 p-b-5">
-                            <h3 class="blam-title">实时报警</h3>
-                            <ul class="list-group">
-                                <li class="list-group-item">桥墩号 : #9桥墩</li>
-                                <li class="list-group-item">报警时间 : 10:15:55</li>
-                                <li class="list-group-item">类型 : 上浮</li>
-                                <li class="list-group-item">危险等级 : III级</li>
+        <div class="ifream_head">
+                <header class=" headtwo">
+                    <img src="images/top.png" class="img-responsive">
+                </header>
+                <section class="container togethers index_menu">
+                    <ul class="breadcrumb breadcrumb-left nav_menu1">
+                        <li class="nav_menu_li">
+                            <a href="index.html" class="home-btn"  target = '_self'>首页</a>
+                        </li>
+                        <li class="nav_menu_li ifream_listnav">
+                            <a class="menu-btn" target="myFra   meName">菜单</a>
+                            <ul class="nav_twomenu">
+                                <li>
+                                    <a target="myFrameName">设置</a>
+                                    <ul class="nav_threemenu ifream_nav_bg3">
+                                        <li>
+                                            <a href="setPermission.html"  target = '_self'>权限</a>
+                                        </li>
+                                        <li>
+                                            <a href="threshold-value.html"  target = '_self'>阈值</a>
+                                        </li>
+                                        <li class="index_fell"><a href="device_sensor.html"  target = '_self'>传感器</a> </li>
+                                        <li class="index_fell"><a href="device_mediate.html"  target = '_self'>解调仪</a> </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a target="myFrameName">查询</a>
+                                    <ul class="nav_threemenu nav_threebg">
+                                        <li>
+                                            <a href="searchDuan.html"  target = '_self'>时间段查询</a>
+                                        </li>
+                                        <li>
+                                            <a href="searchPoint.html"  target = '_self'>时间点查询</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="police.html" target = '_self'>报警</a>
+                                </li>
                             </ul>
-                        </div>
-
-                    </div>
-
-                    <!-- Activity -->
-                    <div class="tile machine-status">
-                        <div class="p-t-10 p-r-5 p-b-5">
-                            <h3 class="blam-title">设备状态</h3>
-
-                            <table id="tabeleList2" class="table text-center" style="position: relative;top: 10px;left: 0.5px">
-                                <thead>
-                                <tr>
-                                    <td style="    color: #fff     ;border-top: 1px solid #255890">状态</td>
-                                    <td style="    color: #fff ;border-top: 1px solid #255890">设备号</td>
-                                    <td style="    color: #fff ;border-top: 1px solid #255890">位置</td>
-                                    <td style="    color: #fff ;border-top: 1px solid #255890">时间</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr style="background: #064370">
-                                    <td>正常"数量"</td>
-                                    <td>—</td>
-                                    <td>#9 桥墩上行</td>
-                                    <td>2018-10-05</td>
-                                </tr>
-                                <tr>
-                                    <td>正常"数量"</td>
-                                    <td>—</td>
-                                    <td>#9 桥墩上行</td>
-                                    <td>2018-10-05</td>
-                                </tr>
-                                <tr>
-                                    <td>正常"数量"</td>
-                                    <td>—</td>
-                                    <td>#9 桥墩上行</td>
-                                    <td>2018-10-05</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Main Chart -->
-                    <div class="tile qiao">
-                        <div class="qiao-tab">
-                            <ul>
-                                <li>上行</li>
-                                <li>下行</li>
-                            </ul>
-                        </div>
-                        <canvas id="canvas" width="980" height="150" ></canvas>
-                    </div>
-
-                    <!-- Pies -->
-                    <div class="tile text-center up-status-title" id="main-show">
-                        <div class="qiao-tab">
-                            <ul style="margin-right: 50px;">
-                                <li class="blue">安全范围</li>
-                                <li class="purple">危险范围</li>
-                            </ul>
-                        </div>
-                        <div class="qiao-tab">
-                            <ul>
-                                <li class="up">上行</li>
-                                <li class="down">下行</li>
-                            </ul>
-                        </div>
-                        <div class="tile-dark p-10 up-status">
-                            <div id="main-line"></div>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                </div>
-
-                <div class="col-md-3 ">
-                    <div class="machine-status alrm-list-line"  id="main-show1">
-                        <div class="p-t-10 p-r-5 p-b-5">
-                            <h3 class="blam-title">桥墩实时监测</h3>
-                            <div id="main-line2" style="height:340px;">
-
-                            </div></div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="machine-status alrm-list alrm-list-zishi" style="padding: 4.4px;">
-                        <div class="p-t-10 p-r-5 p-b-5">
-                            <h3 class="blam-title">报警列表</h3>
-
-                            <table id="tabeleList" class="table text-center" style="position: relative;top: 10px;left: 0.5px">
-                                <thead>
-                                <tr>
-                                    <td style="    color: #fff     ;border-top: 1px solid #255890">报警类型</td>
-                                    <td style="    color: #fff ;border-top: 1px solid #255890">报警位置</td>
-                                    <td style="    color: #fff ;border-top: 1px solid #255890">监测值</td>
-                                    <td style="    color: #fff ;border-top: 1px solid #255890">报警时间</td>
-                                    <td style="    color: #fff ;border-top: 1px solid #255890">状态</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr style="background: #064370">
-                                    <td>未处理</td>
-                                    <td>#9 桥墩上行</td>
-                                    <td>23</td>
-                                    <td>18:28分</td>
-                                    <td>上浮</td>
-                                </tr>
-                                <tr>
-                                    <td>未处理</td>
-                                    <td>#9 桥墩上行</td>
-                                    <td>23</td>
-                                    <td>18:28分</td>
-                                    <td>上浮</td>
-                                </tr>
-                                <tr>
-                                    <td>未处理</td>
-                                    <td>#9 桥墩上行</td>
-                                    <td>23</td>
-                                    <td>18:28分</td>
-                                    <td>上浮</td>
-                                </tr>
-                                <tr>
-                                    <td>未处理</td>
-                                    <td>#9 桥墩上行</td>
-                                    <td>23</td>
-                                    <td>18:28分</td>
-                                    <td>上浮</td>
-                                </tr>
-                                <tr>
-                                    <td>未处理</td>
-                                    <td>上浮</td>
-                                    <td>#9 桥墩上行</td>
-                                    <td>18:28分</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                        </li>
+                    </ul>
+                    <!-- Breadcrumb -->
+                    <ol class="breadcrumb">
+                        <!-- <li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li> -->
+                        <li>
+                            <a href="#" class="date-btn">2018年5月27号</a>
+                        </li>
+                        <li>
+                            <a href="#" class="loginout-btn">退出</a>
+                        </li>
+                    </ol>
+                </section>
             </div>
-        </div>
-    </section>
-</section>
+        <section id="main" class="p-relative" role="main">
+                <!-- Content -->
+                <section id="content" class="container container_index">
+                    <!-- Breadcrumb -->
+        
+        
+                    <!-- Main Widgets -->
+        
+                    <div class="block-area index_contentbox">
+                        <div class="row">
+                            <div class="col-md-2 menu-left-01">
+                                <!-- USA Map -->
+                                <div class="tile today-blam bg-line">
+                                    <h3 class="blam-title">今日报警</h3>
+                                    <div id="usa-map-new">
+                                        <p>0</p>
+                                        <p>0</p>
+                                        <p>0</p>
+                                        <p>0</p>
+                                    </div>
+                                </div>
+        
+                                <!-- Dynamic Chart -->
+                                <div class="tile blam-list">
+                                    <div class="p-t-10 p-r-5 p-b-5">
+                                        <h3 class="blam-title">实时报警</h3>
+                                        <ul class="list-group" id="alarmTime">
+                                        
+                                        </ul>
+                                    </div>
+        
+                                </div>
+        
+                                <!-- Activity -->
+                                <div class="tile machine-status machine-status_shebhover">
+                                    <div class="p-t-10 p-r-5 p-b-5">
+                                        <h3 class="blam-title index_zt1">设备状态</h3>
+        
+                                        <table id="tabeleList2" class="table text-center font-14 " style="position: relative;top: 10px;left: 0.5px">
+                                            <thead>
+                                                <tr>
+                                                    <td style="    color: #fff     ;border-top: 1px solid #255890;">设备类型</td>
+                                                    <td style="    color: #fff ;border-top: 1px solid #255890">正常数量</td>
+                                                    <td style="    color: #fff ;border-top: 1px solid #255890">异常数量</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr id="chuanganqi">
+                                                    <td>传感器</td>
+                                                    <td>0个</td>
+                                                    <td>42个</td>
+                                                </tr>
+                                                <tr id="jietiaoyi">
+                                                    <td>解调仪</td>
+                                                    <td>1个</td>
+                                                    <td>0个</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <!-- Main Chart -->
+                                <div class="tile qiao">
+                                    <div class="qiao-tab qiao_titright">
+                                        <ul>
+                                            <li>上行</li>
+                                            <li>下行</li>
+                                        </ul>
+                                    </div>
+                                    <canvas id="canvas" style="display: none" width="980" height="150"></canvas>
+                                    <canvas id="canvasWrap" width="1000" height="250"></canvas>
+                                </div>
+        
+                                <!-- Pies -->
+                                <div class="tile text-center up-status-title" id="main-show">
+                                    <div class="qiao-tab">
+                                        <ul style="margin-right: 50px;margin-top: 10px">
+                                            <li class="blue index_aqfw">安全范围</li>
+                                            <li class="purple index_bjfw">报警范围</li>
+                                        </ul>
+                                    </div>
+                                    <div class="qiao-tab">
+                                        <ul style="margin-top: 10px">
+                                            <li class="up index_con2bot1">上行</li>
+                                            <li class="down index_con2bot2">下行</li>
+                                        </ul>
+                                    </div>
+                                    <div class="tile-dark p-10 up-status" style="position: relative">
+                                        <div id="main-line" style="    position: relative;
+                                        top: -27px;"></div>
+                                        <div style="position: absolute;    right: 2%;bottom: 4.2%;">桥墩号</div>
+                                    </div>
+                                </div>
+        
+                                <div class="clearfix"></div>
+                            </div>
+        
+                            <div class="col-md-3 ">
+                                <div class="machine-status alrm-list-line" id="main-show1">
+                                    <div class="p-t-10 p-r-5 p-b-5">
+                                            <div class="qiao-tab" id="time">
+                                                    <ul>
+                                                        <li style="color: #8ADC5D">上行</li>
+                                                        <li style="color: #FFFE1D">下行</li>
+                                                    </ul>
+                                                </div>
+                                        <h3 class="blam-title">桥墩实时监测</h3>
+                                        <div id="main-line2" style="height:340px;">
+        
+                                        </div>
+                                    </div>
+                                    <div class="index_setid m-b-15">
+                                        <select class="select index_addselect">
+                                            <option>#10桥墩</option>
+                                            <option>#1桥墩</option>
+                                            <option>#2桥墩</option>
+                                            <option>#3桥墩</option>
+                                            <option>#4桥墩</option>
+                                            <option>#5桥墩</option>
+                                            <option>#6桥墩</option>
+                                            <option>#7桥墩</option>
+                                            <option>#8桥墩</option>
+                                            <option>#9桥墩</option>
+                                            <option>#10桥墩</option>
+                                            <option>#11桥墩</option>
+                                            <option>#12桥墩</option>
+                                            <option>#13桥墩</option>
+                                            <option>#14桥墩</option>
+                                            <option>#15桥墩</option>
+                                            <option>#16桥墩</option>
+                                            <option>#17桥墩</option>
+                                            <option>#18桥墩</option>
+                                            <option>#19桥墩</option>
+                                            <option>#20桥墩</option>
+                                            <option>#21桥墩</option>
+                                        </select>
+                                    </div>
+                                    <div style="position: absolute;    right: 5.6%;top: 40.6%;">时间（12h）</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="machine-status alrm-list alrm-list-zishi" style="padding: 4.4px;">
+                                    <div class="p-t-10 p-r-5 p-b-5">
+                                        <h3 class="blam-title">报警列表</h3>
+        
+                                        <table id="tabeleList" class="table text-center table-striped" style="position: relative;top: 17px;left: 0.5px">
+                                            <thead>
+                                                <tr>
+                                                    <td style="    color: #fff     ;border-top: 1px solid #255890;line-height: 28px;font-size: 15px;">报警时间 </td>
+                                                    <td style="    color: #fff ;border-top: 1px solid #255890 ;line-height: 28px;font-size: 15px;">预警位置</td>
+                                                    <td style="    color: #fff ;border-top: 1px solid #255890;line-height: 28px;font-size: 15px;">报警状态</td>
+                                                    <td style="    color: #fff ;border-top: 1px solid #255890;line-height: 28px;font-size: 15px;">监测值</td>
+                                                    <td style="    color: #fff ;border-top: 1px solid #255890;line-height: 28px;font-size: 15px;">等级</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="aliamList">
+                                            
+                                             
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        
 
+<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
 <!-- Javascript Libraries -->
 <!-- jQuery -->
-<script src="js/jquery.min.js"></script> <!-- jQuery Library -->
-<script src="js/jquery-ui.min.js"></script> <!-- jQuery UI -->
-<script src="js/jquery.easing.1.3.js"></script> <!-- jQuery Easing - Requirred for Lightbox + Pie Charts-->
-
-<!-- Bootstrap -->
+<script src="js/jquery.min.js"></script>
+<!-- jQuery Library -->
 <script src="js/bootstrap.min.js"></script>
 
-<!-- Charts -->
-<script src="js/charts/jquery.flot.js"></script> <!-- Flot Main -->
-<script src="js/charts/jquery.flot.time.js"></script> <!-- Flot sub -->
-<script src="js/charts/jquery.flot.animator.min.js"></script> <!-- Flot sub -->
-<script src="js/charts/jquery.flot.resize.min.js"></script> <!-- Flot sub - for repaint when resizing the screen -->
+<script src="js/select.min.js"></script>
 
-<script src="js/sparkline.min.js"></script> <!-- Sparkline - Tiny charts -->
-<script src="js/easypiechart.js"></script> <!-- EasyPieChart - Animated Pie Charts -->
+<script src="js/device_setup.js"></script>
 
-
-<!--  Form Related -->
-<script src="js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
-
-<!-- UX -->
-<script src="js/scroll.min.js"></script> <!-- Custom Scrollbar -->
-
-<!-- Other -->
-<script src="js/calendar.min.js"></script> <!-- Calendar -->
-<script src="js/feeds.min.js"></script> <!-- News Feeds -->
-
-<!--echarts 地图表-->
-<script src="js/lineData.js"></script>
-<script src="js/new-line.js"></script>
-<script src="js/alarm.js"></script>
-<!--<script src="js/zhexian2.js"></script>-->
-<script>
-    var oriP = 92;
-    /*
-    * 画桥墩*/
-    var canvas=document.getElementById("canvas");
-    var cxt=canvas.getContext("2d");
-    //创建image对象
-    var imgObj = new Image();
-    imgObj.src = "./images/car.png";
-    imgObj.onload = function(){
-        cxt.drawImage(this, 0, 16);//this即是imgObj,保持图片的原始大小：470*480
-       ctx.drawImage(this, 0, 0,1024,768);//改变图片的大小到1024*768
-    }
-     var drawPolygon = function(ctx, conf){
-         var start = conf && conf.start || 10; //x轴起始点
-         var width = conf && conf.width || 2;
-         var itemWidth = conf && conf.itemWidth || 0;//桥墩宽度
-         var strokeStyle = conf && conf.strokeStyle;
-         var fillStyle = conf && conf.fillStyle;
-         var index = conf && conf.index;
-         var shadowColor = conf && conf.shadowColor;
-         // 添加图片
-         //开始路径
-         ctx.beginPath();
-         ctx.moveTo(start, 56);
-         ctx.lineTo(oriP+8+itemWidth,70);
-         ctx.lineTo(oriP+8+itemWidth,110);
-         ctx.lineTo(oriP+18+itemWidth,110);
-         ctx.lineTo(oriP+18+itemWidth,70);
-         ctx.lineTo(oriP+28+itemWidth,56);
-         ctx.shadowOffsetX = -10;
-         ctx.shadowOffsetY = 0;
-         ctx.shadowBlur    = 0;
-         ctx.shadowColor   = shadowColor;
-         ctx.closePath();
-         //路径闭合
-         if(strokeStyle) {
-             ctx.strokeStyle = strokeStyle;
-             ctx.lineWidth = width;
-             ctx.lineJoin = 'round';
-             ctx.stroke();
-         }
-         if(fillStyle) {
-             ctx.fillStyle = fillStyle;
-             ctx.fill();
-         }
-     }
-
-//     setInterval(function(){
-//         var index = Math.round(Math.random()*21);
-//
-//         for(var i=0; i<21; i++) {
-//             if( i == index ) {
-//                 if( i % 2 == 0) {
-//                     drawPolygon(cxt, {
-//                         start: oriP + i * 38,
-//                         itemWidth: i * 38,
-//                         strokeStyle: '',
-//                         fillStyle: '#ffffff',
-//                         index: i + 1,
-//                         shadowColor: '#eb048c'
-//                     })
-//                 } else {
-//                     drawPolygon(cxt, {
-//                         start: oriP + i * 38,
-//                         itemWidth: i * 38,
-//                         strokeStyle: '',
-//                         fillStyle: '#eb048c',
-//                         index: i + 1,
-//                         shadowColor: '#02B494'
-//                     })
-//                 }
-//
-//             } else {
-//                 drawPolygon(cxt, {
-//                     start: oriP + i * 38,
-//                     itemWidth: i * 38,
-//                     strokeStyle: '',
-//                     fillStyle: '#ffffff',
-//                     index: i + 1,
-//                     shadowColor: '#02B494'
-//                 })
-//             }
-//         }
-//     },3000)
-     for(var i=0; i<21; i++) {
-         if( i == 12 ) {
-             drawPolygon(cxt, {
-                 start: 92 + i * 38,
-                 itemWidth: i * 38,
-                 strokeStyle: '',
-                 fillStyle: '#ffffff',
-                 index: i + 1,
-                 shadowColor: '#eb048c'
-             })
-         } else {
-             drawPolygon(cxt, {
-                 start: 92 + i * 38,
-                 itemWidth: i * 38,
-                 strokeStyle: '',
-                 fillStyle: '#ffffff',
-                 index: i + 1,
-                 shadowColor: '#02B494'
-             })
-         }
-     }
-</script>
-
-</body>
 </html>

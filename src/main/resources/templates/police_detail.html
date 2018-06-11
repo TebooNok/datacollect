@@ -16,6 +16,35 @@
     <link rel="stylesheet" href="css/index.css">
     <link href="css/sun.css" rel="stylesheet">
     <link rel="stylesheet" href="css/sunthree.css">
+    <style>
+        .form-control:focus, .input-focused, .bootstrap-select.open > .form-control{    border-color: #c9c9c9;
+            /* background: rgba(0, 0, 0, 0); */
+            box-shadow: none;}
+        input::-webkit-input-placeholder{
+            color:#9c9a9a !important;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#9c9a9a !important;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#9c9a9a !important;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+            color:#9c9a9a !important;
+        }
+        textarea::-webkit-input-placeholder{
+            color:#9c9a9a !important;
+        }
+        textarea::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#9c9a9a !important;
+        }
+        textarea:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#9c9a9a !important;
+        }
+        textarea:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+            color:#9c9a9a !important;
+        }
+    </style>
 
 </head>
 <body>
@@ -25,28 +54,29 @@
     </header>
     <section class="container togethers">
         <ul class="breadcrumb breadcrumb-left nav_menu1">
-            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext" target="myFrameName">首页</a></li>
+            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext"  target = '_self'>首页</a></li>
             <li class="nav_menu_li ifream_listnav">
                 <a  class="home-btn home_btnnext" target="myFrameName" >菜单</a>
                 <ul class="nav_twomenu bg2">
                     <li>
                         <a  target="myFrameName">设置</a>
                         <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
-                            <li><a href="setPermission.html" target="myFrameName">权限</a> </li>
-                            <li><a href="threshold-value.html" target="myFrameName">阈值</a> </li>
-                            <li id="sbsz"><a href="device_setup.html" target="myFrameName">设备设置</a> </li>
+                            <li><a href="setPermission.html"  target = '_self'>权限</a> </li>
+                            <li><a href="threshold-value.html"  target = '_self'>阈值</a> </li>
+                            <li ><a href="device_sensor.html"  target = '_self'>传感器</a> </li>
+                            <li ><a href="device_mediate.html"  target = '_self'>解调仪</a> </li>
                         </ul>
                     </li>
                     <li><a  target="myFrameName">查询</a>
                         <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="searchDuan.html" target="myFrameName">时间段查询</a> </li>
-                            <li><a href="searchPoint.html" target="myFrameName">时间点查询</a> </li>
+                            <li><a href="searchDuan.html"  target = '_self'>时间段查询</a> </li>
+                            <li><a href="searchPoint.html"  target = '_self'>时间点查询</a> </li>
                         </ul>
                     </li>
-                    <li><a href="police.html" target="myFrameName" onClick="jump('charts.html')">报警</a>
+                    <li><a href="police.html"  target = '_self'>报警</a>
                         <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="police_handle.html" target="myFrameName">报警处理人</a> </li>
-                            <li><a href="police_sure.html" target="myFrameName">报警确认人</a> </li>
+                            <li><a href="police_handle.html"  target = '_self'>报警处理人</a> </li>
+                            <li><a href="police_sure.html"  target = '_self'>报警确认人</a> </li>
                         </ul>
                     </li>
                 </ul>
@@ -64,11 +94,11 @@
 <section class="p-relative container mg_t22" role="main" >
     <div class="head_titall">
         <ol class="head_titall_title">
-            <li class="home"><a href="index.html">首页</a></li>
+            <li class="home"><a href="index.html" target = '_self'>首页</a></li>
             <li> > </li>
-            <li><a href="police.html">报警</a></li>
+            <li><a href="police.html" target = '_self'>报警</a></li>
             <li> > </li>
-            <li class="active"><a href="police_detail.html">报警详情</a></li>
+            <li class="active"><a href="police_detail.html"  target = '_self'>报警详情</a></li>
 
         </ol>
     </div>
@@ -79,11 +109,11 @@
             <div class="row device_list2">
                 <div class="col-lg-4 police_tit">
                     <label class="police_type">报警类型</label>
-                    <input type="text" class="form-control m-b-10" placeholder="">
+                    <input type="text" class="form-control m-b-10" placeholder="请输入报警类型">
                 </div>
                 <div class="col-lg-4 police_tit">
                     <label class="police_type">报警位置</label>
-                    <input type="text" class="form-control m-b-10" placeholder="">
+                    <input type="text" class="form-control m-b-10" placeholder="请输入报警位置">
                 </div>
                 <div class="col-lg-4 police_tit police_tit_time">
                     <div class="layui-form">
@@ -91,7 +121,7 @@
                             <div >
                                 <label class=" police_type">报警时间</label>
                                 <div class="polist_onelist_three">
-                                    <input type="text" class="form-control" id="test1" placeholder="yyyy-MM-dd">
+                                    <input type="text" class="form-control time_rightbox" id="test1" placeholder="请输入报警时间">
                                 </div>
                             </div>
                         </div>
@@ -102,11 +132,11 @@
             <div class="row device_list2">
                 <div class="col-lg-4 police_tit">
                     <label class="police_type">处理状态</label>
-                    <input type="text" class="form-control m-b-10" placeholder="">
+                    <input type="text" class="form-control m-b-10" placeholder="请输入处理状态">
                 </div>
                 <div class="col-lg-4 police_tit">
                     <label class="police_type">处理人</label>
-                    <input type="text" class="form-control m-b-10" placeholder="">
+                    <input type="text" class="form-control m-b-10" placeholder="请输入处理人">
                 </div>
                 <div class="col-lg-4 police_tit police_tit_time">
                     <div class="layui-form">
@@ -114,7 +144,7 @@
                             <div >
                                 <label class=" police_type">处理时间</label>
                                 <div class="polist_onelist_three">
-                                    <input type="text" class=" form-control m-b-10" id="test2" placeholder="yyyy-MM-dd ">
+                                    <input type="text" class=" form-control m-b-10 time_rightbox" id="test2" placeholder="请输入处理时间">
                                 </div>
                             </div>
                         </div>
@@ -134,7 +164,7 @@
             <div class="row device_list2">
                 <div class="col-lg-4 police_tit">
                     <label class="police_type">确认人</label>
-                    <input type="text" class="form-control m-b-10" placeholder="">
+                    <input type="text" class="form-control m-b-10" placeholder="请输入确认人">
                 </div>
 
                 <div class="col-lg-4 police_tit police_tit_time">
@@ -143,7 +173,7 @@
                             <div >
                                 <label class=" police_type">处理时间</label>
                                 <div class="polist_onelist_three">
-                                    <input type="text" class=" form-control m-b-10" id="test3" placeholder="yyyy-MM-dd ">
+                                    <input type="text" class=" form-control m-b-10 time_rightbox" id="test3" placeholder="请输入处理时间 ">
                                 </div>
                             </div>
                         </div>
@@ -192,6 +222,6 @@
             });
         });
     </script>
-</body>
+<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
 </html>
 

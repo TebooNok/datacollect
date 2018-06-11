@@ -16,6 +16,7 @@
     <link type="text/css" rel="stylesheet" href="table/css/jquery.paginate.css" />
     <link type="text/css" rel="stylesheet" href="table/css/jquery.yhhdatatable.css" />
     <link type="text/css" rel="stylesheet" href="css/ProjectCss/setPermission.css" />
+    <link type="text/css" rel="stylesheet" href="css/ProjectCss/waitApprova.css" />
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <link href="css/sun.css" rel="stylesheet">
@@ -28,6 +29,19 @@
         text-decoration: underline;
     }
     threshold_upline{margin-top: 20px;}
+    input::-webkit-input-placeholder{
+        color:#9c9a9a !important;
+    }
+    input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+        color:#9c9a9a !important;
+    }
+    input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+        color:#9c9a9a !important;
+    }
+    input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+        color:#9c9a9a !important;
+    }
+    .bootstrap-select.btn-group .btn .filter-option{    text-align: left!important;}
 </style>
 </head>
 <body>
@@ -37,29 +51,26 @@
     </header>
     <section class="container togethers">
         <ul class="breadcrumb breadcrumb-left nav_menu1">
-            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext" target="myFrameName">首页</a></li>
+            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext"  target = '_self'>首页</a></li>
             <li class="nav_menu_li ifream_listnav">
                 <a  class="home-btn home_btnnext" target="myFrameName" >菜单</a>
                 <ul class="nav_twomenu bg2">
                     <li>
                         <a  target="myFrameName">设置</a>
                         <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
-                            <li><a href="setPermission.html" target="myFrameName">权限</a> </li>
-                            <li><a href="threshold-value.html" target="myFrameName">阈值</a> </li>
-                            <li id="sbsz"><a href="device_setup.html" target="myFrameName">设备设置</a> </li>
+                            <li><a href="setPermission.html"  target = '_self'>权限</a> </li>
+                            <li><a href="threshold-value.html"  target = '_self'>阈值</a> </li>
+                            <li class="index_fell"><a href="device_sensor.html"  target = '_self'>传感器</a> </li>
+                            <li class="index_fell"><a href="device_mediate.html"  target = '_self'>解调仪</a> </li>
                         </ul>
                     </li>
                     <li><a  target="myFrameName">查询</a>
                         <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="searchDuan.html" target="myFrameName">时间段查询</a> </li>
-                            <li><a href="searchPoint.html" target="myFrameName">时间点查询</a> </li>
+                            <li><a href="searchDuan.html"  target = '_self'>时间段查询</a> </li>
+                            <li><a href="searchPoint.html"  target = '_self'>时间点查询</a> </li>
                         </ul>
                     </li>
-                    <li><a href="police.html" target="myFrameName" onClick="jump('charts.html')">报警</a>
-                        <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="police_handle.html" target="myFrameName">报警处理人</a> </li>
-                            <li><a href="police_sure.html" target="myFrameName">报警确认人</a> </li>
-                        </ul>
+                    <li><a href="police.html"  target = '_self'>报警</a>
                     </li>
                 </ul>
             </li>
@@ -68,18 +79,18 @@
         <ol class="breadcrumb">
             <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
             <li><a href="#" class="date-btn date_btnnext">2018年5月27号</a></li>
-            <li><a href="#" class="loginout-btn home_btnnext">Admin</a></li>
+            <li><a href="#" class="loginout-btn home_btnnext">退出</a></li>
         </ol>
     </section>
 </div>
 <section class="p-relative container mg_t22" role="main" >
     <div class="head_titall">
         <ol class="head_titall_title">
-            <li class="home"><a href="index.html">首页</a></li>
+            <li class="home"><a href="index.html"  target = '_self'>首页</a></li>
             <li> > </li>
             <li><a >设置</a></li>
             <li> > </li>
-            <li class="active">权限</li>
+            <li class="active"><a href="setPermission.html" target = '_self'>权限</a></li>
         </ol>
     </div>
     <div class="clearfix"></div>
@@ -89,17 +100,24 @@
             <div class="">
                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 threshold_upline">
                     <label>ID：</label>
-                    <input type="text" class="form-control m-b-10" placeholder="请输入ID">
+                    <input id="importId" type="text" class="form-control m-b-10" placeholder="请输入ID">
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 threshold_upline">
                     <label>权限：</label>
-                    <input type="text" class="form-control m-b-10" placeholder="请输入权限">
+                    <div class="device_setid m-b-15 set_preselect">
+                        <select class="select" id="select">
+                            <option>普通用户</option>
+                            <option>管理员</option>
+                            <option>高级管理员</option>
+                            <option>超级管理员</option>
+                        </select>
+                    </div>
                 </div>
                 <button class="btn btn-primary" onclick="search
 ()">搜索</button>
                 <div class="clearfix"></div>
             </div>
-            <table id="testtable3">
+            <table id="testtable3" style="margin-top: 40px;">
                 <thead>
                 <tr>
                     <th>ID</th><th>姓名</th><th>权限</th><th>操作</th>
@@ -117,15 +135,15 @@
 <script src="js/jquery.min.js"></script> <!-- jQuery Library -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
+<script src="js/device_setup.js"></script>
 <script type="text/javascript" src="js/ProjectJs/jquery.paginate.js"></script>
 <script type="text/javascript" src="js/ProjectJs/jquery.yhhdatatable.js" ></script>
-<script type="text/javascript" src="js/ProjectJs/setPermission.js"
-></script>
+<script type="text/javascript" src="js/ProjectJs/setPermission.js"></script>
 <script src="js/select.min.js"></script>
 <script>
 
     function edit(obj){
-        console.log(JSON.parse($(obj).attr('token-attr')))
+          var data = JSON.parse($(obj).attr('data-attr'))
         layer.open({
             type: 1,
             title:'编辑',
@@ -134,16 +152,15 @@
             content: "<div class=' threshold_upline'>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 10%;'>ID:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='t001'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;padding-left: 12px;'' type='text' value='"+data.a+"'>" +
             "</div>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 10%;'>姓名:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='桥梁测试'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;padding-left: 12px;' type='text' value='"+data.b+"'>" +
             "</div>" +
             "<div class='mb-b-15' style='margin: 10px 16px'>" +
             "<label style='width: 10%;'>权限:</label>" +
-
-            "<select class='select' style='width: 70%;line-height: 34px;height: 34px;background: #fff;border:1px solid #ccc;'>" +
+            "<select class='select' style='width: 70%;line-height: 34px;height: 34px;background: #fff;border:1px solid #ccc;padding-left: 12px;''>" +
             "<option>普通用户</option" +
             "><option>管理员</option>" +
             "<option>高级管理员</option>" +
@@ -153,17 +170,17 @@
             "<div class='threshold_butset'>" +
             "<button style='color: #fff;\n" +
             "    background: #23aaea;\n" +
-            "    padding: 9px 34px;\n" +
+            "    padding: 8px 34px;\n" +
             "    border: none;\n" +
-            "    border-radius: 10px!important;\n" +
+            "    border-radius: 5px!important;\n" +
             "    font-size: 16px;\n" +
-            "    margin-top: 16px;' onclick='confim()'>确认</button>" +
+            "    margin-top: 16px;' onclick='editAffirm()'>确认</button>" +
             "<button style='float: right;\n" +
-            "    color: #fff;\n" +
-            "    background: #5e5955;\n" +
-            "    padding: 9px 34px;\n" +
-            "    border: none;\n" +
-            "    border-radius: 10px!important;\n" +
+            "    color: #333;\n" +
+            "    border: 1px solid #ddd;\n" +
+            "    background: #fff;\n" +
+            "    padding: 8px 34px;\n" +
+            "    border-radius: 5px!important;\n" +
             "    font-size: 16px;\n" +
             "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
             "</div>" +
@@ -174,6 +191,8 @@
         console.log("1")
         console.log(id)
         layer.confirm('确定要删除吗？', {
+            btnAlign: 'c',
+            skin: 'del-class',
             btn: ['确定','取消'] //按钮
         }, function(){
             layer.msg('删除成功', {icon: 1});
@@ -183,7 +202,20 @@
             });
         });
     }
+    function editAffirm () {
+        layer.alert('编辑确定接口', {icon:0,btnAlign: 'c',skin: 'del-class' });
+    }
+    function search () {
+        var id = $("#importId").val()
+        var select = $('#select option:selected').val();
+        console.log(id)
+        console.log(select)
+    }
+    function cancel (){
+        layer.closeAll()
+    };
+
 </script>
-</body>
+<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
 </html>
 

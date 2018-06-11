@@ -21,6 +21,53 @@ line-height: 30px
     border: 1px solid #3a5f22;
     background: #fff!important;
     border-color: #67b930!important;
-    border-radius: 10px!important;
+    border-radius: 22px!important;
     height: 32px;
 }
+.tableListth{
+    text-align: center;
+}
+.tabess{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show
+}
+.yhh-data-table-frame{
+    height: 406px;
+    margin-top: 50px;
+    overflow-y: auto;
+}
+.yhh-data-table-frame>.data-table-top-box{
+    height: 0px;
+}
+.qiao-tab ul{
+	margin-top: 0px;
+}
+.export.btn:not(.form-control){color: #67b930;}
+.export.btn:not(.form-control):active, .export.btn:not(.form-control).active, .export.open .btn.dropdown-toggle:not(.form-control){background: transparent;}
+.export.btn:active, .export.btn.active{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;}
+.ms-drop ul{
+    padding:0;
+}
+.ms-drop ul > li:hover
+{
+    background-color:#a7c3ed;
+}
+.ms-drop ul > li{
+    line-height: 25px;
+}
+.ms-drop ul > li> label > span{
+    position: relative;
+    top: 2px;
+}
+.purple:before{
+    background: -webkit-linear-gradient(#1bed4b 33%, #c462f7 33%,#f79fbe) !important; /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#1bed4b 33%, #c462f7 33%,#f79fbe) !important; /* Opera 11.6 - 12.0 */
+    background: -moz-linear-gradient(#1bed4b 33%, #c462f7 33%,#f79fbe) !important ; /* Firefox 3.6 - 15 */
+    background: linear-gradient(#1bed4b 33%, #c462f7 33%,#f79fbe) !important; /* 标准的语法（必须放在最后） */
+}
+

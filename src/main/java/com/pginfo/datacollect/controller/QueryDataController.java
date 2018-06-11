@@ -6,6 +6,7 @@ import com.pginfo.datacollect.dto.QueryDataRequest;
 import com.pginfo.datacollect.dto.QueryDataResponse;
 import com.pginfo.datacollect.service.QuerySinkDataService;
 import com.pginfo.datacollect.util.Constants;
+import com.pginfo.datacollect.util.FileUtils;
 import com.pginfo.datacollect.util.LocalUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,10 +86,10 @@ public class QueryDataController {
         }
 
         // 按时间降序排序
-        returnList.sort((MongoSinkData o1, MongoSinkData o2) -> o1.getDateTime().compareTo(o2.getDateTime())>0?-1:0);
+        returnList.sort((MongoSinkData o1, MongoSinkData o2) -> o1.getDateTime().compareTo(o2.getDateTime()) > 0 ? -1 : 0);
 
         // 传入位置信息
-        for(MongoSinkData data:returnList){
+        for (MongoSinkData data : returnList) {
             MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(data.getDeviceId());
             data.setDeviceDirection(monitorDeviceSetting.getDevicePosition());
             data.setDevicePosition(monitorDeviceSetting.getDevicePosition());
@@ -98,6 +100,30 @@ public class QueryDataController {
         //return queryService.queryAll();
     }
 
+    @RequestMapping(value = "queryDataExcel.do", method = RequestMethod.GET)//, produces = "application/vnd.ms-excel")
+    public void exportExcel(QueryDataRequest request, HttpServletResponse response) {
+        QueryDataResponse queryDataResponse = querySinkDataList(request);
+        try {
+
+            //------------------- TEST -------------
+//            List<MongoSinkData> testList = new ArrayList<>();
+//            testList.add(new MongoSinkData(1, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
+//            testList.add(new MongoSinkData(2, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
+//            testList.add(new MongoSinkData(3, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
+//            testList.add(new MongoSinkData(4, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
+//            testList.add(new MongoSinkData(5, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
+            //------------------- TEST -------------
+
+            FileUtils.exportExcel(queryDataResponse.getMongoSinkDataList(), "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据", response);
+            // FileUtils.exportExcel(testList, "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据", response);
+        } catch (Exception e) {
+
+            logger.error("[Internal error at export excel file.]");
+            //return new QueryDataResponse(Constants.INTERNAL_ERROR_CODE, "[Internal error at export excel file.]" + e.getMessage(), null);
+        }
+
+        //return new QueryDataResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
+    }
 
     private String validateRequest(QueryDataRequest queryDataRequest) {
 
@@ -106,42 +132,34 @@ public class QueryDataController {
             return "Mode must in [1,2,3,4]";
         }
 
-        switch (mode){
+        switch (mode) {
             case 3:
                 return null;
             case 1:
-                if(StringUtils.isEmpty(queryDataRequest.getStartDateTime()))
-                {
+                if (StringUtils.isEmpty(queryDataRequest.getStartDateTime())) {
                     return "Time point can`t be null when search point.";
                 }
-                if(StringUtils.isEmpty(queryDataRequest.getDeviceId()))
-                {
+                if (StringUtils.isEmpty(queryDataRequest.getDeviceId())) {
                     return "DeviceId can`t be null when search point.";
                 }
                 break;
             case 2:
-                if(queryDataRequest.getDeviceId().contains("\\|"))
-                {
+                if (queryDataRequest.getDeviceId().contains("\\|")) {
                     return "Not allowed multi-deviceId when search slot for same device.";
                 }
-                if(StringUtils.isEmpty(queryDataRequest.getDeviceId()))
-                {
+                if (StringUtils.isEmpty(queryDataRequest.getDeviceId())) {
                     return "DeviceId can`t be null when search slot for same device.";
                 }
-                if(StringUtils.isEmpty(queryDataRequest.getStartDateTime()) || StringUtils.isEmpty(queryDataRequest.getEndDateTime()))
-                {
+                if (StringUtils.isEmpty(queryDataRequest.getStartDateTime()) || StringUtils.isEmpty(queryDataRequest.getEndDateTime())) {
                     return "Start time or end time can`t be null when search slot for same device.";
                 }
-                if(LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()).isAfter(LocalDateTime.now()) || LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime()).isAfter(LocalDateTime.now()))
-                {
+                if (LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()).isAfter(LocalDateTime.now()) || LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime()).isAfter(LocalDateTime.now())) {
                     return "Start time or end time can`t be after current time when search slot for same device.";
                 }
-                if(LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()).isAfter(LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime())))
-                {
+                if (LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()).isAfter(LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime()))) {
                     return "Start time can`t be after end time when search slot for same device.";
                 }
-                if(StringUtils.isEmpty(queryDataRequest.getTemplateType()))
-                {
+                if (StringUtils.isEmpty(queryDataRequest.getTemplateType())) {
                     return "TemplateType can`t be null when search slot for same device.";
                 }
 

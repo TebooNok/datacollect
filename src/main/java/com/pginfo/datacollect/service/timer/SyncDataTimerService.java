@@ -5,6 +5,7 @@ import com.pginfo.datacollect.dao.MongoSinkDataDao;
 //import com.pginfo.datacollect.dao.SinkDataDao;
 import com.pginfo.datacollect.dao.SinkDataMapper;
 import com.pginfo.datacollect.domain.MongoSinkData;
+import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.domain.SinkData;
 import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.ConvertUtil;
@@ -39,18 +40,21 @@ public class SyncDataTimerService {
 
     private final Map<Integer, Queue<MongoSinkData>> cacheDataQueueMap;
 
+    private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
+
     // 避免重复(目前允许重复，保证每秒进入一条数据)
     // private static Map<Integer, String> duplicateDataMap = new HashMap<>(Constants.DEVICE_NUM);
 
     @Autowired
-    public SyncDataTimerService(SinkDataMapper sinkDataMapper, MongoSinkDataDao mongoSinkDataDao, Map<Integer, MongoSinkData> cacheDataMap, Map<Integer, Queue<MongoSinkData>> cacheDataQueueMap) {
+    public SyncDataTimerService(SinkDataMapper sinkDataMapper, MongoSinkDataDao mongoSinkDataDao, Map<Integer, MongoSinkData> cacheDataMap, Map<Integer, Queue<MongoSinkData>> cacheDataQueueMap, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
         this.sinkDataMapper = sinkDataMapper;
         this.mongoSinkDataDao = mongoSinkDataDao;
         this.cacheDataMap = cacheDataMap;
         this.cacheDataQueueMap = cacheDataQueueMap;
+        this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
 
-    //    每秒同步一次，刷新到缓存和Mongodb中
+    //    每秒同步一次，刷新到缓存和Mongodb中，在这里做减值
     @Scheduled(cron = "0/1 0 * * * ?")
     public void syncDataFromFrontDb() {
 
@@ -71,7 +75,15 @@ public class SyncDataTimerService {
                 mapMongoSinkData = cacheDataMap.get(mongoSinkData.getDeviceId());
                 mapMongoSinkData.setDateTime(mongoSinkData.getDateTime());
                 mapMongoSinkData.setTemperature(mongoSinkData.getTemperature());
-                mapMongoSinkData.setHeight(mongoSinkData.getHeight());
+
+                // 检查是否有基准传感器,有则在此处理减值
+                int base = monitorDeviceSettingMap.get(sinkData.getDeviceId()).getDeviceBase();
+                if(0 != base){
+                    mapMongoSinkData.setHeight(mongoSinkData.getHeight() - cacheDataMap.get(base).getHeight());
+                }
+                else{
+                    mapMongoSinkData.setHeight(mongoSinkData.getHeight());
+                }
 
                 cacheDataMap.put(mongoSinkData.getDeviceId(), mapMongoSinkData);
             }

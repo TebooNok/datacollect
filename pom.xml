@@ -40,14 +40,14 @@
             <version>1.3.2</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-orm</artifactId>-->
-            <!--<version>4.2.4.RELEASE</version>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-orm</artifactId>-->
+        <!--<version>4.2.4.RELEASE</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version >
+            <version>1.2.17</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -92,14 +92,14 @@
             <version>1.3.2</version>
         </dependency>
         <dependency>
-	        <groupId>io.springfox</groupId>
-	        <artifactId>springfox-swagger2</artifactId>
-	        <version>2.6.1</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
         </dependency>
         <dependency>
-	        <groupId>io.springfox</groupId>
-	        <artifactId>springfox-swagger-ui</artifactId>
-	        <version>2.6.1</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
         </dependency>
         <dependency>
             <groupId>com.auth0</groupId>
@@ -118,6 +118,23 @@
             <artifactId>Java-WebSocket</artifactId>
             <version>1.3.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>

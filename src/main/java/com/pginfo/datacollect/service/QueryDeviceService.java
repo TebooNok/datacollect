@@ -3,6 +3,7 @@ package com.pginfo.datacollect.service;
 import com.pginfo.datacollect.domain.DemoDevice;
 import com.pginfo.datacollect.domain.MonitorDevice;
 import com.pginfo.datacollect.domain.MonitorDeviceSetting;
+import com.pginfo.datacollect.dto.QueryDeviceStatusResponse;
 import com.pginfo.datacollect.dto.QueryMonitorDeviceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,23 +42,23 @@ public class QueryDeviceService {
 
             response.setTotal(returnList.size());
 
-            // 启用分页
-            if (page > 0) {
-                int endIndex = (page) * dataNum;
-                int size = returnList.size();
-                if ((page - 1) * dataNum > size) {
-                    return new ArrayList<>();
-                } else {
-                    return returnList.subList((page - 1) * dataNum, endIndex > size ? size : endIndex);
+                // 启用分页
+                if (page > 0) {
+                    int endIndex = (page) * dataNum;
+                    int size = returnList.size();
+                    if ((page - 1) * dataNum > size) {
+                        return new ArrayList<>();
+                    } else {
+                        return returnList.subList((page - 1) * dataNum, endIndex > size ? size : endIndex);
+                    }
                 }
-            }
 
-            // 不启用分页，返回前N条
-            if (returnList.size() > dataNum) {
-                return returnList.subList(0, dataNum);
-            } else {
-                return returnList;
-            }
+                // 不启用分页，返回前N条
+                if (returnList.size() > dataNum) {
+                    return returnList.subList(0, dataNum);
+                } else {
+                    return returnList;
+                }
 
         }
         else{
@@ -80,5 +81,33 @@ public class QueryDeviceService {
         else{
             throw new Exception("[Can not find any demo device info]");
         }
+    }
+
+    public void getDeviceNumber(QueryDeviceStatusResponse response){
+        int normalMonitorNum = 0;
+        int normalDemoNum = 0;
+        int abnormalMonitorNum = 0;
+        int abnormalDemoNum = 0;
+
+        for(Map.Entry<Integer, DemoDevice> entry:demoDeviceMap.entrySet()){
+            if(entry.getValue().getStatus() != 1){
+                abnormalDemoNum++;
+            }else {
+                normalDemoNum++;
+            }
+        }
+
+        for(Map.Entry<Integer, MonitorDevice> entry:monitorDeviceMap.entrySet()){
+            if(entry.getValue().getStatus() != 1){
+                abnormalMonitorNum++;
+            }else {
+                normalMonitorNum++;
+            }
+        }
+
+        response.setAbnormalDemoNum(abnormalDemoNum);
+        response.setAbnormalMonitorNum(abnormalMonitorNum);
+        response.setNormalDemoNum(normalDemoNum);
+        response.setNormalMonitorNum(normalMonitorNum);
     }
 }

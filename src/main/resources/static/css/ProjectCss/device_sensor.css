@@ -1,0 +1,34 @@
+.export{
+    padding: 2px 20px;
+    margin-bottom: 10px;
+    color: #67b930;
+    border: 1px solid #3a5f22;
+    background: #fff!important;
+    border-color: #5a79ed!important;
+    border-radius: 22px!important;
+}
+
+.export.btn:not(.form-control){color: #5a79ed;}
+.export.btn:not(.form-control):active, .export.btn:not(.form-control).active, .export.open .btn.dropdown-toggle:not(.form-control){background: transparent;}
+.export.btn:active, .export.btn.active{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;}
+.btn-danger{
+    margin-left: 0px;
+}
+.restart_icon{
+    background-image: url("../../images/restart.png") !important;
+}
+.del_icon{
+    background-image: url("../../images/del.png") !important;
+}
+.initialize_icon{
+    background-image: url("../../images/initialize.png") !important;
+}
+.start_use{
+    background-image: url("../../images/start_sure.png") !important;
+}
+.stop_icon{
+    background-image: url("../../images/stop.png") !important;
+}

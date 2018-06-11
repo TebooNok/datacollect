@@ -1,0 +1,20 @@
+.together_pad
+{
+    padding: 0px;
+}
+.threshold_but{
+    margin-bottom: 0px;
+}
+.yhh-data-table-frame{
+    height: 497px;
+    margin-top: 10px;
+}
+.yhh-data-table-frame>table.yhh-data-table tbody th, .yhh-data-table-frame>table.yhh-data-table tbody td{
+    padding: 0px;
+}
+.batchProcess{
+    background: #00a74f !important; ;
+}
+.yhh-data-table-frame>table.yhh-data-table tbody th, .yhh-data-table-frame>table.yhh-data-table tbody td input[type=checkbox]{
+    margin-left: 19px;
+}

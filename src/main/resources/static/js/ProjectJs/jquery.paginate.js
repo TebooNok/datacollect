@@ -275,7 +275,7 @@
     	'pageData':{
     		'currentPage': 1, /*当前页码*/ 
     		'dataLen': 10 ,/*数据总条数*/
-    		'displayDataLen': 7  /*每页显示条数*/
+    		'displayDataLen': 10  /*每页显示条数*/
     	},
     	'pageBtnFun':function(){}
     };

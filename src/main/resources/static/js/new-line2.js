@@ -1,6 +1,6 @@
 var timeData = ["#1","#2","#3",,"#4","#5","#6","#7","#8","#9","#10","#11","#12","#14","#15","#16","#17","#18","#19","#20","#21","#3"];
 function randomData() {
-    return ((Math.random()*(-1) + Math.random()) * 0.3).toFixed(1)
+    return ((Math.random()*(-1) + Math.random()) * 50).toFixed(1)
 }
 
 var datas = [
@@ -103,10 +103,10 @@ option = {
     yAxis: [{
 
         type: 'value',
-        max: 0.3,
+        max: 50,
         name: '上浮/下沉量',
-        min: -0.3,
-        interval: 0.1,
+        min: -50,
+        interval: 25,
         axisLine: {
             onZero: true,
             lineStyle: {
@@ -148,34 +148,34 @@ option = {
             },
             data: [
                 [{
-                    yAxis: 0.3,
+                    yAxis: 50,
                     itemStyle: {
                         normal: {
                             color: 'rgba(70,66,125,0.4)'
                         }
                     },
                 }, {
-                    yAxis: 0.2
+                    yAxis: 25
                 }],
                 [{
-                    yAxis: 0.2,
+                    yAxis: 25,
                     itemStyle: {
                         normal: {
                             color: 'rgba(14,113,155,0.4)'
                         }
                     },
                 }, {
-                    yAxis: -0.2,
+                    yAxis: -25,
                 }],
                 [{
-                    yAxis: -0.2,
+                    yAxis: -25,
                     itemStyle: {
                         normal: {
                             color: 'rgba(70,66,125,0.4)'
                         }
                     }
                 }, {
-                    yAxis: -0.3,
+                    yAxis: -50,
                 }]
             ]
         },
@@ -202,34 +202,34 @@ option = {
             },
             data: [
                 [{
-                    yAxis: 0.3,
+                    yAxis: 50,
                     itemStyle: {
                         normal: {
                             color: 'rgba(70,66,125,0.4)'
                         }
                     },
                 }, {
-                    yAxis: 0.2
+                    yAxis: 25
                 }],
                 [{
-                    yAxis: 0.2,
+                    yAxis: 25,
                     itemStyle: {
                         normal: {
                             color: 'rgba(14,113,155,0.4)'
                         }
                     },
                 }, {
-                    yAxis: -0.2,
+                    yAxis: -25,
                 }],
                 [{
-                    yAxis: -0.2,
+                    yAxis: -25,
                     itemStyle: {
                         normal: {
                             color: 'rgba(70,66,125,0.4)'
                         }
                     }
                 }, {
-                    yAxis: -0.3,
+                    yAxis: -50,
                 }]
             ]
         },

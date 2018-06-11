@@ -43,6 +43,11 @@
     background-image: url("../../images/commomAdmin.png");
     background-repeat: no-repeat
 }
+.edit{
+    background-image: url("../../images/edits.png");
+    background-repeat: no-repeat
+}
+
 .noWord{
     width: 81px;
     text-overflow: ellipsis;
@@ -53,4 +58,8 @@
     line-height: 30px;
     position: relative;
     left: 25px;
+}
+.police_del{
+    background-image: url("../../images/del.png");
+    background-repeat: no-repeat
 }

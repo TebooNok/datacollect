@@ -104,6 +104,12 @@ public class MvcConfiguration implements WebMvcConfigurer {
         viewControlMap.put("/threshold-value", "threshold-value");
         viewControlMap.put("/threshold-value.html", "threshold-value");
 
+        viewControlMap.put("/device_mediate", "device_mediate");
+        viewControlMap.put("/device_mediate.html", "device_mediate");
+
+        viewControlMap.put("/device_sensor", "device_sensor");
+        viewControlMap.put("/device_sensor.html", "device_sensor");
+
         return viewControlMap;
     }
 }

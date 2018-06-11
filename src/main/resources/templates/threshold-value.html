@@ -39,29 +39,26 @@
     </header>
     <section class="container togethers">
         <ul class="breadcrumb breadcrumb-left nav_menu1">
-            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext" target="myFrameName">首页</a></li>
+            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext"  target = '_self'>首页</a></li>
             <li class="nav_menu_li ifream_listnav">
                 <a  class="home-btn home_btnnext" target="myFrameName" >菜单</a>
                 <ul class="nav_twomenu bg2">
                     <li>
                         <a  target="myFrameName">设置</a>
                         <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
-                            <li><a href="setPermission.html" target="myFrameName">权限</a> </li>
-                            <li><a href="threshold-value.html" target="myFrameName">阈值</a> </li>
-                            <li id="sbsz"><a href="device_setup.html" target="myFrameName">设备设置</a> </li>
+                            <li><a href="setPermission.html"  target = '_self'>权限</a> </li>
+                            <li><a href="threshold-value.html"  target = '_self'>阈值</a> </li>
+                            <li class="index_fell"><a href="device_sensor.html"  target = '_self'>传感器</a> </li>
+                            <li class="index_fell"><a href="device_mediate.html"  target = '_self'>解调仪</a> </li>
                         </ul>
                     </li>
                     <li><a  target="myFrameName">查询</a>
                         <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="searchDuan.html" target="myFrameName">时间段查询</a> </li>
-                            <li><a href="searchPoint.html" target="myFrameName">时间点查询</a> </li>
+                            <li><a href="searchDuan.html"  target = '_self'>时间段查询</a> </li>
+                            <li><a href="searchPoint.html"  target = '_self'>时间点查询</a> </li>
                         </ul>
                     </li>
-                    <li><a href="police.html" target="myFrameName" onClick="jump('charts.html')">报警</a>
-                        <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="police_handle.html" target="myFrameName">报警处理人</a> </li>
-                            <li><a href="police_sure.html" target="myFrameName">报警确认人</a> </li>
-                        </ul>
+                    <li><a href="police.html"  target = '_self'>报警</a>
                     </li>
                 </ul>
             </li>
@@ -70,18 +67,18 @@
         <ol class="breadcrumb">
             <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
             <li><a href="#" class="date-btn date_btnnext">2018年5月27号</a></li>
-            <li><a href="#" class="loginout-btn home_btnnext">Admin</a></li>
+            <li><a href="#" class="loginout-btn home_btnnext">退出</a></li>
         </ol>
     </section>
 </div>
 <section class="p-relative container mg_t22" role="main" >
     <div class="head_titall">
         <ol class="head_titall_title">
-            <li class="home"><a href="index.html">首页</a></li>
+            <li class="home"><a href="index.html"  target = '_self'>首页</a></li>
             <li> > </li>
             <li><a >设置</a></li>
             <li> > </li>
-            <li class="active">阈值</li>
+            <li class="active"><a href="threshold-value.html" target = '_self'> 阈值</a></li>
         </ol>
     </div>
     <div class="clearfix"></div>
@@ -91,37 +88,28 @@
             <h2 class="threshold_listline"><p class="block-title">一级</p><span class="small_sanjiao"></span></h2>
             <div class="row htreshold_listbox">
                 <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
-                    <label><i>*</i>上限：</label>
+                    <label style="width: 57px"><i>*</i>阈值</label>
                     <input type="text" class="form-control m-b-10" placeholder="请输入">
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
-                    <label><i>*</i>下限：</label>
-                    <input type="text" class="form-control m-b-10" placeholder="请输入">
-                </div>
+               
                 <div class="clearfix"></div>
             </div>
             <h2 class="threshold_listline"><p class="block-title green">二级</p><span class="small_sanjiao sanjiao_green"></span></h2>
             <div class="row htreshold_listbox">
                 <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
-                    <label><i>*</i>上限：</label>
+                    <label style="width: 57px"><i>*</i>阈值</label>
                     <input type="text" class="form-control m-b-10" placeholder="请输入">
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
-                    <label><i>*</i>下限：</label>
-                    <input type="text" class="form-control m-b-10" placeholder="请输入">
-                </div>
+               
                 <div class="clearfix"></div>
             </div>
             <h2 class="threshold_listline"><p class="block-title orange">三级</p><span class="small_sanjiao sanjiao_orange"></span></h2>
             <div class="row htreshold_listbox">
                 <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
-                    <label><i>*</i>上限：</label>
+                    <label style="width: 57px"><i>*</i>阈值</label>
                     <input type="text" class="form-control m-b-10" placeholder="请输入">
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
-                    <label><i>*</i>下限：</label>
-                    <input type="text" class="form-control m-b-10" placeholder="请输入">
-                </div>
+               
                 <div class="clearfix"></div>
             </div>
             <div class="threshold_but threshold_mgb">
@@ -138,6 +126,6 @@
 <script src="js/jquery.min.js"></script> <!-- jQuery Library -->
 <script src="js/bootstrap.min.js"></script>
 
-</body>
+<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
 </html>
 

@@ -15,6 +15,7 @@
  * JSONObject为参数，可不传
  **/
 (function ($) {
+
 	var Method = {
 		/*插件默认入口*/
 		'default':function($container,pluginName,methodName){
@@ -48,8 +49,8 @@
     		
     		/*如果用户可变更每页显示条数*/
     		if (opts.paginate.enabled && opts.paginate.changeDisplayLen){
-    			/*构造表格上部位置栏*/
-    			this.topBox.draw($frame);
+    			// /*构造表dsd格上部位置栏*/
+    			// this.topBox.draw($frame);
     			/*取得表格上部位置栏*/
     			var $topBox = $frame.children('.data-table-top-box');
     			/*改变每页显示数目区域创建*/  				
@@ -117,12 +118,12 @@
     		}
     	},
 		/*表格上部位置栏*/
-		'topBox':{
-			/*构造表格上部位置栏*/
-    		'draw':function($frame){
-    			$frame.prepend('<div class="data-table-top-box"></div>');
-    		}
-    	},
+        // 'topBox':{
+			// /*构造表格上部位置栏*/
+    	// 	'draw':function($frame){
+    	// 		$frame.prepend('<div class="data-table-top-box"></div>');
+    	// 	}
+    	// },
     	/*表格下部位置栏*/
     	'bottomBox':{
     		/*构造表格下部位置栏*/
@@ -275,6 +276,11 @@
     	},
     	/*显示渲染*/
     	'view':function($frame,$table,$tbody,pluginName,isStart){
+		
+			if($("#selectAll")) {
+				$("#selectAll").removeClass("layui-checked");
+				$("#selectAll").attr("isCheck","true");
+			}
     		var opts = optHandle.get($table,pluginName);
     		console.log('yhhDataTable param:'+JSON.stringify(opts));
     		opts.beforeShow();
@@ -469,11 +475,14 @@
 				return r;
 			}
 		},
+		"headerSearch": {
+
+		},
     	'paginate':{
     		'enabled':true, /*是否分页*/
     		'visibleGo': false, /*是否开启直接翻至某页功能*/
     		'type':'numbers', /*默认按钮样式递增（numbers只有数字按钮，updown增加上下页按钮，full增加首尾页按钮）*/
-    		'displayLen':7,  /*每页显示条数*/
+    		'displayLen':10,  /*每页显示条数*/
     		'currentPage':1, /*当前页码（初始页码）*/ 
     		'changeDisplayLen': false,  /*改变每页显示数目*/
     		'displayLenMenu':[10,20,30,50] /*改变每页显示数目时的可选值*/

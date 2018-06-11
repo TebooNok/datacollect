@@ -4,6 +4,7 @@ import com.pginfo.datacollect.dto.ManageDeviceRequest;
 import com.pginfo.datacollect.dto.ManageDeviceResponse;
 import com.pginfo.datacollect.service.ManageDeviceService;
 import com.pginfo.datacollect.util.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ public class ManageDeviceController {
 
     private final ManageDeviceService manageDeviceService;
 
+    @Autowired
     public ManageDeviceController(ManageDeviceService manageDeviceService) {
         this.manageDeviceService = manageDeviceService;
     }

@@ -5,15 +5,15 @@
    color: rgba(255,255,255,0.7) !important;
 }
 
-:-moz-placeholder { 
+:-moz-placeholder {
    color: rgba(255,255,255,0.7) !important;
 }
 
-::-moz-placeholder {  
+::-moz-placeholder {
    color: rgba(255,255,255,0.7) !important;
 }
 
-:-ms-input-placeholder {  
+:-ms-input-placeholder {
     color: rgba(255,255,255,0.7) !important;
 }
 
@@ -64,7 +64,7 @@ textarea.form-control {
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    background-color: rgba(238, 238, 238, 0.09);
+    background-color: #f3f3f3;
 }
 
 select:not([multiple]){
@@ -171,9 +171,9 @@ input[type="checkbox"], input[type="radio"]{
    color: #333;
 }
 
-.btn:not(.form-control):active, .btn:not(.form-control).active, .open .btn.dropdown-toggle:not(.form-control) {
+/*.btn:not(.form-control):active, .btn:not(.form-control).active, .open .btn.dropdown-toggle:not(.form-control) {
     background: rgba(0,0,0,0.75);
-}
+}*/
 
 .btn-sm {
     padding: 4px 10px 6px;
@@ -220,7 +220,7 @@ input[type="checkbox"], input[type="radio"]{
     border-top: 0;
     background: rgba(255,255,255,0.85);
     margin-top: -1px;
-     
+
 }
 .chzn-container.chzn-with-drop .chzn-drop {
      left: 0;
@@ -341,7 +341,7 @@ input[type="checkbox"], input[type="radio"]{
 }
 
 .chzn-container .chzn-results li:hover {
-    background: #fff !important;    
+    background: #fff !important;
 }
 
 .chzn-container .chzn-results li.active-result {
@@ -515,7 +515,7 @@ input[type="checkbox"], input[type="radio"]{
 
 .bootstrap-select.btn-group .dropdown-menu li small {
     padding-left: 0.5em;
-}    
+}
 
 .bootstrap-select.btn-group .dropdown-menu li:not(.disabled) > a:hover small,
 .bootstrap-select.btn-group .dropdown-menu li:not(.disabled) > a:focus small {
@@ -1292,7 +1292,7 @@ div.spinedit span:hover {
 }
 
 /* --------------------------------------------------------
-    Form Validation  
+    Form Validation
 -----------------------------------------------------------*/
 .formError {
      z-index: 990;
@@ -1683,7 +1683,7 @@ div.spinedit span:hover {
     text-align: right;
 }
 .note-editor .note-editable {
-    padding: 10px; 
+    padding: 10px;
     overflow: auto;
     outline: 0;
 }
@@ -1737,13 +1737,13 @@ div.spinedit span:hover {
 
 
 .note-editor .btn-group .btn+.btn, .note-editor .btn-group .btn+.btn-group, .note-editor .btn-group .btn-group+.btn, .note-editor .btn-group .btn-group+.btn-group,
-.md-editor .btn-group .btn+.btn, .md-editor .btn-group .btn+.btn-group, .md-editor .btn-group .btn-group+.btn, .md-editor .btn-group .btn-group+.btn-group{ margin-left: 0; } 
+.md-editor .btn-group .btn+.btn, .md-editor .btn-group .btn+.btn-group, .md-editor .btn-group .btn-group+.btn, .md-editor .btn-group .btn-group+.btn-group{ margin-left: 0; }
 
 .note-editor .note-color-palette div .note-color-btn:hover { border: 1px solid #fff }
-.note-editor .note-toolbar .btn, .md-editor .md-header .btn { 
-	background: none !important; 
-	font-size: 15px; 
-	padding: 0 4px 2px; 
+.note-editor .note-toolbar .btn, .md-editor .md-header .btn {
+	background: none !important;
+	font-size: 15px;
+	padding: 0 4px 2px;
 	color: #fff;
 	border: 0;
 	opacity: 0.7;

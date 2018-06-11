@@ -22,6 +22,11 @@
     <!-- <link type="text/css" rel="stylesheet" href="css/ProjectCss/setPermission.css" />-->
     <link type="text/css" rel="stylesheet" href="css/ProjectCss/waitApprova.css" />
     <link rel="stylesheet" href="css/sunthree.css">
+	 <style>
+	   .yhh-data-table-frame>table.yhh-data-table tr td {
+			padding: 0 10px;
+		}
+	</style>
 </head>
 <body>
 <div class="ifream_head" >
@@ -30,29 +35,26 @@
     </header>
     <section class="container togethers">
         <ul class="breadcrumb breadcrumb-left nav_menu1">
-            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext" target="myFrameName">首页</a></li>
+            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext"  target = '_self'>首页</a></li>
             <li class="nav_menu_li ifream_listnav">
                 <a  class="home-btn home_btnnext" target="myFrameName" >菜单</a>
                 <ul class="nav_twomenu bg2">
                     <li>
                         <a  target="myFrameName">设置</a>
                         <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
-                            <li><a href="setPermission.html" target="myFrameName">权限</a> </li>
-                            <li><a href="threshold-value.html" target="myFrameName">阈值</a> </li>
-                            <li id="sbsz"><a href="device_setup.html" target="myFrameName">设备设置</a> </li>
+                            <li><a href="setPermission.html"  target = '_self'>权限</a> </li>
+                            <li><a href="threshold-value.html"  target = '_self'>阈值</a> </li>
+                            <li class="index_fell"><a href="device_sensor.html"  target = '_self'>传感器</a> </li>
+                            <li class="index_fell"><a href="device_mediate.html"  target = '_self'>解调仪</a> </li>
                         </ul>
                     </li>
                     <li><a  target="myFrameName">查询</a>
                         <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="searchDuan.html" target="myFrameName">时间段查询</a> </li>
-                            <li><a href="searchPoint.html" target="myFrameName">时间点查询</a> </li>
+                            <li><a href="searchDuan.html"  target = '_self'>时间段查询</a> </li>
+                            <li><a href="searchPoint.html"  target = '_self'>时间点查询</a> </li>
                         </ul>
                     </li>
-                    <li><a href="police.html" target="myFrameName" onClick="jump('charts.html')">报警</a>
-                        <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="police_handle.html" target="myFrameName">报警处理人</a> </li>
-                            <li><a href="police_sure.html" target="myFrameName">报警确认人</a> </li>
-                        </ul>
+                    <li><a href="police.html"  target = '_self'>报警</a>
                     </li>
                 </ul>
             </li>
@@ -61,7 +63,7 @@
         <ol class="breadcrumb">
             <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
             <li><a href="#" class="date-btn date_btnnext">2018年5月27号</a></li>
-            <li><a href="#" class="loginout-btn home_btnnext">Admin</a></li>
+            <li><a href="#" class="loginout-btn home_btnnext">退出</a></li>
         </ol>
     </section>
 </div>
@@ -69,9 +71,9 @@
 <section class="p-relative container mg_t22" role="main" >
     <div class="head_titall">
         <ol class="head_titall_title">
-            <li class="home"><a href="index.html">首页</a></li>
+            <li class="home"><a href="index.html"  target = '_self'>首页</a></li>
             <li> > </li>
-            <li class="active"><a href="police.html">报警</a></li>
+            <li class="active"><a href="police.html"  target = '_self'>报警</a></li>
 
         </ol>
     </div>
@@ -80,12 +82,12 @@
         <section id="content" class="container together_pad">
             <div class="layui-tab">
                 <ul class=" police_click">
-                    <li > <a href="police.html"> 待审批</a></li>
-                    <li class="layui-this"><a href="police_over.html"> 已审批</a></li>
+                    <li > <a href="police.html"  target = '_self'> 待审批</a></li>
+                    <li class="layui-this"><a href="police_over.html"  target = '_self'> 已审批</a></li>
 
                 </ul>
                 <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show block-area police_caozuo" id="text-input">
+                    <div class="layui-tab-item layui-show block-area police_caozuo"style="margin-top: 30px;" id="text-input">
                         <table id="testtable3">
                             <thead>
                             <tr>
@@ -203,6 +205,6 @@
 
     });
 </script>
-</body>
+<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
 </html>
 

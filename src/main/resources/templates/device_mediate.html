@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]>
+<html class="ie9">
+<![endif]-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8">
+    <meta name="description" content="Violate Responsive Admin Template">
+    <meta name="keywords" content="Super Admin, Admin, Template, Bootstrap">
+    <title>解调仪</title>
+    <link href="css/ProjectCss/bootstrap.min2.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <!--<link href="css/form.css" rel="stylesheet">-->
+    <link href="css/style.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="table/css/font-awesome.4.6.0.css">
+    <!-- <link type="text/css" rel="stylesheet" href="js/layui/css/layui.css">-->
+    <link type="text/css" rel="stylesheet" href="table/css/jquery.paginate.css" />
+    <link type="text/css" rel="stylesheet" href="table/css/jquery.yhhdatatable.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <link href="css/sun.css" rel="stylesheet">
+    <!-- <link type="text/css" rel="stylesheet" href="css/ProjectCss/setPermission.css" />-->
+    <link type="text/css" rel="stylesheet" href="css/ProjectCss/waitApprova.css" />
+    <link rel="stylesheet" href="css/sunthree.css">
+    <link type="text/css" rel="stylesheet" href="css/ProjectCss/device_sensor.css" />
+    <style>
+        .yhh-data-table-frame>table.yhh-data-table tr td {
+            padding: 0 10px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="ifream_head" >
+    <header  class=" headtwo">
+        <img src="images/top1.png" class="img-responsive">
+    </header>
+    <section class="container togethers">
+        <ul class="breadcrumb breadcrumb-left nav_menu1">
+            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext"  target = '_self'>首页</a></li>
+            <li class="nav_menu_li ifream_listnav">
+                <a  class="home-btn home_btnnext" target="myFrameName" >菜单</a>
+                <ul class="nav_twomenu bg2">
+                    <li>
+                        <a  target="myFrameName">设置</a>
+                        <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
+                            <li><a href="setPermission.html"  target = '_self'>权限</a> </li>
+                            <li><a href="threshold-value.html"  target = '_self'>阈值</a> </li>
+                            <li class="index_fell"><a href="device_sensor.html"  target = '_self'>传感器</a> </li>
+                            <li class="index_fell"><a href="device_mediate.html"  target = '_self'>解调仪</a> </li>
+                        </ul>
+                    </li>
+                    <li><a  target="myFrameName">查询</a>
+                        <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
+                            <li><a href="searchDuan.html"  target = '_self'>时间段查询</a> </li>
+                            <li><a href="searchPoint.html"  target = '_self'>时间点查询</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="police.html"  target = '_self'>报警</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+            <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
+            <li><a href="#" class="date-btn date_btnnext">2018年5月27号</a></li>
+            <li><a href="#" class="loginout-btn home_btnnext">退出</a></li>
+        </ol>
+    </section>
+</div>
+
+<section class="p-relative container mg_t22" role="main" >
+    <div class="head_titall">
+        <ol class="head_titall_title">
+            <li class="home"><a href="index.html"  target = '_self'>首页</a></li>
+            <li> > </li>
+            <li><a>设置</a></li>
+            <li> > </li>
+            <li class="active"><a href="device_mediate.html"  target = '_self'>调解仪</a></li>
+
+        </ol>
+    </div>
+    <div class="clearfix"></div>
+    <section id="main" class="p-relative together_content container" role="main">
+        <section id="content" class="container together_pad">
+            <div class="layui-tab">
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show block-area police_caozuo" id="text-input">
+                        <div style="float: right; margin-bottom: 8px;"> <button class="btn btn-primary searchButton export" onclick="assdd()"><i class="fa fa fa-plus" aria-hidden="true"></i>&nbsp&nbsp&nbsp新增</button></div>
+                        <table id="testtable3">
+                            <thead>
+                            <tr>
+                                <th>设备安装时间</th>
+                                <th>设备状态</th>
+                                <th>安装地点</th>
+                                <th>设备名称</th>
+                                <th>设备编号</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            </div>
+        </section>
+    </section>
+</section>
+
+<script src="js/jquery.min.js"></script> <!-- jQuery Library -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
+<script type="text/javascript" src="js/ProjectJs/jquery.paginate.js"></script>
+<script type="text/javascript" src="js/ProjectJs/jquery.yhhdatatable.js" ></script>
+<script type="text/javascript" src="js/ProjectJs/deviceMediate.js"></script>
+<script src="js/select.min.js"></script>
+
+<script>
+    function assdd (){
+        layer.open({
+            type: 1,
+            title:'新增',
+            skin: 'layui-layer-rim', //加上边框
+            area: ['520px', '420px'], //宽高
+            content: "<div class=' threshold_upline'>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备安装时间:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='' placeholder='请输入设备安装时间'>" +
+            "</div>" +
+            "<div style='margin: 22px 16px'>" +
+            "<label style='width: 22%;'>安装地点:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='' placeholder='请输入安装地点'>" +
+            "</div>" +
+            "<div style='margin: 22px 16px'>" +
+            "<label style='width: 22%;'>设备名称:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='' placeholder='请输入设备名称'>" +
+            "</div>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备编号:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='' placeholder='请输入设备编号'>" +
+            "</div>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备状态:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='' placeholder='请输入设备状态   '>" +
+            "</div>" +
+            "<div class='threshold_butset'>" +
+            "<button style='color: #fff;\n" +
+            "    background: #23aaea;\n" +
+            "    padding: 8px 34px;\n" +
+            "    border: none;\n" +
+            "    border-radius: 5px!important;\n" +
+            "    font-size: 16px;\n" +
+            "    margin-top: 16px;' onclick='viewAffirm()'>确认</button>" +
+            "<button style='float: right;\n" +
+            "    color: #333;\n" +
+            "    background: #fff;\n" +
+            "    padding: 8px 34px;\n" +
+            "    border: 1px solid #ddd;\n" +
+            "    border-radius: 5px!important;\n" +
+            "    font-size: 16px;\n" +
+            "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
+            "</div>" +
+            "</div>"
+        });
+    }
+    function details(obj){
+        console.log(obj)
+        var data =JSON.parse($(obj).attr('data-attr'))
+        console.log(data)
+        layer.open({
+            type: 1,
+            title:'查看',
+            skin: 'layui-layer-rim', //加上边框
+            area: ['520px', '420px'], //宽高
+            content: "<div class=' threshold_upline'>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备安装时间:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+data.a+"'>" +
+            "</div>" +
+            "<div style='margin: 22px 16px'>" +
+            "<label style='width: 22%;'>安装地点:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+data.b+"'>" +
+            "</div>" +
+            "<div style='margin: 22px 16px'>" +
+            "<label style='width: 22%;'>设备名称:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+data.c+"'>" +
+            "</div>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备编号:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+data.d+"'>" +
+            "</div>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备状态:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+data.e+"'>" +
+            "</div>" +
+            "<div class='threshold_butset'>" +
+            "<button style='color: #fff;\n" +
+            "    background: #23aaea;\n" +
+            "    padding: 8px 34px;\n" +
+            "    border: none;\n" +
+            "    border-radius: 5px!important;\n" +
+            "    font-size: 16px;\n" +
+            "    margin-top: 16px;' onclick='viewAffirm()'>确认</button>" +
+            "<button style='float: right;\n" +
+            "    color: #333;\n" +
+            "    background: #fff;\n" +
+            "    padding: 8px 34px;\n" +
+            "    border: 1px solid #ddd;\n" +
+            "    border-radius: 5px!important;\n" +
+            "    font-size: 16px;\n" +
+            "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
+            "</div>" +
+            "</div>"
+        });
+        // window.open('police_detail.html'+ '?' + a,'_self')
+    }
+    function edit(obj){
+        console.log(obj)
+        console.log("1")
+        var data =JSON.parse($(obj).attr('data-attr'))
+        console.log(data)
+        layer.open({
+            type: 1,
+            title:'查看',
+            skin: 'layui-layer-rim', //加上边框
+            area: ['520px', '420px'], //宽高
+            content: "<div class=' threshold_upline'>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备安装时间:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='"+data.a+"'>" +
+            "</div>" +
+            "<div style='margin: 22px 16px'>" +
+            "<label style='width: 22%;'>安装地点:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='"+data.b+"'>" +
+            "</div>" +
+            "<div style='margin: 22px 16px'>" +
+            "<label style='width: 22%;'>设备名称:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='"+data.c+"'>" +
+            "</div>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备编号:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='"+data.d+"'>" +
+            "</div>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备状态:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='"+data.e+"'>" +
+            "</div>" +
+            "<div class='threshold_butset'>" +
+            "<button style='color: #fff;\n" +
+            "    background: #23aaea;\n" +
+            "    padding: 8px 34px;\n" +
+            "    border: none;\n" +
+            "    border-radius: 5px!important;\n" +
+            "    font-size: 16px;\n" +
+            "    margin-top: 16px;' onclick='editAffirm()'>确认</button>" +
+            "<button style='float: right;\n" +
+            "    color: #333;\n" +
+            "    background: #fff;\n" +
+            "    padding: 8px 34px;\n" +
+            "    border: 1px solid #ddd;\n" +
+            "    border-radius: 5px!important;\n" +
+            "    font-size: 16px;\n" +
+            "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
+            "</div>" +
+            "</div>"
+        });
+        // window.open('police_detail.html'+ '?' + a,'_self')
+    }
+
+    function del (id){
+        console.log("1")
+        console.log(id)
+        layer.confirm('确定要删除吗？', {
+            btnAlign: 'c',
+            skin: 'del-class',
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            layer.msg('删除成功', {icon: 1});
+        }, function(){
+            layer.msg('取消成功', {
+                time: 1000, //20s后自动关闭
+            });
+        });
+    }
+     function stop () {
+         layer.alert('暂停', {icon:0,btnAlign: 'c',skin: 'del-class' });
+     }
+     function start_use() {
+         layer.alert('启用接口',{icon:0,btnAlign: 'c',skin: 'del-class'})
+     }
+    function editAffirm () {
+        layer.alert('编辑确定接口', {icon:0,btnAlign: 'c',skin: 'del-class' });
+    }
+    function viewAffirm () {
+        layer.alert('查看确定',{icon:0,btnAlign: 'c',skin: 'del-class'})
+    }
+    function cancel (){
+        layer.closeAll()
+    };
+</script>
+<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
+</html>
+
