@@ -7,7 +7,6 @@ public class UserBean {
 
     private String role;
 
-    private String permission;
 
     public String getUsername() {
         return username;
