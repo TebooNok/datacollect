@@ -6,7 +6,6 @@ import com.pginfo.datacollect.dao.*;
 import com.pginfo.datacollect.domain.*;
 import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.ConvertUtil;
-import com.pginfo.datacollect.util.CustomWebsocketClient;
 import org.apache.ibatis.datasource.DataSourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -308,16 +307,4 @@ public class BeanConfigure {
         return new ConcurrentHashMap<>();
     }
 
-    // 前置机连接器
-    @Bean
-    CustomWebsocketClient websocketClient() {
-        // TODO
-        String uri = "";
-        try {
-            return new CustomWebsocketClient(new URI(uri));
-        } catch (URISyntaxException e) {
-            logger.error("Init custom websocket client error, uri: " + uri + ", error message: " + e.getMessage());
-        }
-        return null;
-    }
 }
