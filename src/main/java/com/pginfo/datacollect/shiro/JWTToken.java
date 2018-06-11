@@ -1,4 +1,4 @@
-package org.inlighting.shiro;
+package com.pginfo.datacollect.shiro;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
