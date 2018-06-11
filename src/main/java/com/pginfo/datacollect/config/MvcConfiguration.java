@@ -111,5 +111,5 @@ public class MvcConfiguration implements WebMvcConfigurer {
         viewControlMap.put("/device_sensor.html", "device_sensor");
 
         return viewControlMap;
-    }
+}
 }
