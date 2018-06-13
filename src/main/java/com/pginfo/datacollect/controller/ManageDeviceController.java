@@ -4,6 +4,9 @@ import com.pginfo.datacollect.dto.ManageDeviceRequest;
 import com.pginfo.datacollect.dto.ManageDeviceResponse;
 import com.pginfo.datacollect.service.ManageDeviceService;
 import com.pginfo.datacollect.util.Constants;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,15 @@ public class ManageDeviceController {
     }
 
     // 修改设备信息
+    @ApiOperation(value="修改设备设置", notes="修改传感器/解调仪配置")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "deviceId", value = "设备ID", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "devicePosition", value = "设备位置", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "deviceDirection", value = "设备方向", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "deviceType", value = "设备类型", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "deviceBase", value = "关联基准", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "demoBase", value = "关联解调仪", dataType = "int", paramType = "path")
+    })
     @RequestMapping(value = "manageMonitorDevice.do", method = RequestMethod.POST, produces = "application/json")
     public ManageDeviceResponse manageMonitorDevice(ManageDeviceRequest request) {
 

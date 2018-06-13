@@ -7,6 +7,9 @@ import com.pginfo.datacollect.dto.QueryAlarmInfoResponse;
 import com.pginfo.datacollect.service.QueryAlarmService;
 import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.LocalUtils;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +40,18 @@ public class QueryAlarmController {
         this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
 
-    @RequestMapping(value = "queryAlarm.do", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value="查询告警", notes="根据多种条件查询告警信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "mode", value = "查询模式", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmPosition", value = "告警位置", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmDirection", value = "告警方向", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmType", value = "告警类型", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmLevel", value = "告警级别", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmStatus", value = "告警状态", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmStartTime", value = "时间点1", dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "alarmEndTime", value = "时间点2", dataType = "String", paramType = "path")
+    })
+    @RequestMapping(value = "queryAlarm.do", method = RequestMethod.GET, produces = "application/json")
     public QueryAlarmInfoResponse queryAlarmInfoList(QueryAlarmInfoRequest request) {
 
         QueryAlarmInfoResponse queryAlarmInfoResponse = new QueryAlarmInfoResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);

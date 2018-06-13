@@ -26,6 +26,7 @@ public class WebController {
     public void setService(UserService userService) {
         this.userService = userService;
     }
+
     @ApiOperation(value="用户登录", notes="根据用户名和密码登录")
     @ApiImplicitParams({
 	    @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String", paramType = "path"),

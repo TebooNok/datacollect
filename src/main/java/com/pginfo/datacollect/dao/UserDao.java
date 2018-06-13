@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,7 +21,7 @@ public class UserDao {
     private static Map<String, Map<String, String>> data = new HashMap<>();
     private static Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
 
-
+    @Autowired
     public UserDao(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }

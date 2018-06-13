@@ -8,6 +8,9 @@ import com.pginfo.datacollect.service.QuerySinkDataService;
 import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.FileUtils;
 import com.pginfo.datacollect.util.LocalUtils;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +42,16 @@ public class QueryDataController {
         this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
 
-    @RequestMapping(value = "queryData.do", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value="查询监测值", notes="根据多种条件查询沉降值")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "mode", value = "查询模式", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "deviceId", value = "设备ID", dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "height", value = "沉降值1", dataType = "long", paramType = "path"),
+            @ApiImplicitParam(name = "startDateTime", value = "时间点1", dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "endDateTime", value = "时间点2", dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "templateType", value = "模板", dataType = "String", paramType = "path")
+    })
+    @RequestMapping(value = "queryData.do", method = RequestMethod.GET, produces = "application/json")
     public QueryDataResponse querySinkDataList(QueryDataRequest queryDataRequest) {
 //        int deviceId = Integer.parseInt(request.getParameter("deviceId"));
 //        long height = Long.parseLong(request.getParameter("height"));
@@ -100,6 +112,15 @@ public class QueryDataController {
         //return queryService.queryAll();
     }
 
+    @ApiOperation(value="导出数据excel", notes="将查询结果导出为excel")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "mode", value = "查询模式", dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "deviceId", value = "设备ID", dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "height", value = "沉降值1", dataType = "long", paramType = "path"),
+            @ApiImplicitParam(name = "startDateTime", value = "时间点1", dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "endDateTime", value = "时间点2", dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "templateType", value = "模板", dataType = "String", paramType = "path")
+    })
     @RequestMapping(value = "queryDataExcel.do", method = RequestMethod.GET)//, produces = "application/vnd.ms-excel")
     public void exportExcel(QueryDataRequest request, HttpServletResponse response) {
         QueryDataResponse queryDataResponse = querySinkDataList(request);

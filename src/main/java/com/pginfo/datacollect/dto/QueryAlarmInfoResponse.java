@@ -7,7 +7,7 @@ import java.util.List;
 public class QueryAlarmInfoResponse extends ResponseBean {
     private static final long serialVersionUID = -6309038921459690222L;
 
-    private Integer total;
+    private Integer total = 0;
 
     private List<AlarmInfo> alarmInfoList;
 

@@ -4,6 +4,9 @@ import com.pginfo.datacollect.domain.AlarmThre;
 import com.pginfo.datacollect.dto.*;
 import com.pginfo.datacollect.service.ManageAlarmService;
 import com.pginfo.datacollect.util.Constants;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,12 @@ public class ManageAlarmController {
         this.manageAlarmService = manageAlarmService;
     }
 
+    @ApiOperation(value="修改告警阈值", notes="修改告警阈值")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "alarmLevel1", value = "一级告警阈值", dataType = "long", paramType = "path"),
+            @ApiImplicitParam(name = "alarmLevel2", value = "二级告警阈值", dataType = "long", paramType = "path"),
+            @ApiImplicitParam(name = "alarmLevel3", value = "三级告警阈值", dataType = "long", paramType = "path")
+    })
     // 修改告警阈值
     @RequestMapping(value = "setAlarmThre.do", method = RequestMethod.POST, produces = "application/json")
     public SetAlarmThreResponse setAlarmThre(SetAlarmThreRequest setAlarmThreRequest) {
@@ -48,6 +57,12 @@ public class ManageAlarmController {
     }
 
     // 处理告警
+    @ApiOperation(value="告警处理", notes="传告警设备ID,告警处理人和处理备注")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "alarmDeviceId", value = "告警设备ID", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmProcessUser", value = "告警处理人", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmProcessMessage", value = "处理信息", dataType = "String", paramType = "path")
+    })
     @RequestMapping(value = "processAlarm.do", method = RequestMethod.POST, produces = "application/json")
     public ProcessAlarmResponse processAlarm(ProcessAlarmRequest request) {
 
@@ -61,7 +76,14 @@ public class ManageAlarmController {
         return new ProcessAlarmResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
     }
 
-    // 处理告警
+    // 确认告警
+    @ApiOperation(value="告警确认", notes="传告警设备ID,告警确认人和确认备注")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "alarmDeviceId", value = "告警设备ID", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmConfirmResult", value = "确认结果", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmConfirmUser", value = "告警确认人", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "alarmConfirmMessage", value = "确认信息", dataType = "String", paramType = "path")
+    })
     @RequestMapping(value = "confirmAlarm.do", method = RequestMethod.POST, produces = "application/json")
     public ConfirmAlarmResponse confirmAlarm(ConfirmAlarmRequest request) {
 
