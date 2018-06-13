@@ -3,7 +3,7 @@
 <mapper namespace="com.pginfo.datacollect.dao.MonitorDeviceMapper" >
     <resultMap id="MonitorDeviceResultMap" type="com.pginfo.datacollect.domain.MonitorDevice" >
         <result column="id" property="deviceId" jdbcType="INTEGER" />
-        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="state" property="status" jdbcType="INTEGER" />
         <result column="devices_name" property="deviceName" jdbcType="VARCHAR" />
     </resultMap>
 
