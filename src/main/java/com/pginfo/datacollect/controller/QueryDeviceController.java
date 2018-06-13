@@ -9,13 +9,13 @@ import com.pginfo.datacollect.util.Constants;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +23,6 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class QueryDeviceController {
 
-    Logger logger = LoggerFactory.getLogger(QueryDeviceController.class);
     private final QueryDeviceService queryDeviceService;
 
     @Autowired
@@ -37,6 +36,8 @@ public class QueryDeviceController {
             @ApiImplicitParam(name = "dataNum", value = "每页数量", dataType = "Integer", paramType = "path")
     })
     @RequestMapping(value = "queryMonitorDevice.do", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping("/require_auth")
+    @RequiresAuthentication
     public QueryMonitorDeviceResponse queryMonitorDevice(QueryMonitorDeviceRequest request) {
 
         QueryMonitorDeviceResponse response = new QueryMonitorDeviceResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
@@ -53,6 +54,8 @@ public class QueryDeviceController {
 
     @ApiOperation(value="解调仪", notes="查询全部解调仪")
     @RequestMapping(value = "queryDemoDevice.do", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping("/require_auth")
+    @RequiresAuthentication
     public QueryDemoDeviceResponse queryDemoDevice() {
 
         QueryDemoDeviceResponse response = new QueryDemoDeviceResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
@@ -69,6 +72,8 @@ public class QueryDeviceController {
 
     @ApiOperation(value="设备状态数量", notes="查询传感器/解调仪的正常/异常数量")
     @RequestMapping(value = "queryDeviceStatus.do", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping("/require_auth")
+    @RequiresAuthentication
     public QueryDeviceStatusResponse queryDeviceStatus() throws Exception {
 
         QueryDeviceStatusResponse response = new QueryDeviceStatusResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);

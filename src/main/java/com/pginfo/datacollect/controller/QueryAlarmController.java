@@ -11,15 +11,16 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,8 @@ public class QueryAlarmController {
             @ApiImplicitParam(name = "alarmEndTime", value = "时间点2", dataType = "String", paramType = "path")
     })
     @RequestMapping(value = "queryAlarm.do", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping("/require_auth")
+    @RequiresAuthentication
     public QueryAlarmInfoResponse queryAlarmInfoList(QueryAlarmInfoRequest request) {
 
         QueryAlarmInfoResponse queryAlarmInfoResponse = new QueryAlarmInfoResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);

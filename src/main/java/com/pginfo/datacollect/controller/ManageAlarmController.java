@@ -7,11 +7,13 @@ import com.pginfo.datacollect.util.Constants;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -45,6 +47,8 @@ public class ManageAlarmController {
             @ApiImplicitParam(name = "alarmLevel3", value = "三级告警阈值", dataType = "long", paramType = "path")
     })
     @RequestMapping(value = "setAlarmThre.do", method = RequestMethod.POST, produces = "application/json")
+    @GetMapping("/require_role")
+    @RequiresRoles("admin")
     public SetAlarmThreResponse setAlarmThre(SetAlarmThreRequest setAlarmThreRequest) {
 
         try {
@@ -74,6 +78,8 @@ public class ManageAlarmController {
             @ApiImplicitParam(name = "alarmProcessMessage", value = "处理信息", dataType = "String", paramType = "path")
     })
     @RequestMapping(value = "processAlarm.do", method = RequestMethod.POST, produces = "application/json")
+    @GetMapping("/require_role")
+    @RequiresRoles("admin")
     public ProcessAlarmResponse processAlarm(ProcessAlarmRequest request) {
 
         try{
@@ -95,6 +101,8 @@ public class ManageAlarmController {
             @ApiImplicitParam(name = "alarmConfirmMessage", value = "确认信息", dataType = "String", paramType = "path")
     })
     @RequestMapping(value = "confirmAlarm.do", method = RequestMethod.POST, produces = "application/json")
+    @GetMapping("/require_role")
+    @RequiresRoles("admin")
     public ConfirmAlarmResponse confirmAlarm(ConfirmAlarmRequest request) {
 
         try{
