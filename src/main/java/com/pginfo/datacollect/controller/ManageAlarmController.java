@@ -27,13 +27,23 @@ public class ManageAlarmController {
         this.manageAlarmService = manageAlarmService;
     }
 
+    @ApiOperation(value="查询告警阈值", notes="查看告警阈值")
+    public QueryAlarmThreResponse queryAlarmThre(QueryAlarmThreRequest request){
+        QueryAlarmThreResponse response = new QueryAlarmThreResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
+
+        response.setAlarmLevel1(alarmThre.getAlarmLevel1());
+        response.setAlarmLevel2(alarmThre.getAlarmLevel2());
+        response.setAlarmLevel3(alarmThre.getAlarmLevel3());
+
+        return  response;
+    }
+
     @ApiOperation(value="修改告警阈值", notes="修改告警阈值")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "alarmLevel1", value = "一级告警阈值", dataType = "long", paramType = "path"),
             @ApiImplicitParam(name = "alarmLevel2", value = "二级告警阈值", dataType = "long", paramType = "path"),
             @ApiImplicitParam(name = "alarmLevel3", value = "三级告警阈值", dataType = "long", paramType = "path")
     })
-    // 修改告警阈值
     @RequestMapping(value = "setAlarmThre.do", method = RequestMethod.POST, produces = "application/json")
     public SetAlarmThreResponse setAlarmThre(SetAlarmThreRequest setAlarmThreRequest) {
 

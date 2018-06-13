@@ -4,6 +4,7 @@ import com.pginfo.datacollect.dao.MongoAlarmInfoDao;
 import com.pginfo.datacollect.dao.MongoAlarmThreDao;
 import com.pginfo.datacollect.domain.AlarmInfo;
 import com.pginfo.datacollect.domain.AlarmThre;
+import com.pginfo.datacollect.dto.QueryAlarmThreResponse;
 import com.pginfo.datacollect.util.LocalUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
