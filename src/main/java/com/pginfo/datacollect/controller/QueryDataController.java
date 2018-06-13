@@ -11,14 +11,16 @@ import com.pginfo.datacollect.util.LocalUtils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
@@ -52,6 +54,8 @@ public class QueryDataController {
             @ApiImplicitParam(name = "templateType", value = "模板", dataType = "String", paramType = "path")
     })
     @RequestMapping(value = "queryData.do", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping("/require_auth")
+    @RequiresAuthentication
     public QueryDataResponse querySinkDataList(QueryDataRequest queryDataRequest) {
 //        int deviceId = Integer.parseInt(request.getParameter("deviceId"));
 //        long height = Long.parseLong(request.getParameter("height"));
@@ -122,6 +126,8 @@ public class QueryDataController {
             @ApiImplicitParam(name = "templateType", value = "模板", dataType = "String", paramType = "path")
     })
     @RequestMapping(value = "queryDataExcel.do", method = RequestMethod.GET)//, produces = "application/vnd.ms-excel")
+    @GetMapping("/require_auth")
+    @RequiresAuthentication
     public void exportExcel(QueryDataRequest request, HttpServletResponse response) {
         QueryDataResponse queryDataResponse = querySinkDataList(request);
         try {

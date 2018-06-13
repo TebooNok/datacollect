@@ -7,11 +7,14 @@ import com.pginfo.datacollect.util.Constants;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -35,6 +38,8 @@ public class ManageDeviceController {
             @ApiImplicitParam(name = "demoBase", value = "关联解调仪", dataType = "int", paramType = "path")
     })
     @RequestMapping(value = "manageMonitorDevice.do", method = RequestMethod.POST, produces = "application/json")
+    @GetMapping("/require_role")
+    @RequiresRoles("admin")
     public ManageDeviceResponse manageMonitorDevice(ManageDeviceRequest request) {
 
         try{
