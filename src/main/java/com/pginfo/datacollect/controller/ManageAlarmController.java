@@ -24,6 +24,8 @@ public class ManageAlarmController {
         this.manageAlarmService = manageAlarmService;
     }
 
+    // TODO 查询告警阈值接口
+    
     // 修改告警阈值
     @RequestMapping(value = "setAlarmThre.do", method = RequestMethod.POST, produces = "application/json")
     public SetAlarmThreResponse setAlarmThre(SetAlarmThreRequest setAlarmThreRequest) {
