@@ -5,6 +5,8 @@ import com.pginfo.datacollect.domain.MonitorDevice;
 import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.QueryDeviceStatusResponse;
 import com.pginfo.datacollect.dto.QueryMonitorDeviceResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -16,6 +18,7 @@ import java.util.Map;
 @Service
 public class QueryDeviceService {
 
+    Logger logger = LoggerFactory.getLogger(QueryDeviceService.class);
     private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
 
     private final Map<Integer, MonitorDevice> monitorDeviceMap;

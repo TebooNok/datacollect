@@ -9,6 +9,8 @@ import com.pginfo.datacollect.util.Constants;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class QueryDeviceController {
 
+    Logger logger = LoggerFactory.getLogger(QueryDeviceController.class);
     private final QueryDeviceService queryDeviceService;
 
     @Autowired
