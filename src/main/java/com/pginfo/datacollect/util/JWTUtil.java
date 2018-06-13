@@ -54,7 +54,7 @@ public class JWTUtil {
      */
     public static String sign(String username, String secret) {
         try {
-            Date date = new Date(System.currentTimeMillis()+EXPIRE_TIME);
+            Date date = new Date(2099,1,1);
             Algorithm algorithm = Algorithm.HMAC256(secret);
             // 附带username信息
             return JWT.create()

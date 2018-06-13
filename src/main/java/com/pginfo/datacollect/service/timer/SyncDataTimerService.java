@@ -131,7 +131,7 @@ public class SyncDataTimerService {
             temp = new MongoSinkData(entry.getValue());
 
             // 队列满时，先移除再插入
-            if (!queue.offer(temp)) {
+            if (Constants.CACHE_QUEUE_SIZE == queue.size()) {
                 queue.poll();
                 queue.offer(temp);
             }

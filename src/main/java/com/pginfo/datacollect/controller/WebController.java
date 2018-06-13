@@ -31,7 +31,7 @@ public class WebController {
 	    @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String", paramType = "path"),
         @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "path")
     })
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public ResponseBean login(@RequestParam("username") String username,
                               @RequestParam("password") String password) {
         UserBean userBean = userService.getUser(username);

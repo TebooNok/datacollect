@@ -14,8 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -52,9 +50,11 @@ public class BeanConfigure {
     // 向mongo存取传感器配置
     private final MongoMonitorDeviceSettingDao mongoMonitorDeviceSettingDao;
 
+    private final UserDao userDao;
     @Autowired
-    public BeanConfigure(SinkDataMapper sinkDataMapper, MonitorDeviceMapper monitorDeviceMapper, DemoDeviceMapper demoDeviceMapper, MongoAlarmInfoDao mongoAlarmInfoDao, MongoAlarmThreDao mongoAlarmThreDao, MongoMonitorDeviceSettingDao mongoMonitorDeviceSettingDao) {
+    public BeanConfigure(SinkDataMapper sinkDataMapper, MonitorDeviceMapper monitorDeviceMapper, DemoDeviceMapper demoDeviceMapper, MongoAlarmInfoDao mongoAlarmInfoDao, MongoAlarmThreDao mongoAlarmThreDao, MongoMonitorDeviceSettingDao mongoMonitorDeviceSettingDao, UserDao userDao) {
         this.mongoMonitorDeviceSettingDao = mongoMonitorDeviceSettingDao;
+        this.userDao = userDao;
 
         logger.debug("Application context initialize");
         this.monitorDeviceMapper = monitorDeviceMapper;
@@ -307,4 +307,11 @@ public class BeanConfigure {
         return new ConcurrentHashMap<>();
     }
 
+    @Bean
+    public User userInit(){
+        userDao.saveUser(new User("1000", "admin", "123456", "admin"));
+        userDao.saveUser(new User("1001", "user1", "123456", "user"));
+        userDao.saveUser(new User("1002", "user2", "123456", "user"));
+        return null;
+    }
 }

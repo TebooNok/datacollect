@@ -26,11 +26,17 @@ public class UserDao {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public static List<User> getData(String name) {
+    public List<User> getData(String name) {
         Query query = new Query();
         query.addCriteria(Criteria.where("name").is(name));
-        List<User> users = mongoTemplate.find(query, User.class);
+        List<User> users = mongoTemplate.find(query, User.class, PREFIX);
         return  users;
+    }
+
+    public void saveUser(User user){
+        Query query = new Query(Criteria.where("id").is(user.getid()));
+        Update update = new Update().set("name", user.getname()).set("password", user.getpassword()).set("role", user.getrole());
+        mongoTemplate.upsert(query, update, User.class, PREFIX);
     }
 
 }

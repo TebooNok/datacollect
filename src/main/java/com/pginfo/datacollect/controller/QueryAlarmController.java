@@ -101,7 +101,7 @@ public class QueryAlarmController {
             // 传入位置信息
             for (AlarmInfo info : returnList) {
                 MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(info.getAlarmDeviceId());
-                info.setAlarmDeviceDirection(monitorDeviceSetting.getDevicePosition());
+                info.setAlarmDeviceDirection(monitorDeviceSetting.getDeviceDirection());
                 info.setAlarmDevicePosition(monitorDeviceSetting.getDevicePosition());
             }
         }
