@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,10 +34,19 @@ public class UserDao {
         return  users;
     }
 
-    public void saveUser(User user){
+    public void updateUser(User user){
         Query query = new Query(Criteria.where("id").is(user.getid()));
         Update update = new Update().set("name", user.getname()).set("password", user.getpassword()).set("role", user.getrole());
         mongoTemplate.upsert(query, update, User.class, PREFIX);
+    }
+
+    public void deleteUser(String username){
+        Query query = new Query(Criteria.where("name").is(username));
+        mongoTemplate.remove(query,User.class,PREFIX);
+    }
+
+    public void addUser(User user){
+        mongoTemplate.insert(User.class,PREFIX);
     }
 
 }
