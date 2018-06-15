@@ -73,7 +73,7 @@ public class QueryDeviceService {
 
         List<DemoDevice> returnList = new ArrayList<>();
 
-        if (!CollectionUtils.isEmpty(returnList)){
+        if (!CollectionUtils.isEmpty(demoDeviceMap)){
 
             for(Map.Entry<Integer, DemoDevice> entry:demoDeviceMap.entrySet()){
                 returnList.add(entry.getValue());

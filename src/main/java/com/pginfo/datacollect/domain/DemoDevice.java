@@ -13,6 +13,26 @@ public class DemoDevice {
 
     private long timestamp;
 
+    private String deployPosition;
+
+    private String deviceName;
+
+    public String getDeployPosition() {
+        return deployPosition;
+    }
+
+    public void setDeployPosition(String deployPosition) {
+        this.deployPosition = deployPosition;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
     public int getDeviceId() {
         return deviceId;
     }

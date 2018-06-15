@@ -9,6 +9,8 @@ public class MonitorDeviceSetting {
     // 设备类型 1：基准 2：监测
     private int deviceType;
 
+    private String deviceName;
+
     // 设备位置：哪个桥墩
     private int devicePosition;
 
@@ -22,6 +24,24 @@ public class MonitorDeviceSetting {
     private int demoBase;
 
     private int deviceStatus;
+
+    private long deviceLight;
+
+    public long getDeviceLight() {
+        return deviceLight;
+    }
+
+    public void setDeviceLight(long deviceLight) {
+        this.deviceLight = deviceLight;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
 
     public int getDeviceId() {
         return deviceId;

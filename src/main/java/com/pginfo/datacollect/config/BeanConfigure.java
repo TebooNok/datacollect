@@ -190,6 +190,7 @@ public class BeanConfigure {
                 // 默认无基准传感器，无关联解调仪
                 monitorDeviceSetting.setDeviceBase(0);
                 monitorDeviceSetting.setDemoBase(0);
+                monitorDeviceSetting.setDeviceName(monitorDevice.getDeviceName());
                 monitorDeviceSettingMap.put(monitorDevice.getDeviceId(), monitorDeviceSetting);
 
             }
@@ -309,9 +310,15 @@ public class BeanConfigure {
 
     @Bean
     public User userInit(){
-        userDao.saveUser(new User("1000", "admin", "123456", "admin"));
-        userDao.saveUser(new User("1001", "user1", "123456", "user"));
-        userDao.saveUser(new User("1002", "user2", "123456", "user"));
+        if(CollectionUtils.isEmpty(userDao.getData("admin"))){
+            userDao.addUser(new User("1000", "admin", "123456", "admin"));
+        }
+        if(CollectionUtils.isEmpty(userDao.getData("user1"))){
+            userDao.addUser(new User("1001", "user1", "123456", "user"));
+        }
+        if(CollectionUtils.isEmpty(userDao.getData("user2"))){
+            userDao.addUser(new User("1002", "user2", "123456", "user"));
+        }
         return null;
     }
 }

@@ -126,6 +126,7 @@ public class SyncDataTimerService {
             if (CollectionUtils.isEmpty(queue)) {
                 // 如果没有该传感器的数据，则初始化一个长度为3600的队列
                 cacheDataQueueMap.put(deviceId, new LinkedBlockingQueue<>(Constants.CACHE_QUEUE_SIZE));
+                queue = cacheDataQueueMap.get(deviceId);
             }
 
             temp = new MongoSinkData(entry.getValue());
