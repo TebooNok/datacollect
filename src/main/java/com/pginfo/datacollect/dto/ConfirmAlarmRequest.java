@@ -8,7 +8,7 @@ public class ConfirmAlarmRequest extends BaseRequest {
     // 1:通过；2:驳回
     private int alarmConfirmResult;
 
-    private int alarmConfirmUser;
+    private String alarmConfirmUser;
 
     private String alarmConfirmMessage;
 
@@ -28,11 +28,11 @@ public class ConfirmAlarmRequest extends BaseRequest {
         this.alarmDeviceId = alarmDeviceId;
     }
 
-    public int getAlarmConfirmUser() {
+    public String getAlarmConfirmUser() {
         return alarmConfirmUser;
     }
 
-    public void setAlarmConfirmUser(int alarmConfirmUser) {
+    public void setAlarmConfirmUser(String alarmConfirmUser) {
         this.alarmConfirmUser = alarmConfirmUser;
     }
 

@@ -32,7 +32,7 @@ public class ManageAlarmService {
         mongoAlarmThreDao.saveAlarmThre(alarmThre);
     }
 
-    public void processAlarm(int alarmDeviceId, int alarmProcessUser, String alarmProcessMessage) throws Exception {
+    public void processAlarm(int alarmDeviceId, String alarmProcessUser, String alarmProcessMessage) throws Exception {
 
         AlarmInfo alarmInfo = alarmInfoMap.get(alarmDeviceId);
 
@@ -50,7 +50,7 @@ public class ManageAlarmService {
 
     }
 
-    public void confirmAlarm(int alarmConfirmResult, int alarmDeviceId, int alarmConfirmUser, String alarmConfirmMessage) throws Exception {
+    public void confirmAlarm(int alarmConfirmResult, int alarmDeviceId, String alarmConfirmUser, String alarmConfirmMessage) throws Exception {
 
         AlarmInfo alarmInfo = alarmInfoMap.get(alarmDeviceId);
 

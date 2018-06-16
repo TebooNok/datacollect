@@ -6,7 +6,7 @@ public class ProcessAlarmRequest extends BaseRequest{
 
     private int alarmDeviceId;
 
-    private int alarmProcessUser;
+    private String alarmProcessUser;
 
     private String alarmProcessMessage;
 
@@ -18,11 +18,11 @@ public class ProcessAlarmRequest extends BaseRequest{
         this.alarmDeviceId = alarmDeviceId;
     }
 
-    public int getAlarmProcessUser() {
+    public String getAlarmProcessUser() {
         return alarmProcessUser;
     }
 
-    public void setAlarmProcessUser(int alarmProcessUser) {
+    public void setAlarmProcessUser(String alarmProcessUser) {
         this.alarmProcessUser = alarmProcessUser;
     }
 

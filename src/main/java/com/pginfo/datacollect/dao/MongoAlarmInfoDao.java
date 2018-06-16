@@ -49,10 +49,10 @@ public class MongoAlarmInfoDao {
         long height = alarmInfo.getHeight();
         String alarmDateTime = alarmInfo.getAlarmDateTime();
         String alarmProcessTime = alarmInfo.getAlarmProcessTime();
-        int alarmProcessUser = alarmInfo.getAlarmProcessUser();
+        String alarmProcessUser = alarmInfo.getAlarmProcessUser();
         String alarmProcessMessage = alarmInfo.getAlarmProcessMessage();
         String alarmConfirmTime = alarmInfo.getAlarmConfirmTime();
-        int alarmConfirmUser = alarmInfo.getAlarmConfirmUser();
+        String alarmConfirmUser = alarmInfo.getAlarmConfirmUser();
         String alarmConfirmMessage = alarmInfo.getAlarmConfirmMessage();
         int alarmType = alarmInfo.getAlarmType();
 

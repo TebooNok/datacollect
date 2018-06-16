@@ -98,10 +98,10 @@ public class BeanConfigure {
 
                 alarmInfo.setAlarmDateTime(null);
                 alarmInfo.setAlarmLevel(0);
-                alarmInfo.setAlarmProcessUser(0);
+                alarmInfo.setAlarmProcessUser("");
                 alarmInfo.setAlarmProcessTime(null);
                 alarmInfo.setAlarmProcessMessage(null);
-                alarmInfo.setAlarmConfirmUser(0);
+                alarmInfo.setAlarmConfirmUser("");
                 alarmInfo.setAlarmConfirmTime(null);
                 alarmInfo.setAlarmConfirmMessage(null);
 

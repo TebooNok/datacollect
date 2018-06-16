@@ -63,6 +63,7 @@ public class QueryDeviceController {
         try {
 
             List<DemoDevice> demoDeviceList = queryDeviceService.queryDemoDevice();
+            response.setTotal(demoDeviceList.size());
             response.setDemoDeviceList(demoDeviceList);
             return response;
         }catch (Exception e){
@@ -74,7 +75,7 @@ public class QueryDeviceController {
     @RequestMapping(value = "queryDeviceStatus.do", method = RequestMethod.GET, produces = "application/json")
     @GetMapping("/require_auth")
     @RequiresAuthentication
-    public QueryDeviceStatusResponse queryDeviceStatus() throws Exception {
+    public QueryDeviceStatusResponse queryDeviceStatus(){
 
         QueryDeviceStatusResponse response = new QueryDeviceStatusResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
         queryDeviceService.getDeviceNumber(response);

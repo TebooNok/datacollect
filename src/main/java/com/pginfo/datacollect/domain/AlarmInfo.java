@@ -22,13 +22,13 @@ public class AlarmInfo {
 
     private String alarmProcessTime;
 
-    private int alarmProcessUser;
+    private String alarmProcessUser;
 
     private String alarmProcessMessage;
 
     private String alarmConfirmTime;
 
-    private int alarmConfirmUser;
+    private String alarmConfirmUser;
 
     private String alarmConfirmMessage;
 
@@ -101,11 +101,11 @@ public class AlarmInfo {
         this.alarmProcessTime = alarmProcessTime;
     }
 
-    public int getAlarmProcessUser() {
+    public String getAlarmProcessUser() {
         return alarmProcessUser;
     }
 
-    public void setAlarmProcessUser(int alarmProcessUser) {
+    public void setAlarmProcessUser(String alarmProcessUser) {
         this.alarmProcessUser = alarmProcessUser;
     }
 
@@ -125,11 +125,11 @@ public class AlarmInfo {
         this.alarmConfirmTime = alarmConfirmTime;
     }
 
-    public int getAlarmConfirmUser() {
+    public String getAlarmConfirmUser() {
         return alarmConfirmUser;
     }
 
-    public void setAlarmConfirmUser(int alarmConfirmUser) {
+    public void setAlarmConfirmUser(String alarmConfirmUser) {
         this.alarmConfirmUser = alarmConfirmUser;
     }
 
