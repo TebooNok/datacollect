@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -81,6 +82,34 @@ public class ManageUserController {
             if(!StringUtils.isEmpty(id) || !StringUtils.isEmpty(name)){
                 userList = userService.queryByFilter(id, name);
             }
+
+            // 查询时不返回密码
+            userList.forEach((u)->{
+                u.setPassword(null);
+            });
+
+            int page = request.getPage();
+            int dataNum = request.getDataNum();
+            response.setTotal(userList.size());
+
+            // 启用分页
+            if (page > 0) {
+                int endIndex = (page) * dataNum;
+                int size = userList.size();
+                if ((page - 1) * dataNum > size) {
+                    response.setUserList(new ArrayList<>());
+                } else {
+                    response.setUserList(userList.subList((page - 1) * dataNum, endIndex > size ? size : endIndex));
+                }
+            }
+
+            // 不启用分页，返回前N条
+            if (userList.size() > dataNum) {
+                response.setUserList(userList.subList(0, dataNum));
+            } else {
+                response.setUserList(userList);
+            }
+
         } catch (Exception e) {
             return new ManagerUserResponse(Constants.INTERNAL_ERROR_CODE, "[Fatal Error in delete user progress]" + e.getMessage(), null);
         }
