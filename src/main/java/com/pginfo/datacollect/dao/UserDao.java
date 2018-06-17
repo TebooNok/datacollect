@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
@@ -49,4 +50,18 @@ public class UserDao {
         mongoTemplate.insert(User.class,PREFIX);
     }
 
+    public List<User> queryAllUser() {
+        return mongoTemplate.findAll(User.class,PREFIX);
+    }
+
+    public List<User> queryByFilter(String id, String name) {
+        Query query = new Query();
+        if(!StringUtils.isEmpty(id)){
+            query.addCriteria(Criteria.where("id").is(id));
+        }
+        if(!StringUtils.isEmpty(name)){
+            query.addCriteria(Criteria.where("name").is(name));
+        }
+        return mongoTemplate.find(query, User.class, PREFIX);
+    }
 }

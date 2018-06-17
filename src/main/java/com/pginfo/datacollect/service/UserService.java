@@ -40,9 +40,8 @@ public class UserService {
         else return null;
     }
 
-    public void AddUser(String username,String passwd,String role){
-        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();;
-        User user=new User(uuid,username,passwd,role);
+    public void AddUser(String id,String username,String passwd,String role){
+        User user=new User(id,username,passwd,role);
         try{
             userDao.addUser(user);
         }catch(Exception e){
@@ -65,5 +64,13 @@ public class UserService {
         }catch(Exception e){
             logger.error(e.toString());
         }
+    }
+
+    public List<User> queryAllUser() {
+        return userDao.queryAllUser();
+    }
+
+    public List<User> queryByFilter(String id, String name) {
+        return userDao.queryByFilter(id, name);
     }
 }

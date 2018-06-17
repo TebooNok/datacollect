@@ -1,6 +1,6 @@
 package com.pginfo.datacollect.dto;
 
-public class ManagerUserRequest {
+public class ManagerUserRequest extends BaseRequest {
     private String id;
     private String username;
     private String role;

@@ -1,5 +1,6 @@
 package com.pginfo.datacollect.controller;
 
+import com.mongodb.Mongo;
 import com.pginfo.datacollect.domain.MongoSinkData;
 import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.QueryDataRequest;
@@ -104,14 +105,22 @@ public class QueryDataController {
         // 按时间降序排序
         returnList.sort((MongoSinkData o1, MongoSinkData o2) -> o1.getDateTime().compareTo(o2.getDateTime()) > 0 ? -1 : 0);
 
+        // 不返回基准
+        List<MongoSinkData> returnFinal = new ArrayList<>();
+
         // 传入位置信息
         for (MongoSinkData data : returnList) {
             MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(data.getDeviceId());
             data.setDeviceDirection(monitorDeviceSetting.getDevicePosition());
             data.setDevicePosition(monitorDeviceSetting.getDevicePosition());
+
+            // 这里不返回基准
+            if(monitorDeviceSetting.getDeviceType() == 2){
+                returnFinal.add(data);
+            }
         }
 
-        queryDataResponse.setMongoSinkDataList(returnList);
+        queryDataResponse.setMongoSinkDataList(returnFinal);
         return queryDataResponse;
         //return queryService.queryAll();
     }
