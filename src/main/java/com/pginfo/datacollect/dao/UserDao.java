@@ -60,7 +60,7 @@ public class UserDao {
     }
 
     public void addUser(User user){
-        mongoTemplate.insert(User.class,PREFIX);
+        mongoTemplate.insert(user, PREFIX);
     }
 
     public List<User> queryAllUser() {

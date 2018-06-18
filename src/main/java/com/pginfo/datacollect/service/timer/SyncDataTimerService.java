@@ -59,7 +59,7 @@ public class SyncDataTimerService {
     @Scheduled(cron = "0/1 * * * * ?")
     public void syncDataFromFrontDb() {
 
-        logger.info(Thread.currentThread().toString() + ",syncDataFromFrontDb," + LocalDateTime.now().toString());
+        logger.debug(Thread.currentThread().toString() + ",syncDataFromFrontDb," + LocalDateTime.now().toString());
 
         // 从yk_api查询出最新的沉降值、温度
         try {
@@ -147,7 +147,7 @@ public class SyncDataTimerService {
     @Scheduled(cron = "0 0/1 * * * ?")
     public void saveDataPerMin() {
 
-        logger.info(Thread.currentThread().toString() + ",saveDataPerMin," + LocalDateTime.now().toString());
+        logger.debug(Thread.currentThread().toString() + ",saveDataPerMin," + LocalDateTime.now().toString());
         for (Map.Entry<Integer, MongoSinkData> entry: cacheDataMap.entrySet()) {
             MongoSinkData temp = new MongoSinkData(entry.getValue());
             temp.setDateTime(LocalUtils.formatIgnoreSeconds(entry.getValue().getDateTime()));
