@@ -720,7 +720,7 @@
     $.fn.multipleSelect.defaults = {
         name: '',
         isOpen: false,
-        placeholder: '',
+        placeholder: '请选择',
         selectAll: true,
         selectAllDelimiter: ['[', ']'],
         minimumCountSelected: 3,

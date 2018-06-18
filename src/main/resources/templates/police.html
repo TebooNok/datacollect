@@ -26,22 +26,32 @@
     <link rel="stylesheet" href="css/ProjectCss/searchPoint.css">
     <link rel="stylesheet" href="css/ProjectCss/police.css">
     <style>
-        input::-webkit-input-placeholder{
-            color:#9c9a9a !important;
+        input::-webkit-input-placeholder {
+            color: #9c9a9a !important;
         }
-        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
-            color:#9c9a9a !important;
+
+        input::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: #9c9a9a !important;
         }
-        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-            color:#9c9a9a !important;
+
+        input:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: #9c9a9a !important;
         }
-        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
-            color:#9c9a9a !important;
+
+        input:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: #9c9a9a !important;
         }
-        input[type="checkbox"], input[type="radio"] {
+
+        input[type="checkbox"],
+        input[type="radio"] {
             opacity: 1;
         }
-        input[type="checkbox"], input[type="radio"] {
+
+        input[type="checkbox"],
+        input[type="radio"] {
             opacity: 1;
         }
 
@@ -49,36 +59,48 @@
             height: auto !important;
         }
 
-        input[type=checkbox]{    margin: 3px 10px 0;}
-        .btn:hover, .open .btn.dropdown-toggle{color: #fff;}
-        .info-box{display: none;}
-        .form-control:focus, .input-focused, .bootstrap-select.open > .form-control{    border-color: #c9c9c9;
-        /* background: rgba(0, 0, 0, 0); */
-        .yhh-data-table-frame>table.yhh-data-table tr td {
-            padding: 0 10px;
-        }
-        .layui-icon {
-            border: 1px solid #d2d2d2;
-            cursor: pointer;
-        }
-        .layui-icon-ok:before{
-            opacity: 0;
-            color: #ffffff;
-        }
-        .layui-checked {
-            border:none;
-        }
-        .layui-checked::before {
-            opacity: 1;
-            background: #23aaea;
-        }
-        .together_pad{
-            padding-top: 10px;
-        }
-        .police_click .layui-this{
-            left: 0px;
+        input[type=checkbox] {
+            margin: 3px 10px 0;
         }
 
+        .btn:hover,
+        .open .btn.dropdown-toggle {
+            color: #fff;
+        }
+
+        .info-box {
+            display: none;
+        }
+
+        .form-control:focus,
+        .input-focused,
+        .bootstrap-select.open>.form-control {
+            border-color: #c9c9c9;
+            /* background: rgba(0, 0, 0, 0); */
+            .yhh-data-table-frame>table.yhh-data-table tr td {
+                padding: 0 10px;
+            }
+            .layui-icon {
+                border: 1px solid #d2d2d2;
+                cursor: pointer;
+            }
+            .layui-icon-ok:before {
+                opacity: 0;
+                color: #ffffff;
+            }
+            .layui-checked {
+                border: none;
+            }
+            .layui-checked::before {
+                opacity: 1;
+                background: #23aaea;
+            }
+            .together_pad {
+                padding-top: 10px;
+            }
+            .police_click .layui-this {
+                left: 0px;
+            }
     </style>
 
 </head>
@@ -135,7 +157,7 @@
             <ol class="breadcrumb">
                 <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
                 <li>
-                    <a href="#" class="date-btn date_btnnext">2018年5月27号</a>
+                    <a href="#" class="date-btn date_btnnext"></a>
                 </li>
                 <li>
                     <a href="#" class="loginout-btn home_btnnext">退出</a>
@@ -161,107 +183,137 @@
         <section id="main" class="p-relative together_content container" role="main">
             <section id="content" class="container together_pad">
                 <div class="layui-tab">
+                    <form id="search">
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show block-area police_caozuo" style="margin-top: 30px;" id="text-input">
+                                <div class="row" style="color: #555555">
+                                    <div class="col-lg-5">
+                                        <div class="col-lg-6 threshold_upline ">
+                                            <label style="width:70px;text-align: left;line-height: 33px;float:left;">报警时间</label>
+                                            <div class="layui-input-inline" style="float:left">
+                                                <input type="text" name="alarmStartTime" style="color:#9c9a9a;" class="layui-input form-control m-b-10 time_rightbox" id="time1"
+                                                    placeholder="起">
+                                            </div>
 
-                    <div class="layui-tab-content">
-                        <div class="layui-tab-item layui-show block-area police_caozuo" style="margin-top: 30px;" id="text-input">
-                            <div class="row" style="color: #555555">
-                                <div class="col-lg-5">
-                                    <div class="col-lg-6 threshold_upline ">
-                                        <label style="width:70px;text-align: left;line-height: 33px;float:left;">报警时间</label>
-                                        <div class="layui-input-inline" style="float:left">
-                                        <input type="text"   style="color:#9c9a9a;" class="layui-input form-control m-b-10 time_rightbox" id="time1" placeholder="起">
                                         </div>
-
+                                        <div class="col-lg-6 threshold_upline">
+                                            <label style="    width: 34px;text-align: center;line-height: 33px;float: left;">至</label>
+                                            <div class="layui-input-inline" style="float:left">
+                                                <input type="text" name="alarmEndTime" style="color:#9c9a9a; width:71%;" class="layui-input form-control m-b-10 time_rightboxp"
+                                                    id="time2" placeholder="止">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 threshold_upline">
-                                        <label  style="    width: 34px;text-align: center;line-height: 33px;float: left;">至</label>
-                                        <div class="layui-input-inline" style="float:left">
-                                            <input type="text"  style="color:#9c9a9a; width:71%;"  class="layui-input form-control m-b-10 time_rightboxp" id="time2" placeholder="止">
+                                    <div class="col-lg-3"></div>
+
+                                    <div class="col-lg-4 threshold_upline">
+                                        <label style="    width: 62px;text-align: left;line-height: 33px;">报警位置</label>
+                                        <div class="device_setid m-b-15 set_preselect">
+                                            <select class="select" id="select" name="alarmDevicePosition">
+                                                <option value=0>请选择报警位置</option>
+                                                <option value=1>1号桥墩</option>
+                                                <option value=2>2号桥墩</option>
+                                                <option value=3>3号桥墩</option>
+                                                <option value=4>4号桥墩</option>
+                                                <option value=5>5号桥墩</option>
+                                                <option value=6>6号桥墩</option>
+                                                <option value=7>7号桥墩</option>
+                                                <option value=8>8号桥墩</option>
+                                                <option value=9>9号桥墩</option>
+                                                <option value=10>10号桥墩</option>
+                                                <option value=11>11号桥墩</option>
+                                                <option value=12>12号桥墩</option>
+                                                <option value=13>13号桥墩</option>
+                                                <option value=14>14号桥墩</option>
+                                                <option value=15>15号桥墩</option>
+                                                <option value=16>16号桥墩</option>
+                                                <option value=17>17号桥墩</option>
+                                                <option value=18>18号桥墩</option>
+                                                <option value=19>19号桥墩</option>
+                                                <option value=20>20号桥墩</option>
+                                                <option value=21>21号桥墩</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3"></div>
-
-                                <div class="col-lg-4 threshold_upline">
-                                    <label style="    width: 62px;text-align: left;line-height: 33px;">报警位置</label>
-                                    <input type="text" style="color:#9c9a9a; width:80%;" class="layui-input form-control m-b-10 "  placeholder="请输入报警位置">
-                                </div>
-                            </div>
-                            <div class="row" style="color: #555555">
-                                <div class="col-lg-5 threshold_upline">
-                                    <label style="width:76px;text-align: left;line-height: 33px;float:left;padding-left: 6px; box-sizing: border-box;">报警类型</label>
-                                    <div class="device_setid m-b-15 set_preselect">
-                                        <select class="select" id="select">
-                                            <option>上浮</option>
-                                            <option>下沉</option>
-                                        </select>
+                                <div class="row" style="color: #555555">
+                                    <div class="col-lg-5 threshold_upline">
+                                        <label style="width:76px;text-align: left;line-height: 33px;float:left;padding-left: 6px; box-sizing: border-box;">报警类型</label>
+                                        <div class="device_setid m-b-15 set_preselect">
+                                            <select class="select" id="select" name="alarmType">
+                                                <option value=0>请选择报警类型</option>
+                                                <option value=1>上浮</option>
+                                                <option value=2>下沉</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-4 threshold_upline">
+                                        <label style="width:66px;text-align: left;line-height: 33px;float:left;padding-left: 27px;">级别</label>
+                                        <div class="device_setid m-b-15 set_preselect">
+                                            <select class="select" id="select2" name="alarmLevel">
+                                                <option value=0>请选择报警级别</option>
+                                                <option value=1>一级</option>
+                                                <option value=2>二级</option>
+                                                <option value=3>三级</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3"></div>
-                                <div class="col-lg-4 threshold_upline">
-                                    <label style="width:66px;text-align: left;line-height: 33px;float:left;padding-left: 27px;">级别</label>
-                                    <div class="device_setid m-b-15 set_preselect">
-                                        <select class="select" id="select2">
-                                            <option>一级</option>
-                                            <option>二级</option>
-                                            <option>三级</option>
-                                        </select>
+                                <div class="row" style="color: #555555">
+                                    <div class="col-lg-5 threshold_upline ">
+
+                                        <label style="width:76px;text-align: left;line-height: 33px;float:left;padding-left: 6px; box-sizing: border-box;">报警状态</label>
+                                        <div class="device_setid m-b-15 set_preselect">
+                                            <select class="select" id="select21" name="alarmStatus">
+                                                <option value="0">全部</option>
+                                                <option value="1">未处理</option>
+                                                <option value="2">已处理</option>
+                                                <option value="3">已确认</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" style="color: #555555">
-                                <div class="col-lg-5 threshold_upline ">
-
-                                    <label style="width:76px;text-align: left;line-height: 33px;float:left;padding-left: 6px; box-sizing: border-box;">报警状态</label>
-                                    <div class="device_setid m-b-15 set_preselect">
-                                        <select class="select" id="select21">
-                                            <option>全部</option>
-                                            <option>未处理</option>
-                                            <option>已处理</option>
-                                            <option>已确认</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="color: #555555 ;    margin-top: 10px;     padding-right: 10px">
-                                <div class="threshold_but" style="width: 234px;">
-                                    <button class="btn btn-primary searchButton" style="     padding: 5px 34px; border-radius: 20px!important;" onclick="conditionSearch()">查询</button>
-                                    <button class="btn btn-primary resetButton" style="float: right;     padding: 5px 34px; border-radius: 20px!important;" onclick="resert()">重置</button>
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary batchProcess" style="float: right" onclick="batchProcess()">批量处理</button>
-                                </div>
-                            </div>
-                            <div>
-                                <form class="layui-form" action="">
-                                    <table id="testtable3">
-                                        <thead>
-                                        <tr>
-                                            <th style="text-align: left;">
-                                                <!--<i class="layui-icon layui-icon-ok " isCheck="true" id="selectAll">-->
-                                                <!--</i>-->
-                                                <input type="checkbox" isCheck="true" id="selectAll">
-                                            </th>
-                                            <th>报警类型</th>
-                                            <th>报警位置</th>
-                                            <th>报警时间</th>
-                                            <th>处理状态</th>
-                                            <th>处理人</th>
-                                            <th>处理时间</th>
-                                            <th>处理意见</th>
-                                            <th>确认人</th>
-                                            <th>确认时间</th>
-                                            <th>备注</th>
-                                            <th>操作</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </form>
-                            </div>
-
+                    </form>
+                    <div class="row" style="color: #555555 ;    margin-top: 10px;     padding-right: 10px">
+                        <div class="threshold_but" style="width: 234px;">
+                            <a class="btn btn-primary searchButton" style="     padding: 5px 34px; border-radius: 20px!important;" onclick="conditionSearch()">查询</a>
+                            <a class="btn btn-primary resetButton" style="float: right;     padding: 5px 34px; border-radius: 20px!important;" onclick="resert()">重置</a>
                         </div>
+                        <div>
+                            <a class="btn btn-primary batchProcess" style="float: right" onclick="batchProcess()">批量处理</a>
+                        </div>
+                    </div>
+                    <div>
+                        <form class="layui-form" action="">
+                            <table id="testtable3" class="result-list">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">
+                                            <!--<i class="layui-icon layui-icon-ok " isCheck="true" id="selectAll">-->
+                                            <!--</i>-->
+                                            <input type="checkbox" isCheck="true" id="selectAll">
+                                        </th>
+                                        <th>报警类型</th>
+                                        <th>报警位置</th>
+                                        <th>报警时间</th>
+                                        <th>处理状态</th>
+                                        <th>处理人</th>
+                                        <th>处理时间</th>
+                                        <th>处理意见</th>
+                                        <th>确认人</th>
+                                        <th>确认时间</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+
+                    </div>
 
                     </div>
                 </div>
@@ -276,7 +328,8 @@
     <script src="js/bootstrap.min.js"></script>
     <link href="css/multiple-select.css" rel="stylesheet">
     <script src="js/multiple-select.js"></script>
-    <script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
+    <script src="js/layui/layui.all.js"></script>
+    <!-- jQuery Library -->
     <script src="js/device_setup.js"></script>
     <script src="js/select.min.js"></script>
     <!-- jQuery Library -->
@@ -284,41 +337,54 @@
     <script type="text/javascript" src="js/ProjectJs/jquery.yhhdatatable.js"></script>
     <script type="text/javascript" src="js/ProjectJs/waitApprova.js"></script>
 
-<script>
-    layui.config({
-        base: './'
-    }).extend({
-        formSelects: 'formSelects-v3'
-    });
-    layui.use('laydate', function() {
-        var laydate = layui.laydate;
-        laydate.render({
-            elem: '#time1',
-            type: 'datetime',
-            format: 'yyyy年MM月dd日 HH时mm分' //可任意组合
-        });
-        laydate.render({
-            elem: '#time2',
-            type: 'datetime',
-            format: 'yyyy年MM月dd日 HH时mm分' //可任意组合
-        });
-        laydate.render({
-            elem: '#time3',
-            type: 'datetime',
-            format: 'yyyy年MM月dd日 HH时mm分' //可任意组合
-        });
-        $('#sel_search_orderstatus').change(function () {
-            console.log($(this).val());
-        }).multipleSelect({
-            width: '100%',
-            selectAllText: "全选",
-            allSelected: '全选',
-            countSelected: '# 条数据被选中',
-            minimumCountSelected: 10,
-        });
-    })
-</script>
     <script>
+        layui.config({
+            base: './'
+        }).extend({
+            formSelects: 'formSelects-v3'
+        });
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#time1',
+                type: 'datetime',
+            });
+            laydate.render({
+                elem: '#time2',
+                type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss' //可任意组合
+            });
+            laydate.render({
+                elem: '#time3',
+                type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss' //可任意组合
+            });
+            $('#sel_search_orderstatus').change(function () {
+                console.log($(this).val());
+            }).multipleSelect({
+                width: '100%',
+                selectAllText: "全选",
+                allSelected: '全选',
+                countSelected: '# 条数据被选中',
+                minimumCountSelected: 10,
+            });
+        })
+    </script>
+    <script>
+
+        function getUrlParam(params) {
+            var arr = params.substr(1).split("&");
+            var args = {};
+            for (var i = 0; i < arr.length; i++) {
+                item = arr[i].split("=")
+                var name = decodeURIComponent(item[0]), value = decodeURIComponent(item[1]);
+                if (name) {
+                    args[name] = value
+                }
+            }
+            return args;
+        }
+
         $("#selectAll").on('change', function (e) {
             var isCheck = $(this).attr("isCheck");
             if (isCheck == "true") {
@@ -336,68 +402,84 @@
         })
         function views(obj) {
             var a = 10
-            var data =JSON.parse($(obj).attr('data-attr'))
+            var data = JSON.parse($(obj).attr('data-attr'))
             console.log(data)
         }
         function conditionSearch() {
-            layer.alert('条件查询接口', {icon:0,btnAlign: 'c',
-            skin: 'del-class', });
+
+            var params = getUrlParam($("#search").serialize());
+            var arr = [];
+            for (var i in params) {
+                console.log(params[i])
+                if (params[i] && params[i] > 0) {
+                    arr.push(i + "=" + params[i])
+                }
+            }
+            arr.push("alarmStartTime=" + $("#time1").val());
+            arr.push("alarmEndTime=" + $("#time2").val());
+
+            renderTable('http://19.0.1.20:8081/monitor/queryAlarm.do?mode=4&' + arr.join("&"))
         }
         function resert() {
-            layer.alert('重置接口', {icon:0,btnAlign: 'c',
-            skin: 'del-class',
-            });
+            window.location.reload()
         }
         function views(obj) {
-            console.log(obj)
-            var data =JSON.parse($(obj).attr('data-attr'))
-            console.log(data)
-            window.open('police_detail.html'+ '?' + data,'_self')
+            layer.msg('暂不支持详情', {
+                time: 1000, //20s后自动关闭
+            });
+            return false;
+            window.open('police_detail.html' + '?' + data, '_self')
         }
         /*处理人*/
-        function disposed() {
-         /*   var data =JSON.parse($(obj).attr('data-attr'))*/
-            window.open('police_handle.html','_self')
+        function disposed(id, user, type, time, position) {
+            /*   var data =JSON.parse($(obj).attr('data-attr'))*/
+            window.open('police_handle.html?id=' + id + '&user=' + user + '&type=' + type + '&time=' + time + '&position=' + position, '_self')
         }
         /*确认人*/
-        function affirmDispose() {
-            window.open('police_sure.html','_self')
+        function affirmDispose(id, user, type, time, position, processtime, leval, alarmProcessMessage) {
+            window.open('police_sure.html?id=' + id + '&user=' + user + '&type=' + type + '&time=' + time + '&position=' + position + '&processtime=' + processtime + '&leval=' + leval + "&alarmProcessMessage=" + alarmProcessMessage, '_self')
         }
         function batchProcess() {
+            layer.msg('暂不支持批量处理', {
+                time: 1000, //20s后自动关闭
+            });
+            return false;
             layer.open({
                 type: 1,
-                title:'批量处理',
+                title: '批量处理',
                 skin: 'layui-layer-rim', //加上边框
                 area: ['420px', '260px'], //宽高
                 content: "<div class=' threshold_upline'>" +
-                "<div style='margin: 10px 16px'>" +
-                "<label style='width: 25%;'>处理意见:</label>" +
-                "<textarea style='height: 95px' placeholder='请输入内容' class='form-control'></textarea>" +
-                "</div>" +
-                "</div>" +
-                "<div class='threshold_butset'>" +
-                "<button style='color: #fff;\n" +
-                "    background: #23aaea;\n" +
-                "    padding: 8px 34px;\n" +
-                "    border: none;\n" +
-                "    border-radius: 5px!important;\n" +
-                "    font-size: 16px;\n" +
-                "    margin-top: 16px;' onclick='editAffirm()'>提交</button>" +
-                "<button style='float: right;\n" +
-                "    color: #fff;\n" +
-                "    background: #5e5955;\n" +
-                "    padding: 8px 34px;\n" +
-                "    border: none;\n" +
-                "    border-radius: 5px!important;\n" +
-                "    font-size: 16px;\n" +
-                "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
-                "</div>" +
-                "</div>"
+                    "<div style='margin: 10px 16px'>" +
+                    "<label style='width: 25%;'>处理意见:</label>" +
+                    "<textarea style='height: 95px' placeholder='请输入内容' class='form-control'></textarea>" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='threshold_butset'>" +
+                    "<button style='color: #fff;\n" +
+                    "    background: #23aaea;\n" +
+                    "    padding: 8px 34px;\n" +
+                    "    border: none;\n" +
+                    "    border-radius: 5px!important;\n" +
+                    "    font-size: 16px;\n" +
+                    "    margin-top: 16px;' onclick='editAffirm()'>提交</button>" +
+                    "<button style='float: right;\n" +
+                    "    color: #fff;\n" +
+                    "    background: #5e5955;\n" +
+                    "    padding: 8px 34px;\n" +
+                    "    border: none;\n" +
+                    "    border-radius: 5px!important;\n" +
+                    "    font-size: 16px;\n" +
+                    "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
+                    "</div>" +
+                    "</div>"
             });
         }
         function del(id) {
-            console.log("1")
-            console.log(id)
+            layer.msg('暂不支持删除', {
+                time: 1000, //20s后自动关闭
+            });
+            return false;
             layer.confirm('确定要删除吗？', {
                 btnAlign: 'c',
                 skin: 'del-class',
@@ -410,10 +492,10 @@
                 });
             });
         }
-        function cancel (){
+        function cancel() {
             layer.closeAll()
         };
     </script>
-<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
+<script type="text/javascript" src="js/islogin.js?a4da8d9554f6e14268b8"></script></body>
 
 </html>

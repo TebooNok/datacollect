@@ -1,159 +1,229 @@
-$(document).ready(function(){
+window.onload = function() {
 
-    var testdata2 = [
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'}
-    ];
-    var testdata3= [
-        {'a':'2018-10-11 12:12:12','b':'#1','c':'上行','d':'0.2','e':'正常','f':'--','g':'--','h':'--','i':'--'},
-    ];
-    $('#testtable3').yhhDataTable({
-        'paginate':{
-            'changeDisplayLen':true,
-            'type':'updown',
-            'visibleGo': true
-        },
-        'tbodyRow':{
-            'zebra':true,
-            'write':function(d){
-                return '<tr><td>'+d.a+'</td><td>'+d.b+'</td><td>'+d.c+'</td><td>'+d.d+'</td><td>'+d.e+'</td></tr>'
-            }
-        },
-        'tbodyData':{
-            'enabled':true,  /*是否传入表格数据*/
-            'source':testdata2 /*传入的表格数据*/
-        }
-    });
-    $('.testtable8').yhhDataTable({
-        'paginate':{
-            'changeDisplayLen':true,
-            'type':'updown',
-            'visibleGo': true
-        },
-        'tbodyRow':{
-            'zebra':true,
-            'write':function(d){
-                return '<tr><td>'+d.r+'</td><td>'+d.b+'</td><td>'+d.c+'</td><td>'+d.d+'</td><td>'+d.e+'</td><td>'+d.f+'</td><td>'+d.g+'</td><td>'+d.h+'</td><td>'+d.h+'</td><td>'+d.i+'</td><td> <div> \n' +
-                    '                 <input type="button"  class="btn btn-primary backSearch police_caozuo" data-attr=\''+JSON.stringify(d)+'\' onclick="edit(this)"/>' +
-                    '                 <input type="reset"   class="btn btn-danger police_del police_caozuo" onclick="del(\''+d.a+'\')"/>' +
-                    '             </div> </td></tr>';
-            }
-        },
-        'tbodyData':{
-            'enabled':true,  /*是否传入表格数据*/
-            'source':testdata3 /*传入的表格数据*/
-        }
-    });
-    $('#testtable4').yhhDataTable({
-        'paginate':{
-            'changeDisplayLen':true,
-            'type':'updown',
-            'visibleGo': true
-        },
-        'tbodyRow':{
-            'zebra':true,
-            'write':function(d){
-                return '<tr><td>'+d.a+'</td><td>'+d.b+'</td><td>'+d.c+'</td><td>'+d.d+'</td></tr>';
-            }
-        },
-        'tbodyData':{
-            'enabled':true,  /*是否传入表格数据*/
-            'source':testdata2 /*传入的表格数据*/
-        },
-        'backDataHandle':function(d){
-            if (d.code == '000'){
-                return d.data;
-            } else {
-                alert('出错信息');
-                return [];
-            }
-        }
-    });
+    var timeData = ["#1","#2","#3","#4","#5","#6","#7","#8","#9","#10","#11","#12","#13","#14","#15","#16","#17","#18","#19","#20","#21"];
+    var datas = [
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+    ]
+    
+    var datas2 = [
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+        randomData(),
+    ]
 
-    //$('#testtable5').yhhDataTable({
-    //	'tbodyRow':{
-    //		'write':function(d){ /*表格生成每行数据的方法*/
-    //			return that.drawRow(d);
-    //		}
-    //	},
-    //	'paginate':{
-    //		'visibleGo': true, /*是否开启直接翻至某页功能*/
-    //		'type':'full', /*默认按钮样式递增（numbers只有数字按钮，updown增加上下页按钮，full增加首尾页按钮）*/
-    //		'displayLen':10,  /*每页显示条数*/
-    //		'currentPage':1 /*当前页码（初始页码）*/
-    // 	},
-    //	'serverSide': true, /*是否从服务器获取数据*/
-    /*ajax参数*/
-    //	'ajaxParam': {
-    //		'url':projectHttpAjax.baseUrl + listActionName, /*url地址*/
-    //		'type':'GET', /*ajax传输方式*/
-    //		'dataType':'jsonp', /*ajax传送数据格式*/
-    //		'jsonp':'callback', /*dataType是jsonp的时候，传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名*/
-    //		'jsonpCallback':'jsonpCallBack', /*dataType是jsonp的时候，自定义的jsonp回调函数名称*/
-    //		'data':data /*传到服务器的数据*/
-    //	},
-    //	'sendDataHandle':function(d){
-    //		d.pageNumber = d.currentPage;
-    //		delete d.currentPage;
-    //		d.pageCount = d.displayDataLen;
-    //		delete d.displayDataLen;
-    //		console.log('检索结果入参：' + JSON.stringify(d));
-    //		return d;
-    //	},  /*传递到服务器的数据预处理方法*/
-    //	'backDataHandle':function(d){
-    //		console.log('检索结果出参：' + JSON.stringify(d));
-    //		var r = {'errFlag':false,'errMsg':'','dataLen':0,'data':[],'origData':null};
-    //		if (d == null) {
-    //			r.errFlag=true,r.errMsg=_ERR_MSG;
-    //		} else if (d.flag != '0') {
-    //			r.errFlag=true,r.errMsg=d.message;
-    //		} else {
-    //			r.errMsg=d.message,r.dataLen=d.data.totalCount,r.data=d.data.list;
-    //			r.origData=d.data;
-    //		}
-    //		return r;
-    //	},  /*预处理从服务器的接收数据或者js传入的数据*/
-    //	'beforeShow':function(){loadingDialog.show();},  /*显示之前的额外处理事件*/
-    //	'afterShow':function(errFlag,errMsg,dataLen,listData){
-    //		loadingDialog.hide();
-    //		if (errFlag) {
-    //			$page.find('.recorder-counts').text(0);
-    //			msgDialog.show(errMsg);
-    //		} else {
-    //			$page.find('.recorder-counts').text(listData.totalCount);
-    //			$table.find('.operation-btn').button();
-    //			$table.find('.disable-operation-btn').button().button('disable');
-    //		}
-    //		$table.find('.results-checkbox-all').removeClass('fa-check-square-o').addClass('fa-square-o');
-    //	}  /*显示之后的额外处理事件*/
-    //});*/
-
-    /*更新表格*/
-    var refreshTable = function(data,page){
-        if ($.isEmptyObject(data)) data = {};
-        var toData = {
-            'ajaxParam':{'data':data}
-        }
-        if (!$.isEmptyObject(page)){
-            toData.paginate = {};
-            toData.paginate.currentPage = page;
-        }
-        var $table = $page.find('.result-list');
-        $table.yhhDataTable('refresh',toData);
+    layui.config({
+        base: './'
+    }).extend({
+        formSelects: 'formSelects-v3'
+    });
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#time1',
+            type: 'datetime',
+           
+             done: function (value, date, endDate) {
+                $("input[name=alarmStartTime]").val(value)
+            }
+        });
+        laydate.render({
+            elem: '#time2',
+            type: 'datetime',
+          
+             done: function (value, date, endDate) {
+                $("input[name=alarmEndTime]").val(value)
+            }
+        });
+    });
+    // $('#sel_search_orderstatus').change(function () {
+    //     console.log($(this).val());
+    // }).multipleSelect({
+    //     width: '100%',
+    //     selectAllText: "全选",
+    //     allSelected: '全选',
+    //     countSelected: '# 条数据被选中',
+    //     minimumCountSelected: 10,
+    // });
+    
+    function renderData(data) {
+        $ajax('monitor/queryAlarm.do', data, function (res) {
+    
+            if (res.code == 200) {
+                var tr = "";
+                for (var i in res.alarmInfoList) {
+                    console.log(i)
+                    tr += "<tr><td>" + res.alarmInfoList[i].alarmDateTime + "</td>";
+                    tr += "<td>" + res.alarmInfoList[i].alarmDevicePosition + "号桥墩</td>";
+                    tr += "<td>" + (res.alarmInfoList[i].alarmDeviceDirection == 1 ? '上行' : '下行') + "</td>";
+                    tr += "<td>" + (res.alarmInfoList[i].height / 1000) + "</td>";
+                    if (res.alarmInfoList[i].alarmStatus == 1) {
+                        tr += "<td>未处理</td>"
+                    } else if (res.alarmInfoList[i].alarmStatus == 2) {
+                        tr += "<td>处理中</td>"
+                    } else if (res.alarmInfoList[i].alarmStatus == 3) {
+                        tr += "<td>已处理</td>"
+                    } else {
+                        tr += "<td>未警告</td>"
+                    }
+                    tr += "</tr>"
+                }
+    
+                document.getElementById("tbody").innerHTML = tr;
+            }
+        },
+            function (res) {
+    
+            },
+            'get');
     }
-});
+    
+    renderData({ mode: 2 })
+    
+    function renderLineByData(data) {
+        renderLine(datas,datas2,timeData);
+        return;
+        $ajax('monitor/queryAlarm.do', data, function (res) {
+    
+            if (res.code == 200) {
+                var preg = /(\d+-)|(\d+\s)/g;
+                var item = res.alarmInfoList;
+                var xdata = item.map(function(item){
+                    return item.alarmDateTime.replace(preg,"").replace(/\:00$/,"");
+                })
+             
+                var updata = item.map(function(item) {
+                    if(item.alarmDeviceDirection == 1) {
+                        return item.height / 1000
+                    } 
+                });
+    
+                var downdata = item.map(function(item) {
+                    if(item.alarmDeviceDirection == 2) {
+                        return item.height / 1000
+                    }
+                });
+    
+    
+                console.log(xdata)
+    
+    
+                renderLine(updata,downdata,xdata)
+            }
+    
+        },function(res) {},'get')
+    }
+    
+    
+    // 数组去重
+    function getUniqueArr(data) {
+        data.sort();
+        var res = [];
+        var json = {};
+        for(var i=0;i<data.length;i++) {
+            if(!json[data[i]]) {
+                res.push(data[i])
+                json[data[i]] = 1;
+            }
+        }
+        return sortByNum(res);
+    }
+    
+    // 数组拍寻
+    function sortByNum(arr) {
+     for(var i=0;i<arr.length;i++) {
+         for(var j=0; j<arr.length-i-1;j++) {
+             if(arr[j] >arr[j+1]) {
+                 var hand = arr[j];
+                 arr[j] = arr[j+1];
+                 arr[j+1] = hand;
+             }
+         }
+     }
+     return arr
+    }
+    
+    function getUrlParam(params) {
+        var arr = params.split("&");
+        var args = {};
+        for (var i = 0; i < arr.length; i++) {
+            item = arr[i].split("=")
+            var name = decodeURIComponent(item[0]), value = decodeURIComponent(item[1]);
+            if (name) {
+                args[name] = value
+            }
+        }
+        return args;
+    }
+    
+    
+    
+    renderLineByData({ mode: 2 })
+    
+    $("#search").on('click',function() {
+        var data = getUrlParam($("#search_alarm").serialize());
+        for(var i in data) {
+            if(data[i].length <= 0) {
+               delete data[i]
+            } else {
+                var preg = /\+/g;
+                data[i] = data[i].replace(preg," ")
+            }
+        }
+        data.mode = 2;
+        console.log(data)
+        
+        renderData(data)
+    })
+    $("#reset").on('click',function() {
+       window.location.reload()
+    });
+    
+    $("#excel").on('click',function() {
+     
+        $ajax("monitor/queryDataExcel.do",{},function(res){
+            console.log(res)
+        },function(res){},'get');
+    });
+    
+    
+    
+    }
+    

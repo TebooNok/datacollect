@@ -25,6 +25,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,17 @@ public class QueryDataController {
 
             logger.error("[Validate param error.] " + errorMessage);
             return new QueryDataResponse(Constants.INTERNAL_ERROR_CODE, "[Validate param error.] " + errorMessage, null);
+        }
+
+        String sTime = queryDataRequest.getStartDateTime();
+        String eTime = queryDataRequest.getEndDateTime();
+        if(!StringUtils.isEmpty(sTime)){
+            sTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(sTime)));
+            queryDataRequest.setStartDateTime(sTime);
+        }
+        if(!StringUtils.isEmpty(eTime)){
+            eTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(eTime)));
+            queryDataRequest.setEndDateTime(eTime);
         }
 
         int mode = queryDataRequest.getMode();

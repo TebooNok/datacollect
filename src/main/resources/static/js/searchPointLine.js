@@ -1,16 +1,17 @@
 
 var MAKELINE = {
-    homeFunc: function(id,data,data2,axisColor) {
+    homeFunc: function(id,data,data2,axisColor,timeData,flag) {
+       
         // id 绑定节点的ID名称  data,data2 数据  axisColor 网格和坐标轴的颜色
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById(id));
 
-        var option = this.getOption(data,data2,axisColor ? axisColor : '#FFF');
+        var option = this.getOption(data,data2,axisColor ? axisColor : '#FFF',timeData,flag);
         
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     },
-    getOption: function(data,data2,axisColor) {
+    getOption: function(datas,datas2,axisColor,timeData,flag) {
        var option = {
             title: {
                 text: '',
@@ -40,6 +41,7 @@ var MAKELINE = {
                 left: 40,
                 right: 40,
             }],
+           
             xAxis: [{
                 type: 'category',
                 boundaryGap: true,
@@ -275,6 +277,16 @@ var MAKELINE = {
         
             }]
         };
+
+        if(flag) {
+            option.dataZoom = {
+                show: true,
+                start: 0,
+                end: 50,
+                maxSpan: 80
+                // zoomLock: true
+            };
+        }
 
         return option
     }

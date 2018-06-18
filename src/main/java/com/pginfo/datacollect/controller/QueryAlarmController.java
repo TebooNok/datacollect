@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -103,6 +105,10 @@ public class QueryAlarmController {
                 MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(info.getAlarmDeviceId());
                 info.setAlarmDeviceDirection(monitorDeviceSetting.getDeviceDirection());
                 info.setAlarmDevicePosition(monitorDeviceSetting.getDevicePosition());
+
+                String dateTime = info.getAlarmDateTime();
+                dateTime = String.valueOf(LocalUtils.convertString2LocalDataTime(dateTime).toInstant(ZoneOffset.of("+8")).toEpochMilli());
+                info.setAlarmDateTime(dateTime);
             }
         }
 

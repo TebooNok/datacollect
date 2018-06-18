@@ -40,6 +40,8 @@
 		}
 	};
 
+    var token = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : '';
+
 	var yhhDataTable = {
 		'init':function($table,pluginName,opts){
 			$table.addClass('yhh-data-table').wrap('<div class="yhh-data-table-frame"></div>');
@@ -333,6 +335,7 @@
 				'url':opts.ajaxParam.url,
 				'type':opts.ajaxParam.type,
 				'dataType':opts.ajaxParam.dataType,
+               'headers': {'Content-Type':'application/x-www-form-urlencoded',"Authorization": token},
 				'data':toData,
 				'success':function(d){
 					callback(d);

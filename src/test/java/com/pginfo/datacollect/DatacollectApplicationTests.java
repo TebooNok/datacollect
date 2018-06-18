@@ -5,6 +5,8 @@ import com.pginfo.datacollect.domain.SinkData;
 import com.pginfo.datacollect.service.QuerySinkDataService;
 import com.pginfo.datacollect.util.ConvertUtil;
 import com.pginfo.datacollect.util.LocalUtils;
+import io.swagger.models.auth.In;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -325,5 +330,36 @@ public class DatacollectApplicationTests {
             }
             return;
         }
+    }
+
+    @Test
+    public void Timestamp(){
+        long timestamp = System.currentTimeMillis();
+        long timestamp1 = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        Instant instant1 = Instant.ofEpochMilli(timestamp1);
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of("+8"));
+        LocalDateTime localDateTime1 = LocalDateTime.ofInstant(instant1, ZoneId.of("+8"));
+        System.out.println(timestamp);
+        System.out.println(timestamp1);
+        System.out.println(instant);
+        System.out.println(instant1);
+        System.out.println(localDateTime);
+        System.out.println(localDateTime1);
+
+        Timestamp ts = new Timestamp(timestamp);
+        String dateTime = LocalUtils.convertTimestamp2String(ts);
+        System.out.println(dateTime);
+
+        String sTime = String.valueOf(System.currentTimeMillis());
+        System.out.println(sTime);
+        sTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(sTime)));
+        System.out.println(sTime);
+
+        String dateTime1 = "2018-06-19 01:23:34";
+        dateTime = String.valueOf(LocalUtils.convertString2LocalDataTime(dateTime1).toInstant(ZoneOffset.of("+8")).toEpochMilli());
+        System.out.println(dateTime);
+        String dateTime2 = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(dateTime)));
+        System.out.println(dateTime2);
     }
 }

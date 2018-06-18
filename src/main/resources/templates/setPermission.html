@@ -2,6 +2,7 @@
 <!--[if IE 9 ]>
 <html class="ie9">
 <![endif]-->
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta name="format-detection" content="telephone=no">
@@ -21,201 +22,312 @@
     <link rel="stylesheet" href="css/index.css">
     <link href="css/sun.css" rel="stylesheet">
     <link rel="stylesheet" href="css/sunthree.css">
-<style>
-    .btn:hover, .open .btn.dropdown-toggle {
-        text-shadow:none;
-        opacity: 1 !important;
-        color: #fff;
-        text-decoration: underline;
-    }
-    threshold_upline{margin-top: 20px;}
-    input::-webkit-input-placeholder{
-        color:#9c9a9a !important;
-    }
-    input::-moz-placeholder{   /* Mozilla Firefox 19+ */
-        color:#9c9a9a !important;
-    }
-    input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-        color:#9c9a9a !important;
-    }
-    input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
-        color:#9c9a9a !important;
-    }
-    .bootstrap-select.btn-group .btn .filter-option{    text-align: left!important;}
-</style>
+    <style>
+        .btn:hover,
+        .open .btn.dropdown-toggle {
+            text-shadow: none;
+            opacity: 1 !important;
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        threshold_upline {
+            margin-top: 20px;
+        }
+
+        input::-webkit-input-placeholder {
+            color: #9c9a9a !important;
+        }
+
+        input::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: #9c9a9a !important;
+        }
+
+        input:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: #9c9a9a !important;
+        }
+
+        input:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: #9c9a9a !important;
+        }
+
+        .bootstrap-select.btn-group .btn .filter-option {
+            text-align: left !important;
+        }
+    </style>
 </head>
+
 <body>
-<div class="ifream_head" >
-    <header  class=" headtwo">
-        <img src="images/top1.png" class="img-responsive">
-    </header>
-    <section class="container togethers">
-        <ul class="breadcrumb breadcrumb-left nav_menu1">
-            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext"  target = '_self'>首页</a></li>
-            <li class="nav_menu_li ifream_listnav">
-                <a  class="home-btn home_btnnext" target="myFrameName" >菜单</a>
-                <ul class="nav_twomenu bg2">
-                    <li>
-                        <a  target="myFrameName">设置</a>
-                        <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
-                            <li><a href="setPermission.html"  target = '_self'>权限</a> </li>
-                            <li><a href="threshold-value.html"  target = '_self'>阈值</a> </li>
-                            <li class="index_fell"><a href="device_sensor.html"  target = '_self'>传感器</a> </li>
-                            <li class="index_fell"><a href="device_mediate.html"  target = '_self'>解调仪</a> </li>
-                        </ul>
-                    </li>
-                    <li><a  target="myFrameName">查询</a>
-                        <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="searchDuan.html"  target = '_self'>时间段查询</a> </li>
-                            <li><a href="searchPoint.html"  target = '_self'>时间点查询</a> </li>
-                        </ul>
-                    </li>
-                    <li><a href="police.html"  target = '_self'>报警</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- Breadcrumb -->
-        <ol class="breadcrumb">
-            <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
-            <li><a href="#" class="date-btn date_btnnext">2018年5月27号</a></li>
-            <li><a href="#" class="loginout-btn home_btnnext">退出</a></li>
-        </ol>
-    </section>
-</div>
-<section class="p-relative container mg_t22" role="main" >
-    <div class="head_titall">
-        <ol class="head_titall_title">
-            <li class="home"><a href="index.html"  target = '_self'>首页</a></li>
-            <li> > </li>
-            <li><a >设置</a></li>
-            <li> > </li>
-            <li class="active"><a href="setPermission.html" target = '_self'>权限</a></li>
-        </ol>
+    <div class="ifream_head">
+        <header class=" headtwo">
+            <img src="images/top1.png" class="img-responsive">
+        </header>
+        <section class="container togethers">
+            <ul class="breadcrumb breadcrumb-left nav_menu1">
+                <li class="nav_menu_li">
+                    <a href="index.html" class="home-btn home_btnnext" target='_self'>首页</a>
+                </li>
+                <li class="nav_menu_li ifream_listnav">
+                    <a class="home-btn home_btnnext" target="myFrameName">菜单</a>
+                    <ul class="nav_twomenu bg2">
+                        <li>
+                            <a target="myFrameName">设置</a>
+                            <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
+                                <li>
+                                    <a href="setPermission.html" target='_self'>权限</a>
+                                </li>
+                                <li>
+                                    <a href="threshold-value.html" target='_self'>阈值</a>
+                                </li>
+                                <li class="index_fell">
+                                    <a href="device_sensor.html" target='_self'>传感器</a>
+                                </li>
+                                <li class="index_fell">
+                                    <a href="device_mediate.html" target='_self'>解调仪</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a target="myFrameName">查询</a>
+                            <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
+                                <li>
+                                    <a href="searchDuan.html" target='_self'>时间段查询</a>
+                                </li>
+                                <li>
+                                    <a href="searchPoint.html" target='_self'>时间点查询</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="police.html" target='_self'>报警</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
+                <li>
+                    <a href="#" class="date-btn date_btnnext">2018年5月27号</a>
+                </li>
+                <li>
+                    <a href="#" class="loginout-btn home_btnnext">退出</a>
+                </li>
+            </ol>
+        </section>
     </div>
-    <div class="clearfix"></div>
-    <section id="main" class="p-relative together_content container" role="main">
-        <section id="content" class="container together_pad">
-        <div class="block-area" id="text-input">
-            <div class="">
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 threshold_upline">
-                    <label>ID：</label>
-                    <input id="importId" type="text" class="form-control m-b-10" placeholder="请输入ID">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 threshold_upline">
-                    <label>权限：</label>
-                    <div class="device_setid m-b-15 set_preselect">
-                        <select class="select" id="select">
-                            <option>普通用户</option>
-                            <option>管理员</option>
-                            <option>高级管理员</option>
-                            <option>超级管理员</option>
-                        </select>
+    <section class="p-relative container mg_t22" role="main">
+        <div class="head_titall">
+            <ol class="head_titall_title">
+                <li class="home">
+                    <a href="index.html" target='_self'>首页</a>
+                </li>
+                <li> > </li>
+                <li>
+                    <a>设置</a>
+                </li>
+                <li> > </li>
+                <li class="active">
+                    <a href="setPermission.html" target='_self'>权限</a>
+                </li>
+            </ol>
+        </div>
+        <div class="clearfix"></div>
+        <section id="main" class="p-relative together_content container" role="main">
+            <section id="content" class="container together_pad">
+                <div class="block-area" id="text-input">
+                    <div class="">
+                        <form id="search">
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 threshold_upline">
+                            <label>ID：</label>
+                            <input id="importId" name="id" type="text" class="form-control m-b-10" placeholder="请输入ID">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 threshold_upline">
+                            <label>权限：</label>
+                            <div class="device_setid m-b-15 set_preselect">
+                                <select name="role" class="select" id="select">
+                                    <option value="0">全部</option>
+                                    <option value="admin">admin</option>
+                                    <option value="user">user</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary" id="search_btn" style="display:inline-block"
+>搜索</a>
+</form>
+                        <div class="clearfix"></div>
                     </div>
+                    <table id="testtable3" style="margin-top: 40px;">
+                        <thead>
+                            <tr>
+                                <th style=" width: 25%">ID</th>
+                                <th style=" width: 25%">姓名</th>
+                                <th style=" width: 25%">权限</th>
+                                <th style=" width: 25%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
-                <button class="btn btn-primary" onclick="search
-()">搜索</button>
-                <div class="clearfix"></div>
-            </div>
-            <table id="testtable3" style="margin-top: 40px;">
-                <thead>
-                <tr>
-                    <th>ID</th><th>姓名</th><th>权限</th><th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        </div>
+                </div>
+            </section>
+        </section>
     </section>
-    </section>
-</section>
 
-<script src="js/jquery.min.js"></script> <!-- jQuery Library -->
-<script src="js/bootstrap.min.js"></script>
-<script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
-<script src="js/device_setup.js"></script>
-<script type="text/javascript" src="js/ProjectJs/jquery.paginate.js"></script>
-<script type="text/javascript" src="js/ProjectJs/jquery.yhhdatatable.js" ></script>
-<script type="text/javascript" src="js/ProjectJs/setPermission.js"></script>
-<script src="js/select.min.js"></script>
-<script>
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery Library -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/layui/layui.all.js"></script>
+    <!-- jQuery Library -->
+    <script src="js/device_setup.js"></script>
+    <script type="text/javascript" src="js/ProjectJs/jquery.paginate.js"></script>
+    <script type="text/javascript" src="js/ProjectJs/jquery.yhhdatatable.js"></script>
+    <script src="js/ajax.js"></script>
+    <script type="text/javascript" src="js/ProjectJs/setPermission.js"></script>
+    <script src="js/select.min.js"></script>
+    <script>
 
-    function edit(obj){
-          var data = JSON.parse($(obj).attr('data-attr'))
-        layer.open({
-            type: 1,
-            title:'编辑',
-            skin: 'layui-layer-rim', //加上边框
-            area: ['420px', '260px'], //宽高
-            content: "<div class=' threshold_upline'>" +
-            "<div style='margin: 10px 16px'>" +
-            "<label style='width: 10%;'>ID:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;padding-left: 12px;'' type='text' value='"+data.a+"'>" +
-            "</div>" +
-            "<div style='margin: 10px 16px'>" +
-            "<label style='width: 10%;'>姓名:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;padding-left: 12px;' type='text' value='"+data.b+"'>" +
-            "</div>" +
-            "<div class='mb-b-15' style='margin: 10px 16px'>" +
-            "<label style='width: 10%;'>权限:</label>" +
-            "<select class='select' style='width: 70%;line-height: 34px;height: 34px;background: #fff;border:1px solid #ccc;padding-left: 12px;''>" +
-            "<option>普通用户</option" +
-            "><option>管理员</option>" +
-            "<option>高级管理员</option>" +
-            "<option>超级管理员</option>" +
-            "</select>" +
-            "</div>" +
-            "<div class='threshold_butset'>" +
-            "<button style='color: #fff;\n" +
-            "    background: #23aaea;\n" +
-            "    padding: 8px 34px;\n" +
-            "    border: none;\n" +
-            "    border-radius: 5px!important;\n" +
-            "    font-size: 16px;\n" +
-            "    margin-top: 16px;' onclick='editAffirm()'>确认</button>" +
-            "<button style='float: right;\n" +
-            "    color: #333;\n" +
-            "    border: 1px solid #ddd;\n" +
-            "    background: #fff;\n" +
-            "    padding: 8px 34px;\n" +
-            "    border-radius: 5px!important;\n" +
-            "    font-size: 16px;\n" +
-            "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
-            "</div>" +
-            "</div>"
-        });
-    }
-    function del (id){
-        console.log("1")
-        console.log(id)
-        layer.confirm('确定要删除吗？', {
-            btnAlign: 'c',
-            skin: 'del-class',
-            btn: ['确定','取消'] //按钮
-        }, function(){
-            layer.msg('删除成功', {icon: 1});
-        }, function(){
-            layer.msg('取消成功', {
-                time: 1000, //20s后自动关闭
+        function edit(obj) {
+            var data = JSON.parse($(obj).attr('data-attr'))
+            layer.open({
+                type: 1,
+                title: '编辑',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '360px'], //宽高
+                content: "<div class=' threshold_upline'>" +
+                    "<div style='margin: 10px 16px'><form id='edit_user'>" +
+                    "<label style='width: 10%;'>ID:</label>" +
+                    "<input style='color: black;width: 70%;line-height: 28px;padding-left: 12px;'' id='user_id' name='id' type='text' disabled value='" + data.id + "'>" +
+                    "</div>" +
+                    "<div style='margin: 10px 16px'>" +
+                    "<label style='width: 10%;'>姓名:</label>" +
+                    "<input style='color: black;width: 70%;line-height: 28px;padding-left: 12px;' id='username' name='username'  type='text' value='" + data.name + "'>" +
+                    "</div>" +
+                    "<div style='margin: 10px 16px'>" +
+                    "<label style='width: 10%;'>密码:</label>" +
+                    "<input style='color: black;width: 70%;line-height: 28px;padding-left: 12px;' id='password' name='password'  type='password' value='" + data.password + "'>" +
+                    "</div>" +
+                    "<div class='mb-b-15' style='margin: 10px 16px'>" +
+                    "<label style='width: 10%;'>权限:</label>" +
+                    "<select class='select' name='role' id='role' style='width: 70%;line-height: 34px;height: 34px;background: #fff;border:1px solid #ccc;padding-left: 12px;''>" +
+                    "<option "+getAuth(data.role, 'user')+" value="+data.role+">user</option>"+
+                    "<option "+getAuth(data.role, 'admin')+" value="+data.role+">admin</option>"+
+                    // "><option " + getAuth(data.role, '管理员') + ">管理员</option>" +
+                    // "<option " + getAuth(data.role, '高级管理员') + ">高级管理员</option>" +
+                    // "<option " + getAuth(data.role, '超级管理员') + ">超级管理员</option>" +
+                    "</select>" +
+                    "</div>" +
+                    "<div class='threshold_butset'>" +
+                    "<a style='color: #fff;\n" +
+                    "    background: #23aaea;\n" +
+                    "    display: inline-block;\n" +
+                    "    padding: 8px 34px;\n" +
+                    "    border: none;\n" +
+                    "    border-radius: 5px!important;\n" +
+                    "    font-size: 16px;\n" +
+                    "    cursor: pointer;\n" +
+                    "    margin-top: 16px;' onclick='editAffirm()'>确认</a>" +
+                    "<a style='float: right;\n" +
+                    "    color: #333;\n" +
+                    "    border: 1px solid #ddd;\n" +
+                    "    background: #fff;\n" +
+                    "    padding: 8px 34px;\n" +
+                    "    border-radius: 5px!important;\n" +
+                    "    font-size: 16px;\n" +
+                    "    display: inline-block;\n" +
+                    "    cursor: pointer;\n" +
+                    "    margin-top: 16px;' onclick='cancel()'>取消</a>" +
+                    "</form></div>" +
+                    "</div>"
             });
-        });
-    }
-    function editAffirm () {
-        layer.alert('编辑确定接口', {icon:0,btnAlign: 'c',skin: 'del-class' });
-    }
-    function search () {
-        var id = $("#importId").val()
-        var select = $('#select option:selected').val();
-        console.log(id)
-        console.log(select)
-    }
-    function cancel (){
-        layer.closeAll()
-    };
+        }
 
-</script>
-<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
+        function getAuth(auth, value) {
+            if (auth == value) {
+                return "selected";
+            } else {
+                return ""
+            }
+        }
+        function del(id) {
+        
+            layer.confirm('确定要删除吗？', {
+                btnAlign: 'c',
+                skin: 'del-class',
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                $ajax("monitor/deleteUser.do",{id:id},function(res){
+                  if(res.code == 200) {
+                      layer.closeAll()
+                    layer.msg('删除成功', { icon: 1 });
+                    window.location.reload();
+                  } else {
+                    layer.msg('删除失败', { icon: 1 });
+                  }
+                },function(){})
+              
+            }, function () {
+                layer.msg('取消成功', {
+                    time: 1000, //20s后自动关闭
+                });
+            });
+        }
+        function editAffirm() {
+           var data = {};
+           var id = $("#user_id").val();
+           var username = $("#username").val();
+           var password = $("#password").val();
+           var role = $("#role").val();
+
+           if(id) {
+               data.id = id;
+           }
+
+           if(username) {
+               data.username = username
+           }
+
+           if(role) {
+               data.role = role;
+           }
+           if(password) {
+               data.password = password;
+           }
+           
+           $ajax("monitor/updateUser.do",data,function(res){
+            
+               if(res.code == 200) {
+                layer.closeAll()
+                layer.msg('修改成功', { icon: 1 });
+                   window.location.reload();
+                } else {
+                    layer.msg('修改失败');
+                }
+           },function(res){})
+        }
+        function cancel() {
+            layer.closeAll()
+        };
+
+        function getUrlParam(params) {
+            var arr = params.split("&");
+            var args = {};
+            for (var i = 0; i < arr.length; i++) {
+                item = arr[i].split("=")
+                var name = decodeURIComponent(item[0]), value = decodeURIComponent(item[1]);
+                if (name) {
+                    args[name] = value
+                }
+            }
+            return args;
+        }
+
+    </script>
+<script type="text/javascript" src="js/setPermission.js?a4da8d9554f6e14268b8"></script><script type="text/javascript" src="js/islogin.js?a4da8d9554f6e14268b8"></script></body>
+
 </html>
-

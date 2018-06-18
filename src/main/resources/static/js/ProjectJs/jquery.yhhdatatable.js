@@ -40,6 +40,8 @@
 			yhhDataTable.refresh($container,pluginName);
 		}
 	};
+
+	var token = window.localStorage.getItem('token') ? window.localStorage.getItem('token') : '';
 	
 	var yhhDataTable = {
 		'init':function($table,pluginName,opts){
@@ -253,6 +255,9 @@
     	/*分页功能模块*/
     	'paginate':{
     		'init':function($frame,$table,$tbody,$paginateFrame,pluginName,opts,top){
+				$(".paginate-containter").remove();
+				//$(".yhh-data-table-frame").remove();
+			
     			$paginateFrame.paginate({
 					'visibleGo':opts.paginate.visibleGo,
 					'type':opts.paginate.type,
@@ -387,6 +392,7 @@
 				'url':opts.ajaxParam.url,
 				'type':opts.ajaxParam.type,
 				'dataType':opts.ajaxParam.dataType,
+				'headers': {'Content-Type':'application/x-www-form-urlencoded',"Authorization": token},
 				'data':toData,
 				'success':function(d){
 					callback(d);
@@ -500,11 +506,13 @@
 			'jsonp':null, /*dataType是jsonp的时候，传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名*/
 			'jsonpCallback':null, /*dataType是jsonp的时候，自定义的jsonp回调函数名称*/
 			'data':{}, /*传到服务器的数据*/
-			'timeout':10*1000  /*响应最久时间限制，毫秒*/
+			'timeout':10*1000,  /*响应最久时间限制，毫秒*/
 		},
 		'errFlag':false,   /*出错标记，false无错误，true出错*/ 
 		'errMsg':'',   /*出错信息*/
-		'sendDataHandle':function(d){return d;},  /*传递到服务器的数据预处理方法*/
+		'sendDataHandle':function(d){
+			
+			return d;},  /*传递到服务器的数据预处理方法*/
 		'backDataHandle':function(d){return d;},  /*预处理从服务器的接收数据或者js传入的数据*/
     	'beforeShow':function(){},  /*显示之前的额外处理事件*/
     	'afterShow':function(){}  /*显示之后的额外处理事件*/

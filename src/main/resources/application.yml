@@ -12,7 +12,7 @@ mybatis:
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://xxx:13306/pggj_squatting
+    url: jdbc:mysql://221.226.251.90:13306/pggj_squatting
     username: root
     password: 123456
 

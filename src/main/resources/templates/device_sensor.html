@@ -94,7 +94,7 @@
                                 <th>设备ID</th>
                                 <th>设备状态</th>
                                 <th>设备位置</th>
-                                <th>设备名称</th>
+                                <th>设备类型</th>
                                 <th>设备波长</th>
                                 <th>操作</th>
                             </tr>
@@ -117,12 +117,15 @@
 <script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
 <script type="text/javascript" src="js/ProjectJs/jquery.paginate.js"></script>
 <script type="text/javascript" src="js/ProjectJs/jquery.yhhdatatable.js" ></script>
+<script src="js/ajax.js"></script>
 <script type="text/javascript" src="js/ProjectJs/deviceSensor.js"></script>
 <script src="js/select.min.js"></script>
 
 <script>
     function add (){
-        layer.open({
+        layer.alert('暂时不支持新增操作',{icon:0,btnAlign: 'c',skin: 'del-class'})
+       /* layer.open({
+            type: 1,
             type: 1,
             title:'新增',
             skin: 'layui-layer-rim', //加上边框
@@ -162,7 +165,7 @@
             "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
             "</div>" +
             "</div>"
-        });
+        });*/
     }
     function details(obj){
         console.log(obj)
@@ -172,23 +175,27 @@
             type: 1,
             title:'查看',
             skin: 'layui-layer-rim', //加上边框
-            area: ['520px', '375px'], //宽高
+            area: ['520px', '400px'], //宽高
             content: "<div class=' threshold_upline'>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 22%;'>设备ID:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+data.a+"'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+data.deviceId+"'>" +
+            "</div>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备状态:</label>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+(formatter(data.deviceStatus))+"'>" +
             "</div>" +
             "<div style='margin: 22px 16px'>" +
             "<label style='width: 22%;'>设备位置:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+data.b+"'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+(data.deviceDirection== 1?'上行':'下行')+"'>" +
             "</div>" +
             "<div style='margin: 22px 16px'>" +
             "<label style='width: 22%;'>设备名称:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+data.c+"'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+(data.devicePosition)+'号'+ (data.deviceDirection== 1?'上行':'下行')+"'>" +
             "</div>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 22%;'>设备波长:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+data.d+"'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+'无'+"'>" +
             "</div>" +
             "<div class='threshold_butset'>" +
             "<button style='color: #fff;\n" +
@@ -209,6 +216,15 @@
             "</div>" +
             "</div>"
         });
+        function  formatter(val) {
+            if(val== 0){
+                return '未初始化'
+            }else if(val== 1){
+                return '正常'
+            }else {
+                return '异常'
+            }
+        }
         /*var a = 10*/
         /*window.open('police_detail.html'+ '?' + a,'_self')*/
     }
@@ -218,25 +234,41 @@
         console.log(data)
         layer.open({
             type: 1,
-            title:'查看',
+            title:'编辑',
             skin: 'layui-layer-rim', //加上边框
-            area: ['520px', '375px'], //宽高
+            area: ['520px', '450px'], //宽高
             content: "<div class=' threshold_upline'>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 22%;'>设备ID:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='"+data.a+"'>" +
+            "<input id = 'deviceId' style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+data.deviceId+"'>" +
+            "</div>" +
+            "<div style='margin: 10px 16px'>" +
+            "<label style='width: 22%;'>设备状态:</label>" +
+            "<input id='stys' style='color: black;width: 70%;line-height: 28px;'   disabled='disabled' type='text' value='"+(formatter(data.deviceStatus))+"'>" +
             "</div>" +
             "<div style='margin: 22px 16px'>" +
             "<label style='width: 22%;'>设备位置:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'   type='text' value='"+data.b+"'>" +
+            "<input id='address' type='number' style='color: black;width: 70%;line-height: 28px;'   type='text' value='"+(data.devicePosition)+"'>" +
             "</div>" +
             "<div style='margin: 22px 16px'>" +
-            "<label style='width: 22%;'>设备名称:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='"+data.c+"'>" +
+            "<label style='width: 22%;'>设备方向:</label>" +
+            /*"<input id='deviceDriection' style='color: black;width: 70%;line-height: 28px;'   type='text' value='"+ (data.deviceDirection== 1?'上行':'下行') +"'>" +*/
+            "<select class='select' id='deviceDriection' style='width: 70%;line-height: 34px;height: 34px;background: #fff;border:1px solid #ccc;''>" +
+            "<option value='1'>上行</option" +
+            "><option value='2'>下行</option>" +
+            "</select>" +
+            "</div>" +
+            "<div style='margin: 22px 16px'>" +
+            "<label style='width: 22%;'>设备类型:</label>" +
+            /*"<input  id='deviceName' style='color: black;width: 70%;line-height: 28px;'   type='text' value=' "+(data.deviceType == 1? '基准传感器':'数据传感器')+"'>" +*/
+            "<select class='select' id='deviceType' style='width: 70%;line-height: 34px;height: 34px;background: #fff;border:1px solid #ccc;''>" +
+            "<option value='2'>数据传感器</option" +
+            "><option value='1'>基准传感器</option>" +
+            "</select>" +
             "</div>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 22%;'>设备波长:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='"+data.d+"'>" +
+            "<input id='boLength' style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+'无'+"'>" +
             "</div>" +
             "<div class='threshold_butset'>" +
             "<button style='color: #fff;\n" +
@@ -245,7 +277,7 @@
             "    border: none;\n" +
             "    border-radius: 5px!important;\n" +
             "    font-size: 16px;\n" +
-            "    margin-top: 16px;' onclick='viewAffirm()'>确认</button>" +
+            "    margin-top: 16px;' onclick='editAffirm()'>确认</button>" +
             "<button style='float: right;\n" +
             "    color: #333;\n" +
             "    background: #fff;\n" +
@@ -257,12 +289,22 @@
             "</div>" +
             "</div>"
         });
+        function  formatter(val) {
+            if(val== 0){
+                return '未初始化'
+            }else if(val== 1){
+                return '正常'
+            }else {
+                return '异常'
+            }
+        }
         /*var a = 10*/
         /*window.open('police_detail.html'+ '?' + a,'_self')*/
     }
 
     function del (id){
-        console.log("1")
+        layer.alert('暂时不支持删除操作',{icon:0,btnAlign: 'c',skin: 'del-class'})
+     /*   console.log("1")
         console.log(id)
         layer.confirm('确定要删除吗？', {
             btnAlign: 'c',
@@ -274,27 +316,87 @@
             layer.msg('取消成功', {
                 time: 1000, //10s后自动关闭
             });
-        });
+        });*/
     }
-    function initialize() {
-        layer.alert('初始化接口',{icon:0,btnAlign: 'c',skin: 'del-class'})
+    
+    function initialize(id) {
+        var ws = new WebSocket("ws://19.0.1.20:8082");
+        var ip = "192.168.0.1"
+        var data = {
+            cmd: "initialization",
+            number: id,
+            address: ip 
+        };
+        
+         ws.onopen = function() {
+          ws.send(data);
+        }
+
+        ws.onmessage = function(res) {
+            //alert(JSON.stringify(res))
+            if(res.isTrusted) {
+                layer.msg('初始化成功');
+            } else {
+                layer.msg('初始化失败'); 
+            }
+        }
+      
     }
-    function restart () {
-        layer.alert('重启接口', {icon:0,btnAlign: 'c',skin: 'del-class' });
+    function restart (id) {
+      //  layer.alert('重启接口', {icon:0,btnAlign: 'c',skin: 'del-class' });
+      var ws = new WebSocket("ws://19.0.1.20:8082");
+        var ip = "192.168.0.1"
+        var data = {
+            cmd: "reset",
+            number: id,
+            address: ip 
+        };
+        
+         ws.onopen = function() {
+          ws.send(data);
+        }
+
+        ws.onmessage = function(res) {
+            //alert(JSON.stringify(res))
+            if(res.isTrusted) {
+                layer.msg('重启成功');
+            } else {
+                layer.msg('重启失败'); 
+            }
+        }
     }
     function editAffirm () {
         layer.alert('编辑确定接口', {icon:0,btnAlign: 'c',skin: 'del-class' });
     }
     function viewAffirm () {
-        layer.alert('查看确定',{icon:0,btnAlign: 'c',skin: 'del-class'})
+        layer.closeAll()
     }
     function addAffirm () {
-        layer.alert('新增确定',{icon:0,btnAlign: 'c',skin: 'del-class'})
+        layer.alert('暂时不支持新增',{icon:0,btnAlign: 'c',skin: 'del-class'})
     }
     function cancel (){
         layer.closeAll()
     };
+    function editAffirm() {
+        var devicePosition = $("#address").val()
+        var deviceDirection = $("#deviceDriection option:selected").val()
+        var deviceType   = $("#deviceType option:selected").val()
+   $ajax(
+            'monitor/manageMonitorDevice.do',
+            {devicePosition,deviceDirection,deviceType},
+            function (res) {
+                layer.alert('保存成功', { icon: 0, btnAlign: 'c', skin: 'del-class' });
+                setTimeout(function(){layer.closeAll()},2000);
+            },
+            function (res) {
+                console.log(res)
+                layer.alert('保存失败', { icon: 0, btnAlign: 'c', skin: 'del-class' });
+            },
+            'post',
+            'json'
+        )
+          }
 </script>
-<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
+<script type="text/javascript" src="js/islogin.js?a4da8d9554f6e14268b8"></script></body>
 </html>
 

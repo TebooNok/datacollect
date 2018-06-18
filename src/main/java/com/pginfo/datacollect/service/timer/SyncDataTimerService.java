@@ -144,14 +144,14 @@ public class SyncDataTimerService {
     }
 
     //    每分钟同步一次，将cacheDataMap数据缓存到mongo
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "30 0/1 * * * ?")
     public void saveDataPerMin() {
 
-        logger.debug(Thread.currentThread().toString() + ",saveDataPerMin," + LocalDateTime.now().toString());
+        logger.info(Thread.currentThread().toString() + ",saveDataPerMin," + LocalDateTime.now().toString());
         for (Map.Entry<Integer, MongoSinkData> entry: cacheDataMap.entrySet()) {
             MongoSinkData temp = new MongoSinkData(entry.getValue());
             temp.setDateTime(LocalUtils.formatIgnoreSeconds(entry.getValue().getDateTime()));
-            mongoSinkDataDao.saveNewSinkData(entry.getValue());
+            mongoSinkDataDao.saveNewSinkData(temp);
         }
 
         logger.debug("save Data to Mongodb successful!\n");

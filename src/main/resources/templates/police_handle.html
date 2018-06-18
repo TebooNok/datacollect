@@ -108,31 +108,40 @@
             <div class="row device_list2">
                 <div class="col-lg-4 police_tit">
                     <label class="police_type">报警类型</label>
-                    <input type="text" class="form-control m-b-10"  value="上浮" disabled="disabled">
+                    <input type="text" class="form-control m-b-10" id="type"  value="" disabled="disabled">
                 </div>
                 <div class="col-lg-4 police_tit">
                     <label class="police_type">报警位置</label>
-                    <input type="text" class="form-control m-b-10" value="1#上行" disabled="disabled">
+                    <input type="text" class="form-control m-b-10" id="position"  value="" disabled="disabled">
                 </div>
                 <div class="col-lg-4 police_tit">
                     <label class="police_type">报警时间</label>
-                    <input type="text" class="form-control m-b-10" value="2018-5-30 13::14:20" disabled="disabled">
+                    <input type="text" class="form-control m-b-10" id="date_time" value="" disabled="disabled">
                 </div>
+                
                 <div class="clearfix"></div>
             </div>
+
+            <div class="row device_list2">
+                    <div class="col-lg-4 police_tit">
+                            <label class="police_type">处理人</label>
+                            <input type="text" class="form-control m-b-10" id="user"  value="">
+                        </div>
+                    <div class="clearfix"></div>
+                </div>
 
             <div class="row device_list2">
                 <div class="layui-form-item layui-form-text">
                     <label class="police_detailyj">处理意见</label>
                     <div class="polist_threelist">
-                        <textarea placeholder="请输入内容" class="form-control"></textarea>
+                        <textarea placeholder="请输入内容" id="alarmProcessMessage" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="threshold_but">
-                <button class="threshold_butbc">处理</button>
-                <button  class="threshold_butqx">取消</button>
+                <button class="threshold_butbc" id="confirm">处理</button>
+                <button  class="threshold_butqx" id="cancel">取消</button>
             </div>
 
 
@@ -144,22 +153,55 @@
 </section>
 <script src="js/jquery.min.js"></script> <!-- jQuery Library -->
 <script src="js/bootstrap.min.js"></script>
-<script src="js/layui/layui.js"></script>
-<script>
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
+<script src="js/layui/layui.all.js"></script>
+<script src="js/ajax.js"></script>
 
-        laydate.render({
-            elem: '#test1'
-        });
-        laydate.render({
-            elem: '#test2'
-        });
-        laydate.render({
-            elem: '#test3'
-        });
-    });
+<script type="text/javascript" src="js/islogin.js?a4da8d9554f6e14268b8"></script></body>
+<script>
+    function getUrlParam() {
+    var params = window.location.search
+    var arr = params.substr(1).split("&");
+    var args = {};
+    for(var i=0; i<arr.length; i++) {
+        item = arr[i].split("=")
+        var name = decodeURIComponent(item[0]),value = decodeURIComponent(item[1]);
+        if(name) {
+            args[name] = value
+        }
+    }
+   return args;
+}
+
+var params = getUrlParam();
+
+if(params) {
+ $("#type").val(params.type == 1 ? '上浮' : '下沉')
+ $("#position").val(params.position + '号桥墩')
+ $("#date_time").val(params.time)
+
+$("#confirm").click(function(){
+    var ags = {};
+    var alarmProcessMessage = $("#alarmProcessMessage").val()
+    var user = $("#user").val()
+    ags['alarmDeviceId'] = params.id
+    ags['alarmProcessUser'] = user
+    ags['alarmProcessMessage'] = alarmProcessMessage
+
+    $ajax('monitor/processAlarm.do',ags,function(res){
+        if(res.code == 200) {
+            layer.msg('处理成功！')
+            window.location.href = "/police.html"
+        } else {
+            layer.msg("处理失败！")
+        }
+    })
+})
+ 
+
+} else {
+    layer.msg("请求数据错误！")
+}
+  
 </script>
-<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
 </html>
 

@@ -2,6 +2,7 @@
 <!--[if IE 9 ]>
 <html class="ie9">
 <![endif]-->
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta name="format-detection" content="telephone=no">
@@ -12,7 +13,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/form.css" rel="stylesheet">
-    <!--<link rel="stylesheet" type="text/css" href="layui-v2.2.6/layui/css/layui.css" />-->
+    <link rel="stylesheet" type="text/css" href="layui-v2.2.6/layui/css/layui.css" />
     <link type="text/css" rel="stylesheet" href="table/css/font-awesome.4.6.0.css">
     <link type="text/css" rel="stylesheet" href="table/css/jquery.paginate.css" />
     <link type="text/css" rel="stylesheet" href="table/css/jquery.yhhdatatable.css" />
@@ -24,243 +25,356 @@
     <link type="text/css" rel="stylesheet" href="css/ProjectCss/waitApprova.css" />
     <link rel="stylesheet" href="css/ProjectCss/searchPoint.css">
     <style>
-        input::-webkit-input-placeholder{
-            color:#9c9a9a !important;
+        input::-webkit-input-placeholder {
+            color: #9c9a9a !important;
         }
-        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
-            color:#9c9a9a !important;
+
+        input::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: #9c9a9a !important;
         }
-        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-            color:#9c9a9a !important;
+
+        input:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: #9c9a9a !important;
         }
-        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
-            color:#9c9a9a !important;
+
+        input:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: #9c9a9a !important;
         }
-        input[type="checkbox"], input[type="radio"] {
+
+        input[type="checkbox"],
+        input[type="radio"] {
             opacity: 1;
         }
-        select::-webkit-select-placeholder{
-            color:#9c9a9a !important;
-        }
-        .qiao-tab ul>li:first-child:before{
-            width:22px;
-            height:10px;}
-        .qiao-tab ul>li:last-child:before{
-            width:22px;
-            height:10px;}
 
-        input[type=checkbox]{    margin: 3px 10px 0;}
-        .btn:hover, .open .btn.dropdown-toggle{color: #fff;}
-        .info-box{display: none;}
-        .form-control:focus, .input-focused, .bootstrap-select.open > .form-control{    border-color: #c9c9c9;
+        select::-webkit-select-placeholder {
+            color: #9c9a9a !important;
+        }
+
+        .qiao-tab ul>li:first-child:before {
+            width: 22px;
+            height: 10px;
+        }
+
+        .qiao-tab ul>li:last-child:before {
+            width: 22px;
+            height: 10px;
+        }
+
+        input[type=checkbox] {
+            margin: 3px 10px 0;
+        }
+
+        .btn:hover,
+        .open .btn.dropdown-toggle {
+            color: #fff;
+        }
+
+        .info-box {
+            display: none;
+        }
+
+        .form-control:focus,
+        .input-focused,
+        .bootstrap-select.open>.form-control {
+            border-color: #c9c9c9;
             /* background: rgba(0, 0, 0, 0); */
-            box-shadow: none;}
+            box-shadow: none;
+        }
+
+        .tile,
+        .tile-dark,
+        .tile-title,
+        .table th {
+            background-color: #ededed;
+            text-align: center;
+            box-shadow: none;
+            border-top: 2px solid #27a8ea !important;
+            color: #333333;
+        }
+
+        .table>thead>tr>th,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>tbody>tr>td,
+        .table>tfoot>tr>td {
+            color: #333333;
+        }
+
+        .table-hover>tbody>tr:hover>td,
+        .table-hover>tbody>tr:hover>th,
+        .table-striped>tbody>tr:nth-child(odd)>td,
+        .table-striped>tbody>tr:nth-child(even)>th {
+            background-color: #FFFFFF;
+        }
+
+        .table-hover>tbody>tr:hover>td,
+        .table-hover>tbody>tr:hover>th,
+        .table-striped>tbody>tr:nth-child(odd)>td,
+        .table-striped>tbody>tr:nth-child(odd)>th {
+            background-color: #f3f6fb;
+        }
+
+        .nav_twomenu li{
+            text-align: center;
+        }
+
+        .bg_pos {
+            left: 105px;
+        }
+
+.p-relative ul li {
+    text-align: center;
+}
+
+.layui-layer-content {
+    color: "#ffffff"
+}
+
+.bg_posti2 {
+    left: 104px;
+   
+}
+
+.bg_posti2 li {
+    text-align: center;
+}
+
+.nav_threebg li {
+    left: 9px;
+}
+       
     </style>
 </head>
+
 <body>
-<div class="ifream_head" >
-    <header  class=" headtwo">
-        <img src="images/top1.png" class="img-responsive">
-    </header>
-    <section class="container togethers">
-        <ul class="breadcrumb breadcrumb-left nav_menu1">
-            <li class="nav_menu_li"><a href="index.html" class="home-btn home_btnnext"  target = '_self'>首页</a></li>
-            <li class="nav_menu_li ifream_listnav">
-                <a  class="home-btn home_btnnext" target="myFrameName" >菜单</a>
-                <ul class="nav_twomenu bg2">
-                    <li>
-                        <a  target="myFrameName">设置</a>
-                        <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
-                            <li><a href="setPermission.html"  target = '_self'>权限</a> </li>
-                            <li><a href="threshold-value.html"  target = '_self'>阈值</a> </li>
-                            <li class="index_fell"><a href="device_sensor.html"  target = '_self'>传感器</a> </li>
-                            <li class="index_fell"><a href="device_mediate.html"  target = '_self'>解调仪</a> </li>
-                        </ul>
-                    </li>
-                    <li><a  target="myFrameName">查询</a>
-                        <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
-                            <li><a href="searchDuan.html"  target = '_self'>时间段查询</a> </li>
-                            <li><a href="searchPoint.html"  target = '_self'>时间点查询</a> </li>
-                        </ul>
-                    </li>
-                    <li><a href="police.html"  target = '_self'>报警</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- Breadcrumb -->
-        <ol class="breadcrumb">
-            <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
-            <li><a href="#" class="date-btn date_btnnext">2018年5月27号</a></li>
-            <li><a href="#" class="loginout-btn home_btnnext">退出</a></li>
-        </ol>
-    </section>
-</div>
-
-<section class="p-relative container mg_t22" role="main" >
-    <div class="head_titall">
-        <ol class="head_titall_title">
-            <li class="home"><a href="index.html"  target = '_self'>首页</a></li>
-            <li> > </li>
-            <li><a >查询</a></li>
-            <li> > </li>
-            <li class="active"><a href="searchDuan.html"  target = '_self'> 时间段查询</a></li>
-        </ol>
+    <div class="ifream_head">
+        <header class=" headtwo">
+            <img src="images/top1.png" class="img-responsive">
+        </header>
+        <section class="container togethers">
+            <ul class="breadcrumb breadcrumb-left nav_menu1">
+                <li class="nav_menu_li">
+                    <a href="index.html" class="home-btn home_btnnext" target='_self'>首页</a>
+                </li>
+                <li class="nav_menu_li ifream_listnav">
+                    <a class="home-btn home_btnnext" target="myFrameName">菜单</a>
+                    <ul class="nav_twomenu bg2">
+                        <li>
+                            <a target="myFrameName">设置</a>
+                            <ul class="nav_threemenu ifream_nav_bg3 bg2 bg_pos">
+                                <li>
+                                    <a href="setPermission.html" target='_self'>权限</a>
+                                </li>
+                                <li>
+                                    <a href="threshold-value.html" target='_self'>阈值</a>
+                                </li>
+                                <li class="index_fell">
+                                    <a href="device_sensor.html" target='_self'>传感器</a>
+                                </li>
+                                <li class="index_fell">
+                                    <a href="device_mediate.html" target='_self'>解调仪</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a target="myFrameName">查询</a>
+                            <ul class="nav_threemenu nav_threebg bg2 bg_posti2">
+                                <li>
+                                    <a href="searchDuan.html" target='_self'>时间段查询</a>
+                                </li>
+                                <li>
+                                    <a href="searchPoint.html" target='_self'>时间点查询</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="police.html" target='_self'>报警</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <!--<li><a href="" style="width: 140px;font-size: 14px;">当前用户：admin</a> </li>-->
+                <li>
+                    <a href="#" class="date-btn date_btnnext">2018年5月27号</a>
+                </li>
+                <li>
+                    <a href="#" class="loginout-btn home_btnnext">退出</a>
+                </li>
+            </ol>
+        </section>
     </div>
-    <div class="clearfix"></div>
-    <section id="main" class="p-relative together_content container" role="main">
-        <section id="content" class="container" style="padding-bottom: 18px">
-            <div class="layui-tab">
-                <ul class=" police_click">
-                    <li class="layui-this"> <a href="searchDuan.html"  target = '_self'> 时间段查询</a></li>
-                    <li><a href="searchPoint.html"  target = '_self'> 时间点查询</a></li>、
-                </ul>
-                <div class="layui-tab-item layui-show block-area police_caozuo" id="text-input" style="    padding: 8px;margin-top: 34px;">
-                    <div class="row" style="color: #555555">
-                        <div class="col-lg-4 threshold_upline" >
 
-                            <label style="vertical-align: middle;"><span style="color: red;margin-right: 4px;">*</span>桥墩编号：</label>
-                            <div style="    display: inline-block;width: 78%;">
-                                <select id="sel_search_orderstatus"  multiple="multiple" name="city" xm-select="select6" xm-select-type="3"  xm-select-skin="primary" xm-select-placeholder="请选择" >
-                                    <option value="1">#1</option>
-                                    <option value="2">#2</option>
-                                    <option value="3">#3</option>
-                                    <option value="4">#4</option>
-                                    <option value="5">#5</option>
-                                    <option value="6">#6</option>
-                                    <option value="7">#7</option>
-                                    <option value="8">#8</option>
-                                    <option value="9">#9</option>
-                                    <option value="10">#10</option>
-                                    <option value="11">#11</option>
-                                    <option value="12">#12</option>
-                                    <option value="13">#13</option>
-                                    <option value="14">#14</option>
-                                    <option value="15">#15</option>
-                                    <option value="16">#16</option>
-                                    <option value="17">#17</option>
-                                    <option value="18">#18</option>
-                                    <option value="19">#19</option>
-                                    <option value="20">#20</option>
-                                    <option value="21">#21</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="col-lg-5 threshold_upline ">
-                                <label><span style="color: red;margin-right: 4px;line-height: 33px;">*</span>开始：</label>
-                                <input type="text"   style="color:#9c9a9a;" class="layui-input form-control m-b-10 time_rightbox" id="time1" placeholder="起">
+    <section class="p-relative container mg_t22" role="main">
+        <div class="head_titall">
+            <ol class="head_titall_title">
+                <li class="home">
+                    <a href="index.html" target='_self'>首页</a>
+                </li>
+                <li> > </li>
+                <li>
+                    <a>查询</a>
+                </li>
+                <li> > </li>
+                <li class="active">
+                    <a href="searchDuan.html" target='_self'> 时间段查询</a>
+                </li>
+            </ol>
+        </div>
+        <div class="clearfix"></div>
+        <section id="main" class="p-relative together_content container" role="main">
+            <section id="content" class="container" style="padding-bottom: 18px">
+                <div class="layui-tab">
+                    <ul class=" police_click">
+                        <li class="layui-this">
+                            <a href="searchDuan.html" target='_self'> 时间段查询</a>
+                        </li>
+                        <li>
+                            <a href="searchPoint.html" target='_self'> 时间点查询</a>
+                        </li>、
+                    </ul>
+                    <div class="layui-tab-item layui-show block-area police_caozuo" id="text-input" style="    padding: 8px;margin-top: 34px;">
+                        <form action="" id="search_alarm" class="layui-form">
+                            <div class="row" style="color: #555555">
+                                <div class="col-lg-4 threshold_upline">
 
-                            </div>
-                            <div class="col-lg-1" style="text-align: center;padding-left: 0;padding-right: 25px;"><label style="line-height: 33px;">至</label></div>
-                            <div class="col-lg-5 threshold_upline" style="position: relative;left: -15px;">
-                                <input type="text"  style="color:#9c9a9a;"  class="layui-input form-control m-b-10 time_rightbox" id="time2" placeholder="止">
+                                    <label style="vertical-align: middle;">
+                                        <span style="color: red;margin-right: 4px;">*</span>桥墩编号：</label>
+                                    <div style="    display: inline-block;width: 78%;">
+
+                                        <select class="select" id="select" name="deviceId">
+                                            <option value="">请选择桥墩位置</option>
+                                            <option value=1>1号桥墩</option>
+                                            <option value=2>2号桥墩</option>
+                                            <option value=3>3号桥墩</option>
+                                            <option value=4>4号桥墩</option>
+                                            <option value=5>5号桥墩</option>
+                                            <option value=6>6号桥墩</option>
+                                            <option value=7>7号桥墩</option>
+                                            <option value=8>8号桥墩</option>
+                                            <option value=9>9号桥墩</option>
+                                            <option value=10>10号桥墩</option>
+                                            <option value=11>11号桥墩</option>
+                                            <option value=12>12号桥墩</option>
+                                            <option value=13>13号桥墩</option>
+                                            <option value=14>14号桥墩</option>
+                                            <option value=15>15号桥墩</option>
+                                            <option value=16>16号桥墩</option>
+                                            <option value=17>17号桥墩</option>
+                                            <option value=18>18号桥墩</option>
+                                            <option value=19>19号桥墩</option>
+                                            <option value=20>20号桥墩</option>
+                                            <option value=21>21号桥墩</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="col-lg-5 threshold_upline ">
+                                        <label>
+                                            <span style="color: red;margin-right: 4px;line-height: 33px;">*</span>开始：</label>
+                                        <input type="text" style="color:#9c9a9a;" name="startDateTime" class="layui-input form-control m-b-10 time_rightbox" id="time1"
+                                            placeholder="起">
+                                            
+
+                                    </div>
+                                    <div class="col-lg-1" style="text-align: center;padding-left: 0;padding-right: 25px;">
+                                        <label style="line-height: 33px;">至</label>
+                                    </div>
+                                    <div class="col-lg-5 threshold_upline" style="position: relative;left: -15px;">
+                                        <input type="text" style="color:#9c9a9a;"  name="endDateTime" class="layui-input form-control m-b-10 time_rightbox" id="time2"
+                                            placeholder="止">
+                                           
+                                    </div>
+                                </div>
+                        </form>
+                        </div>
+                        <div class="row" style="color: #555555 ;   margin-top: 40px;">
+                            <div class="threshold_but" style="width: 234px;">
+                                <button class="btn btn-primary searchButton" style="     padding: 5px 34px; border-radius: 20px!important;" id="search">查询</button>
+                                <button class="btn btn-primary resetButton" style="float: right;     padding: 5px 34px; border-radius: 20px!important;" id="reset">重置</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" style="color: #555555 ;   margin-top: 40px;">
-                        <div class="threshold_but" style="width: 234px;">
-                            <button class="btn btn-primary searchButton" style="     padding: 5px 34px; border-radius: 20px!important;" onclick="search()">查询</button>
-                            <button class="btn btn-primary resetButton" style="float: right;     padding: 5px 34px; border-radius: 20px!important;" onclick="reset()">重置</button>
-                        </div>
-                    </div>
-                    <div class="row" style="color: #555555 ; margin-top: 25px;">
-                        <div class="col-lg-6" >
-                            <div class="qiao-tab qiao-tab3">
-                                <ul style="margin-right: 50px;">
-                                    <li class="blue searchd_safe">安全范围</li>
-                                    <li class=" searchd_happen">危险范围</li>
-                                </ul>
-                            </div>
-                            <div class="qiao-tab qiao-tab2">
-                                <ul>
-                                    <li class="up seard_up">上行</li>
-                                    <li class="down seard_down">下行</li>
-                                </ul>
-                            </div>
-                            <div class=" p-10 search1">
-                                <div id="main-line" class="mainline2"></div>
-                                <span style="color: #4c4c4c;    float: right;
+                        <div class="row" style="color: #555555 ; margin-top: 25px;">
+                            <div class="col-lg-6">
+                                <div class="qiao-tab qiao-tab3">
+                                    <ul style="margin-right: 50px;">
+                                        <li class="blue searchd_safe">安全范围</li>
+                                        <li class=" searchd_happen">危险范围</li>
+                                    </ul>
+                                </div>
+                                <div class="qiao-tab qiao-tab2">
+                                    <ul>
+                                        <li class="up seard_up">上行</li>
+                                        <li class="down seard_down">下行</li>
+                                    </ul>
+                                </div>
+                                <div class=" p-10 search1">
+                                    <div id="main-line" class="mainline2"></div>
+                                    <span style="color: #4c4c4c;    float: right;
                                 position: relative;
                                 left: 60px;top: -23px;">桥墩号</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-5" style="float: right;    ">
-                            <div style="float: right;margin-bottom: 8px;"> <button class="btn btn-primary searchButton export" onclick="search()"><i class="fa fa-sign-out" aria-hidden="true"></i>导出Excel</button></div>
-                            <table id="testtable3">
-                                <thead>
-                                <tr>
-                                    <th>时间</th>
-                                    <th>桥墩编号</th>
-                                    <th>上/下行</th>
-                                    <th>监测值</th>
-                                    <th>设备状态</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
+                            <div class="col-lg-5" style="float: right;   height: 500px;overflow-y: scroll; ">
+                                <div style="float: right;margin-bottom: 8px;">
+                                    <button class="btn btn-primary searchButton export" id="excel">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>导出Excel</button>
+                                </div>
+                                <table id="testtable3" class="table text-center table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>桥墩编号</th>
+                                            <th>上/下行</th>
+                                            <th>监测值</th>
+                                            <th>设备状态</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody id="tbody">
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
                         <div class="clearfix"></div>
+
                     </div>
 
                 </div>
-            </div>
+                </div>
+            </section>
         </section>
     </section>
-</section>
 
-<script src="js/jquery.min.js"></script> <!-- jQuery Library -->
-<script src="js/bootstrap.min.js"></script>
-<link href="css/multiple-select.css" rel="stylesheet">
-<script src="js/multiple-select.js"></script>
-<script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
-<script src="js/select.min.js"></script>
-<!-- <script src="js/device_setup.js"></script> -->
-<script src="js/echarts.min.js"></script>
-<script type="text/javascript" src="js/ProjectJs/databale.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery Library -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- <link href="css/multiple-select.css" rel="stylesheet">
+    <script src="js/multiple-select.js"></script> -->
+    <script src="js/layui/layui.all.js"></script>
+    <!-- jQuery Library -->
+    <!-- <script src="js/select.min.js"></script> -->
+    <!-- <script src="js/device_setup.js"></script> -->
+    <script src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/ProjectJs/databale.js"></script>
 
-<script type="text/javascript" src="js/ProjectJs/tableNOpage.js" ></script>
-<script src="js/ProjectJs/searchDuan.js"></script>
-<!--图表-->
-<script src="js/searchPointLine.js"></script>
-<script src="js/searchLine.js"></script>
-<script>
+    <script type="text/javascript" src="js/ProjectJs/tableNOpage.js"></script>
+    <!--图表-->
+    <script src="js/searchPointLine.js"></script>
+    <script src="js/searchLine.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/ProjectJs/searchDuan.js"></script>
 
-    //No.2 按需加载模块
+    <script>
+    </script>
+<script type="text/javascript" src="js/islogin.js?a4da8d9554f6e14268b8"></script></body>
 
-</script>
-<script>
-    layui.config({
-        base: './'
-    }).extend({
-        formSelects: 'formSelects-v3'
-    });
-    layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        laydate.render({
-            elem: '#time1' ,
-            type:'datetime',
-            format: 'yyyy年MM月dd日 HH时mm分' //可任意组合
-        });
-        laydate.render({
-            elem: '#time2',
-                type:'datetime',
-            format: 'yyyy年MM月dd日 HH时mm分' //可任意组合
-        });
-        $('#sel_search_orderstatus').change(function () {
-            console.log($(this).val());
-        }).multipleSelect({
-            width: '100%',
-            selectAllText: "全选",
-            allSelected: '全选',
-            countSelected: '# 条数据被选中',
-            minimumCountSelected: 10,
-        });
-    });
-</script>
-<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
 </html>
-

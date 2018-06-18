@@ -95,6 +95,47 @@
             margin-right: 4px;
             font-size: 14px;
         }
+
+        .tile,
+        .tile-dark,
+        .tile-title,
+        .table th {
+            background-color: #ededed;
+            text-align: center;
+            box-shadow: none;
+            border-top: 2px solid #27a8ea !important;
+            color: #333333;
+        }
+
+        .table>thead>tr>th,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>tbody>tr>td,
+        .table>tfoot>tr>td {
+            color: #333333;
+        }
+
+        .table-hover>tbody>tr:hover>td,
+        .table-hover>tbody>tr:hover>th,
+        .table-striped>tbody>tr:nth-child(odd)>td,
+        .table-striped>tbody>tr:nth-child(even)>th {
+            background-color: #FFFFFF;
+        }
+
+        .table-hover>tbody>tr:hover>td,
+        .table-hover>tbody>tr:hover>th,
+        .table-striped>tbody>tr:nth-child(odd)>td,
+        .table-striped>tbody>tr:nth-child(odd)>th {
+            background-color: #f3f6fb;
+        }
+
+        .p-relative ul li {
+            text-align: center;
+        }
+        .ms-drop ul > li label {
+            text-align: left;
+        }
     </style>
 </head>
 
@@ -187,6 +228,7 @@
                         </li>、
                     </ul>
                     <div class="layui-tab-item layui-show block-area police_caozuo" id="text-input" style="    padding: 8px;margin-top: 34px;">
+                        <form action="">
                         <div class="row" style="color: #555555">
                             <div class="col-lg-4 threshold_upline">
                                 <label style="width:77px;text-align: right;">
@@ -238,10 +280,11 @@
                         <div class="row" style="color: #555555 ;    margin-top: 40px;">
                             <div class="threshold_but" style="width: 234px;">
 
-                                <button class="btn btn-primary searchButton" style="     padding: 5px 34px; border-radius: 20px!important;" onclick="search()">查询</button>
-                                <button class="btn btn-primary resetButton" style="float: right;     padding: 5px 34px; border-radius: 20px!important;" onclick="reset()">重置</button>
+                                <a class="btn btn-primary searchButton" style="     padding: 5px 34px; border-radius: 20px!important;" id="search">查询</a>
+                                <a class="btn btn-primary resetButton" style="float: right;     padding: 5px 34px; border-radius: 20px!important;" id="reset">重置</a>
                             </div>
                         </div>
+                    </form>
                         <div class="row" style="color: #555555 ; margin-top: 5px;">
                             <div class="col-lg-6">
                                 <div class="qiao-tab qiao-tab3">
@@ -266,10 +309,10 @@
                             </div>
                             <div class="col-lg-5" style="float: right; ">
                                 <div style="float: right; margin-bottom: 8px;">
-                                    <button class="btn btn-primary searchButton export" onclick="exportToExcel()">
+                                    <button class="btn btn-primary searchButton export" id="excel">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i>导出Excel</button>
                                 </div>
-                                <table id="testtable3">
+                                <table id="testtable3" class="table text-center table-striped">
                                     <thead>
                                         <tr>
                                             <th>时间</th>
@@ -279,7 +322,7 @@
                                             <th>设备状态</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tbody">
                                     </tbody>
                                 </table>
                             </div>
@@ -310,54 +353,22 @@
     <script type="text/javascript" src="js/ProjectJs/databale.js"></script>
 
     <script type="text/javascript" src="js/ProjectJs/tableNOpage.js"></script>
-    <script src="js/ProjectJs/searchPoint.js"></script>
+    <script src="js/ajax.js"></script>
     <!--图表-->
     <script src="js/searchPointLine.js"></script>
     <script src="js/searchLine.js"></script>
+    <script src="js/ProjectJs/searchPoint.js"></script>
     <script>
-        layui.config({
-            base: './'
-        }).extend({
-            formSelects: 'formSelects-v3'
+         $('#sel_search_orderstatus').change(function () {
+            /* console.log($(this).val());*/
+        }).multipleSelect({
+            width: '100%',
+            selectAllText: "全选",
+            allSelected: '全选',
+            countSelected: '# 条数据被选中',
+            minimumCountSelected: 10,
         });
-        layui.use('laydate', function () {
-            var laydate = layui.laydate;
-            laydate.render({
-                elem: '#time1',
-                type: 'datetime',
-                format: 'yyyy年MM月dd日 HH时mm分' //可任意组合
-            });
-            laydate.render({
-                elem: '#time2',
-                type: 'datetime',
-                format: 'yyyy年MM月dd日 HH时mm分' //可任意组合
-            });
-            laydate.render({
-                elem: '#time3',
-                type: 'datetime',
-                format: 'yyyy年MM月dd日 HH时mm分' //可任意组合
-            });
-
-            $('#sel_search_orderstatus').change(function () {
-                console.log($(this).val());
-            }).multipleSelect({
-                width: '100%',
-                selectAllText: "全选",
-                allSelected: '全选',
-                countSelected: '# 条数据被选中',
-                minimumCountSelected: 10,
-            });
-        });
-        function search() {
-            alert("查询")
-        }
-        function reset() {
-            alert("重置")
-        }
-        function exportToExcel() {
-            alert("到處")
-        }
     </script>
-<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
+<script type="text/javascript" src="js/islogin.js?a4da8d9554f6e14268b8"></script></body>
 
 </html>

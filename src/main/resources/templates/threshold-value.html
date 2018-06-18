@@ -89,7 +89,7 @@
             <div class="row htreshold_listbox">
                 <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
                     <label style="width: 57px"><i>*</i>阈值</label>
-                    <input type="text" class="form-control m-b-10" placeholder="请输入">
+                    <input id="first" type="text" class="form-control m-b-10" placeholder="请输入">
                 </div>
                
                 <div class="clearfix"></div>
@@ -98,7 +98,7 @@
             <div class="row htreshold_listbox">
                 <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
                     <label style="width: 57px"><i>*</i>阈值</label>
-                    <input type="text" class="form-control m-b-10" placeholder="请输入">
+                    <input id="second" type="text" class="form-control m-b-10" placeholder="请输入">
                 </div>
                
                 <div class="clearfix"></div>
@@ -107,25 +107,23 @@
             <div class="row htreshold_listbox">
                 <div class="col-lg-6 col-md-6 col-sm-6 threshold_upline">
                     <label style="width: 57px"><i>*</i>阈值</label>
-                    <input type="text" class="form-control m-b-10" placeholder="请输入">
+                    <input id="thrid" type="text" class="form-control m-b-10" placeholder="请输入">
                 </div>
                
                 <div class="clearfix"></div>
             </div>
             <div class="threshold_but threshold_mgb">
-                <button class="threshold_butbc">保存</button>
-                <button  class="threshold_butqx">取消</button>
+                <button class="threshold_butbc" onclick="save()">保存</button>
+                <button  class="threshold_butqx" onclick="cancel()">取消</button>
             </div>
-
         </div>
-
-
-
     </section>
 </section>
 <script src="js/jquery.min.js"></script> <!-- jQuery Library -->
 <script src="js/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
+<script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
+<script src="js/ajax.js"></script>
+<script src="js/ProjectJs/threshold-value.js"></script>
+<script type="text/javascript" src="js/islogin.js?a4da8d9554f6e14268b8"></script></body>
 </html>
 

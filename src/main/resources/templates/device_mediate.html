@@ -117,56 +117,13 @@
 <script src="js/layui/layui.all.js"></script> <!-- jQuery Library -->
 <script type="text/javascript" src="js/ProjectJs/jquery.paginate.js"></script>
 <script type="text/javascript" src="js/ProjectJs/jquery.yhhdatatable.js" ></script>
+<script src="js/ajax.js"></script>
 <script type="text/javascript" src="js/ProjectJs/deviceMediate.js"></script>
 <script src="js/select.min.js"></script>
 
 <script>
     function assdd (){
-        layer.open({
-            type: 1,
-            title:'新增',
-            skin: 'layui-layer-rim', //加上边框
-            area: ['520px', '420px'], //宽高
-            content: "<div class=' threshold_upline'>" +
-            "<div style='margin: 10px 16px'>" +
-            "<label style='width: 22%;'>设备安装时间:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='' placeholder='请输入设备安装时间'>" +
-            "</div>" +
-            "<div style='margin: 22px 16px'>" +
-            "<label style='width: 22%;'>安装地点:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='' placeholder='请输入安装地点'>" +
-            "</div>" +
-            "<div style='margin: 22px 16px'>" +
-            "<label style='width: 22%;'>设备名称:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='' placeholder='请输入设备名称'>" +
-            "</div>" +
-            "<div style='margin: 10px 16px'>" +
-            "<label style='width: 22%;'>设备编号:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;' type='text' value='' placeholder='请输入设备编号'>" +
-            "</div>" +
-            "<div style='margin: 10px 16px'>" +
-            "<label style='width: 22%;'>设备状态:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  type='text' value='' placeholder='请输入设备状态   '>" +
-            "</div>" +
-            "<div class='threshold_butset'>" +
-            "<button style='color: #fff;\n" +
-            "    background: #23aaea;\n" +
-            "    padding: 8px 34px;\n" +
-            "    border: none;\n" +
-            "    border-radius: 5px!important;\n" +
-            "    font-size: 16px;\n" +
-            "    margin-top: 16px;' onclick='viewAffirm()'>确认</button>" +
-            "<button style='float: right;\n" +
-            "    color: #333;\n" +
-            "    background: #fff;\n" +
-            "    padding: 8px 34px;\n" +
-            "    border: 1px solid #ddd;\n" +
-            "    border-radius: 5px!important;\n" +
-            "    font-size: 16px;\n" +
-            "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
-            "</div>" +
-            "</div>"
-        });
+        layer.alert('暂时不支持新增',{icon:0,btnAlign: 'c',skin: 'del-class'})
     }
     function details(obj){
         console.log(obj)
@@ -180,7 +137,7 @@
             content: "<div class=' threshold_upline'>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 22%;'>设备安装时间:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+data.a+"'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;'  disabled='disabled' type='text' value='"+dataChange(data.timestamp)+"'>" +
             "</div>" +
             "<div style='margin: 22px 16px'>" +
             "<label style='width: 22%;'>安装地点:</label>" +
@@ -192,11 +149,11 @@
             "</div>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 22%;'>设备编号:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+data.d+"'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+data.deviceId+"'>" +
             "</div>" +
             "<div style='margin: 10px 16px'>" +
             "<label style='width: 22%;'>设备状态:</label>" +
-            "<input style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+data.e+"'>" +
+            "<input style='color: black;width: 70%;line-height: 28px;' disabled='disabled' type='text' value='"+(data.status == 1? '正常':'异常')+"'>" +
             "</div>" +
             "<div class='threshold_butset'>" +
             "<button style='color: #fff;\n" +
@@ -219,12 +176,27 @@
         });
         // window.open('police_detail.html'+ '?' + a,'_self')
     }
+    function  dataChange(timestamp) {
+        if(timestamp == ''){
+            return 无
+        }else{
+            var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            Y = date.getFullYear() + '-';
+            M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+            D = date.getDate() + ' ';
+            h = date.getHours() + ':';
+            m = date.getMinutes() + ':';
+            s = date.getSeconds();
+            return Y+M+D+h+m+s;
+        }
+    }
     function edit(obj){
         console.log(obj)
         console.log("1")
         var data =JSON.parse($(obj).attr('data-attr'))
         console.log(data)
-        layer.open({
+        layer.alert('暂时不支持修改操作',{icon:0,btnAlign: 'c',skin: 'del-class'})
+        /*layer.open({
             type: 1,
             title:'查看',
             skin: 'layui-layer-rim', //加上边框
@@ -268,12 +240,13 @@
             "    margin-top: 16px;' onclick='cancel()'>取消</button>" +
             "</div>" +
             "</div>"
-        });
+        });*/
         // window.open('police_detail.html'+ '?' + a,'_self')
     }
 
     function del (id){
-        console.log("1")
+        layer.alert('暂时不支持删除操作',{icon:0,btnAlign: 'c',skin: 'del-class'})
+      /*  console.log("1")
         console.log(id)
         layer.confirm('确定要删除吗？', {
             btnAlign: 'c',
@@ -285,13 +258,54 @@
             layer.msg('取消成功', {
                 time: 1000, //20s后自动关闭
             });
-        });
+        });*/
     }
-     function stop () {
-         layer.alert('暂停', {icon:0,btnAlign: 'c',skin: 'del-class' });
+   
+     function stop (id) {
+       // layer.alert('暂停', {icon:0,btnAlign: 'c',skin: 'del-class' });
+        var ws = new WebSocket("ws://19.0.1.20:8082");
+        var ip = "192.168.0.1"
+        var data = {
+            cmd: "stopwork",
+            number: id,
+            address: ip 
+        };
+        
+         ws.onopen = function() {
+          ws.send(data);
+        }
+
+        ws.onmessage = function(res) {
+            //alert(JSON.stringify(res))
+            if(res.isTrusted) {
+                layer.msg('暂停成功');
+            } else {
+                layer.msg('操作失败'); 
+            }
+        }
      }
-     function start_use() {
-         layer.alert('启用接口',{icon:0,btnAlign: 'c',skin: 'del-class'})
+     function start_use(id) {
+        // layer.alert('启用接口',{icon:0,btnAlign: 'c',skin: 'del-class'})
+        var ws = new WebSocket("ws://19.0.1.20:8082");
+        var ip = "192.168.0.1"
+        var data = {
+            cmd: "startwork",
+            number: id,
+            address: ip 
+        };
+        
+         ws.onopen = function() {
+          ws.send(data);
+        }
+
+        ws.onmessage = function(res) {
+            //alert(JSON.stringify(res))
+            if(res.isTrusted) {
+                layer.msg('启动成功');
+            } else {
+                layer.msg('启动失败'); 
+            }
+        }
      }
     function editAffirm () {
         layer.alert('编辑确定接口', {icon:0,btnAlign: 'c',skin: 'del-class' });
@@ -303,6 +317,6 @@
         layer.closeAll()
     };
 </script>
-<script type="text/javascript" src="js/index.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/be_talk1.js?bbfa759cc4a183c04807"></script><script type="text/javascript" src="js/waitApprova.js?bbfa759cc4a183c04807"></script></body>
+<script type="text/javascript" src="js/islogin.js?a4da8d9554f6e14268b8"></script></body>
 </html>
 
