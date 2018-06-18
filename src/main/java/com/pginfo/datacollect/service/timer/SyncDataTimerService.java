@@ -1,6 +1,7 @@
 package com.pginfo.datacollect.service.timer;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.pginfo.datacollect.dao.MongoSinkDataDao;
 //import com.pginfo.datacollect.dao.SinkDataDao;
 import com.pginfo.datacollect.dao.SinkDataMapper;
@@ -55,10 +56,10 @@ public class SyncDataTimerService {
     }
 
     //    每秒同步一次，刷新到缓存和Mongodb中，在这里做减值
-    @Scheduled(cron = "0/1 0 * * * ?")
+    @Scheduled(cron = "0/1 * * * * ?")
     public void syncDataFromFrontDb() {
 
-        logger.debug(Thread.currentThread().toString() + ",syncDataFromFrontDb," + LocalDateTime.now().toString());
+        logger.info(Thread.currentThread().toString() + ",syncDataFromFrontDb," + LocalDateTime.now().toString());
 
         // 从yk_api查询出最新的沉降值、温度
         try {
@@ -85,7 +86,7 @@ public class SyncDataTimerService {
                     mapMongoSinkData.setHeight(mongoSinkData.getHeight());
                 }
 
-                cacheDataMap.put(mongoSinkData.getDeviceId(), mapMongoSinkData);
+                //cacheDataMap.put(mongoSinkData.getDeviceId(), mapMongoSinkData);
             }
 
         } catch (Exception e) {
@@ -103,7 +104,7 @@ public class SyncDataTimerService {
     }
 
     //    每秒同步一次，将cacheDataMap数据缓存到cacheDataQueueMap
-    @Scheduled(cron = "0/1 0 * * * ?")
+    @Scheduled(cron = "0/1 * * * * ?")
     public void syncDataFromCacheDataList() {
 
         logger.debug(Thread.currentThread().toString() + ",syncDataFromCacheDataMap," + LocalDateTime.now().toString());
@@ -146,7 +147,7 @@ public class SyncDataTimerService {
     @Scheduled(cron = "0 0/1 * * * ?")
     public void saveDataPerMin() {
 
-        logger.debug(Thread.currentThread().toString() + ",saveDataPerMin," + LocalDateTime.now().toString());
+        logger.info(Thread.currentThread().toString() + ",saveDataPerMin," + LocalDateTime.now().toString());
         for (Map.Entry<Integer, MongoSinkData> entry: cacheDataMap.entrySet()) {
             MongoSinkData temp = new MongoSinkData(entry.getValue());
             temp.setDateTime(LocalUtils.formatIgnoreSeconds(entry.getValue().getDateTime()));

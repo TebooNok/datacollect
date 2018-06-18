@@ -34,7 +34,7 @@ public class DatacollectApplication extends SpringBootServletInitializer {
     @Bean(name = "syncDataTaskPool")
     public TaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
-        taskScheduler.setPoolSize(20);
+        taskScheduler.setPoolSize(30);
         return taskScheduler;
     }
 }

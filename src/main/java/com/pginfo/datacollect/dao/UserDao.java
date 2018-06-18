@@ -36,8 +36,21 @@ public class UserDao {
     }
 
     public void updateUser(User user){
-        Query query = new Query(Criteria.where("id").is(user.getid()));
-        Update update = new Update().set("name", user.getname()).set("password", user.getpassword()).set("role", user.getrole());
+        Query query = new Query(Criteria.where("id").is(user.getId()));
+        Update update = new Update();
+
+        if(!StringUtils.isEmpty(user.getName())){
+            update.set("name", user.getName());
+        }
+
+        if(!StringUtils.isEmpty(user.getPassword())){
+            update.set("password", user.getPassword());
+        }
+
+        if(!StringUtils.isEmpty(user.getRole())){
+            update.set("role", user.getRole());
+        }
+
         mongoTemplate.upsert(query, update, User.class, PREFIX);
     }
 

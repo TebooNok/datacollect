@@ -31,7 +31,7 @@ public class UserService {
         List<User> userList=userDao.getData(username);
         UserBean user = new UserBean();
         Map<String, String> detail = new HashMap<String,String>();
-        userList.forEach((k)->{if(k.getname().equals(username)) {detail.put("password",k.getpassword());detail.put("role",k.getrole());}});
+        userList.forEach((k)->{if(k.getName().equals(username)) {detail.put("password",k.getPassword());detail.put("role",k.getRole());}});
         if (!CollectionUtils.isEmpty(detail)){
         user.setUsername(username);
         user.setPassword(detail.get("password"));

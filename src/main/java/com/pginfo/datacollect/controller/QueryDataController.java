@@ -16,6 +16,7 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,7 +46,7 @@ public class QueryDataController {
         this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
 
-    @ApiOperation(value="查询监测值", notes="根据多种条件查询沉降值")
+    @ApiOperation(value = "查询监测值", notes = "根据多种条件查询沉降值")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "mode", value = "查询模式", required = true, dataType = "int", paramType = "path"),
             @ApiImplicitParam(name = "deviceId", value = "设备ID", dataType = "String", paramType = "path"),
@@ -102,30 +103,34 @@ public class QueryDataController {
             return new QueryDataResponse(Constants.INTERNAL_ERROR_CODE, "[Internal query service error.] " + e.getMessage(), null);
         }
 
-        // 按时间降序排序
-        returnList.sort((MongoSinkData o1, MongoSinkData o2) -> o1.getDateTime().compareTo(o2.getDateTime()) > 0 ? -1 : 0);
+        if (!CollectionUtils.isEmpty(returnList)) {
+            // 按时间降序排序
+            returnList.sort((MongoSinkData o1, MongoSinkData o2) -> o1.getDateTime().compareTo(o2.getDateTime()) > 0 ? -1 : 0);
 
-        // 不返回基准
-        List<MongoSinkData> returnFinal = new ArrayList<>();
+            // 不返回基准
+            List<MongoSinkData> returnFinal = new ArrayList<>();
 
-        // 传入位置信息
-        for (MongoSinkData data : returnList) {
-            MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(data.getDeviceId());
-            data.setDeviceDirection(monitorDeviceSetting.getDevicePosition());
-            data.setDevicePosition(monitorDeviceSetting.getDevicePosition());
+            // 传入位置信息
+            for (MongoSinkData data : returnList) {
+                MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(data.getDeviceId());
+                data.setDeviceDirection(monitorDeviceSetting.getDevicePosition());
+                data.setDevicePosition(monitorDeviceSetting.getDevicePosition());
 
-            // 这里不返回基准
-            if(monitorDeviceSetting.getDeviceType() == 2){
-                returnFinal.add(data);
+                // 这里不返回基准
+                if (monitorDeviceSetting.getDeviceType() == 2) {
+                    returnFinal.add(data);
+                }
             }
-        }
 
-        queryDataResponse.setMongoSinkDataList(returnFinal);
+            queryDataResponse.setMongoSinkDataList(returnFinal);
+        } else {
+            queryDataResponse.setMongoSinkDataList(null);
+        }
         return queryDataResponse;
         //return queryService.queryAll();
     }
 
-    @ApiOperation(value="导出数据excel", notes="将查询结果导出为excel")
+    @ApiOperation(value = "导出数据excel", notes = "将查询结果导出为excel")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "mode", value = "查询模式", dataType = "int", paramType = "path"),
             @ApiImplicitParam(name = "deviceId", value = "设备ID", dataType = "String", paramType = "path"),
