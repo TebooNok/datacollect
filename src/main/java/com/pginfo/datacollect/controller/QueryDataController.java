@@ -1,5 +1,6 @@
 package com.pginfo.datacollect.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mongodb.Mongo;
 import com.pginfo.datacollect.domain.MongoSinkData;
 import com.pginfo.datacollect.domain.MonitorDeviceSetting;
@@ -80,6 +81,9 @@ public class QueryDataController {
 
         String sTime = queryDataRequest.getStartDateTime();
         String eTime = queryDataRequest.getEndDateTime();
+        String secTime = queryDataRequest.getSecondTime();
+        String thrTime = queryDataRequest.getThirdTime();
+
         if(!StringUtils.isEmpty(sTime)){
             sTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(sTime)));
             queryDataRequest.setStartDateTime(sTime);
@@ -88,7 +92,14 @@ public class QueryDataController {
             eTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(eTime)));
             queryDataRequest.setEndDateTime(eTime);
         }
-
+        if(!StringUtils.isEmpty(secTime)){
+            secTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(secTime)));
+            queryDataRequest.setSecondTime(secTime);
+        }
+        if(!StringUtils.isEmpty(thrTime)){
+            thrTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(thrTime)));
+            queryDataRequest.setThirdTime(thrTime);
+        }
         int mode = queryDataRequest.getMode();
 
         List<MongoSinkData> returnList = new ArrayList<>();
@@ -115,6 +126,14 @@ public class QueryDataController {
             return new QueryDataResponse(Constants.INTERNAL_ERROR_CODE, "[Internal query service error.] " + e.getMessage(), null);
         }
 
+        List<MongoSinkData> newList = new ArrayList<>();
+        for(MongoSinkData mon:returnList){
+            if(null != mon){
+                newList.add(mon);
+            }
+        }
+        returnList = newList;
+
         if (!CollectionUtils.isEmpty(returnList)) {
             // 按时间降序排序
             returnList.sort((MongoSinkData o1, MongoSinkData o2) -> o1.getDateTime().compareTo(o2.getDateTime()) > 0 ? -1 : 0);
@@ -125,7 +144,7 @@ public class QueryDataController {
             // 传入位置信息
             for (MongoSinkData data : returnList) {
                 MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(data.getDeviceId());
-                data.setDeviceDirection(monitorDeviceSetting.getDevicePosition());
+                data.setDeviceDirection(monitorDeviceSetting.getDeviceDirection());
                 data.setDevicePosition(monitorDeviceSetting.getDevicePosition());
 
                 // 这里不返回基准
@@ -203,15 +222,15 @@ public class QueryDataController {
                 if (StringUtils.isEmpty(queryDataRequest.getDeviceId())) {
                     return "DeviceId can`t be null when search slot for same device.";
                 }
-                if (StringUtils.isEmpty(queryDataRequest.getStartDateTime()) || StringUtils.isEmpty(queryDataRequest.getEndDateTime())) {
-                    return "Start time or end time can`t be null when search slot for same device.";
-                }
-                if (LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()).isAfter(LocalDateTime.now()) || LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime()).isAfter(LocalDateTime.now())) {
-                    return "Start time or end time can`t be after current time when search slot for same device.";
-                }
-                if (LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()).isAfter(LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime()))) {
-                    return "Start time can`t be after end time when search slot for same device.";
-                }
+//                if (StringUtils.isEmpty(queryDataRequest.getStartDateTime()) || StringUtils.isEmpty(queryDataRequest.getEndDateTime())) {
+//                    return "Start time or end time can`t be null when search slot for same device.";
+//                }
+//                if (LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()).isAfter(LocalDateTime.now()) || LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime()).isAfter(LocalDateTime.now())) {
+//                    return "Start time or end time can`t be after current time when search slot for same device.";
+//                }
+//                if (LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()).isAfter(LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime()))) {
+//                    return "Start time can`t be after end time when search slot for same device.";
+//                }
                 if (StringUtils.isEmpty(queryDataRequest.getTemplateType())) {
                     return "TemplateType can`t be null when search slot for same device.";
                 }

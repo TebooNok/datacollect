@@ -1,4 +1,5 @@
 
+        var BASEURL = "http://19.0.1.20:8081/monitor";
         /**
          * ajax封装
          * url 发送请求的地址

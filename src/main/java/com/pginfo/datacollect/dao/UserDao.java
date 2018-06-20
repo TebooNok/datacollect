@@ -54,8 +54,8 @@ public class UserDao {
         mongoTemplate.upsert(query, update, User.class, PREFIX);
     }
 
-    public void deleteUser(String username){
-        Query query = new Query(Criteria.where("name").is(username));
+    public void deleteUser(String userid){
+        Query query = new Query(Criteria.where("id").is(userid));
         mongoTemplate.remove(query,User.class,PREFIX);
     }
 

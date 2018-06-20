@@ -1,10 +1,12 @@
 package com.pginfo.datacollect.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pginfo.datacollect.dao.MongoSinkDataDao;
 import com.pginfo.datacollect.domain.MongoSinkData;
 import com.pginfo.datacollect.dto.QueryDataRequest;
 import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.LocalUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,9 +222,21 @@ public class QuerySinkDataService {
         String[] idList = queryDataRequest.getDeviceId().split("\\|");
         List<MongoSinkData> returnList = new ArrayList<>();
 
+        if(queryDataRequest.getStartDateTime().contains(""));
+
         for (String id : idList) {
             returnList.add(mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getStartDateTime()), Integer.parseInt(id)));
+
+            if(!StringUtils.isEmpty(queryDataRequest.getSecondTime())){
+                returnList.add(mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getSecondTime()), Integer.parseInt(id)));
+            }
+
+            if(!StringUtils.isEmpty(queryDataRequest.getThirdTime())){
+                returnList.add(mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getThirdTime()), Integer.parseInt(id)));
+            }
+
         }
+
 
         return returnList;
     }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,17 @@ public class QueryAlarmController {
             return new QueryAlarmInfoResponse(Constants.INTERNAL_ERROR_CODE, "[Validate param error.] " + message, null);
         }
 
+        String sTime = request.getAlarmStartTime();
+        String eTime = request.getAlarmEndTime();
+        if(!org.springframework.util.StringUtils.isEmpty(sTime)){
+            sTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(sTime)));
+            request.setAlarmStartTime(sTime);
+        }
+        if(!org.springframework.util.StringUtils.isEmpty(eTime)){
+            eTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(eTime)));
+            request.setAlarmEndTime(eTime);
+        }
+
         int mode = request.getMode();
         List<AlarmInfo> returnList = new ArrayList<>();
         try {
@@ -96,23 +108,28 @@ public class QueryAlarmController {
             return new QueryAlarmInfoResponse(Constants.INTERNAL_ERROR_CODE, "[Internal query service error.] " + e.getMessage(), null);
         }
 
+        List<AlarmInfo> finalList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(returnList)) {
             // 按时间降序排序
             returnList.sort((AlarmInfo o1, AlarmInfo o2) -> o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0);
 
             // 传入位置信息
             for (AlarmInfo info : returnList) {
-                MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(info.getAlarmDeviceId());
-                info.setAlarmDeviceDirection(monitorDeviceSetting.getDeviceDirection());
-                info.setAlarmDevicePosition(monitorDeviceSetting.getDevicePosition());
 
-                String dateTime = info.getAlarmDateTime();
+                AlarmInfo finalAlarm = new AlarmInfo(info);
+
+                MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(info.getAlarmDeviceId());
+                finalAlarm.setAlarmDeviceDirection(monitorDeviceSetting.getDeviceDirection());
+                finalAlarm.setAlarmDevicePosition(monitorDeviceSetting.getDevicePosition());
+
+                String dateTime = finalAlarm.getAlarmDateTime();
                 dateTime = String.valueOf(LocalUtils.convertString2LocalDataTime(dateTime).toInstant(ZoneOffset.of("+8")).toEpochMilli());
-                info.setAlarmDateTime(dateTime);
+                finalAlarm.setAlarmDateTime(dateTime);
+                finalList.add(finalAlarm);
             }
         }
 
-        queryAlarmInfoResponse.setAlarmInfoList(returnList);
+        queryAlarmInfoResponse.setAlarmInfoList(finalList);
 
         return queryAlarmInfoResponse;
     }

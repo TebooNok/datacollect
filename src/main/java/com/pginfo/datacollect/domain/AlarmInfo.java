@@ -1,5 +1,7 @@
 package com.pginfo.datacollect.domain;
 
+import org.apache.poi.openxml4j.opc.PackagingURIHelper;
+
 public class AlarmInfo {
 
     // 告警ID
@@ -35,6 +37,26 @@ public class AlarmInfo {
     private int alarmDevicePosition;
 
     private int alarmDeviceDirection;
+
+    public AlarmInfo(){
+    }
+
+    public AlarmInfo(AlarmInfo info) {
+        this.alarmType = info.getAlarmType();
+        this.alarmStatus = info.getAlarmStatus();
+        this.alarmLevel = info.getAlarmLevel();
+        this.alarmDeviceId = info.alarmDeviceId;
+        this.height = info.getHeight();
+        this.alarmDateTime = info.getAlarmDateTime();
+        this.alarmProcessTime = info.getAlarmProcessTime();
+        this.alarmProcessUser = info.getAlarmProcessUser();
+        this.alarmProcessMessage = info.getAlarmProcessMessage();
+        this.alarmConfirmTime = info.getAlarmConfirmTime();
+        this.alarmConfirmUser = info.getAlarmConfirmUser();
+        this.alarmConfirmMessage = info.getAlarmConfirmMessage();
+        this.alarmDevicePosition = info.getAlarmDevicePosition();
+        this.alarmDeviceDirection = info.getAlarmDeviceDirection();
+    }
 
 //    public int getAlarmId() {
 //        return alarmId;

@@ -58,9 +58,9 @@ public class UserService {
         }
     }
 
-    public void deleteUser(String username){
+    public void deleteUser(String userid){
         try{
-            userDao.deleteUser(username);
+            userDao.deleteUser(userid);
         }catch(Exception e){
             logger.error(e.toString());
         }

@@ -61,7 +61,7 @@ public class ManageUserController {
     public ManagerUserResponse deleteUser(ManagerUserRequest request) {
 
         try {
-            userService.deleteUser(request.getUsername());
+            userService.deleteUser(request.getId());
         } catch (Exception e) {
             return new ManagerUserResponse(Constants.INTERNAL_ERROR_CODE, "[Fatal Error in delete user progress]" + e.getMessage(), null);
         }

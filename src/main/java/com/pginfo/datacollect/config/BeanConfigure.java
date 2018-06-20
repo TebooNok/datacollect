@@ -1,12 +1,14 @@
 package com.pginfo.datacollect.config;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.pginfo.datacollect.dao.*;
 //import com.pginfo.datacollect.dao.SinkDataDao;
 import com.pginfo.datacollect.domain.*;
 import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.ConvertUtil;
 import org.apache.ibatis.datasource.DataSourceException;
+import org.apache.ibatis.io.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
 
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -310,15 +313,32 @@ public class BeanConfigure {
 
     @Bean
     public User userInit(){
-        if(CollectionUtils.isEmpty(userDao.getData("admin"))){
-            userDao.addUser(new User("1000", "admin", "123456", "admin"));
+        try {
+            InputStream inputStream = Resources.getResourceAsStream("conf/userinit.properties");
+            Scanner scanner = new Scanner(inputStream);
+            while(scanner.hasNextLine()){
+                String input = scanner.nextLine();
+                String[] userInfo = input.split("\\|");
+                User user = new User();
+                user.setId(userInfo[0]);
+                user.setName(userInfo[1]);
+                user.setPassword(userInfo[2]);
+                user.setRole(userInfo[3]);
+
+                if(CollectionUtils.isEmpty(userDao.getData(userInfo[1]))){
+                    userDao.addUser(user);
+                    logger.debug("Insert a user : " + user.getName());
+                }
+                else{
+                    logger.debug("Exist a user : " + user.getName());
+                }
+
+            }
+        } catch (IOException e) {
+            logger.error("File userinit.properties not found." + e.getMessage());
+            return null;
         }
-        if(CollectionUtils.isEmpty(userDao.getData("user1"))){
-            userDao.addUser(new User("1001", "user1", "123456", "user"));
-        }
-        if(CollectionUtils.isEmpty(userDao.getData("user2"))){
-            userDao.addUser(new User("1002", "user2", "123456", "user"));
-        }
+
         return null;
     }
 }

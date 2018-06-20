@@ -1,17 +1,22 @@
 package com.pginfo.datacollect;
 
+import com.pginfo.datacollect.controller.QueryDataController;
 import com.pginfo.datacollect.domain.MongoSinkData;
 import com.pginfo.datacollect.domain.SinkData;
+import com.pginfo.datacollect.dto.QueryDataRequest;
+import com.pginfo.datacollect.dto.QueryDataResponse;
 import com.pginfo.datacollect.service.QuerySinkDataService;
 import com.pginfo.datacollect.util.ConvertUtil;
 import com.pginfo.datacollect.util.LocalUtils;
 import io.swagger.models.auth.In;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -22,7 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/// @RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class DatacollectApplicationTests {
 
@@ -361,5 +366,19 @@ public class DatacollectApplicationTests {
         System.out.println(dateTime);
         String dateTime2 = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(dateTime)));
         System.out.println(dateTime2);
+    }
+
+    @Test
+    public void test(){
+        QueryDataRequest request = new QueryDataRequest();
+        String sTime = "1529417985000";
+        request.setStartDateTime(sTime);
+        request.setEndDateTime(sTime);
+        request.setDeviceId("1");
+        request.setMode(2);
+        request.setTemplateType("Custom_10");
+
+        sTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(sTime)));
+        System.out.println(sTime);
     }
 }
