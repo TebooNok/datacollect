@@ -110,7 +110,15 @@ public class QueryDataController {
                     returnList = querySinkDataService.sameTimeMultiBridge(queryDataRequest);
                     break;
                 case 2: // 同一桥墩，指定时间跨度
-                    returnList = querySinkDataService.sameBridgeTimeSlot(queryDataRequest);
+                    int bridgeId = Integer.parseInt(queryDataRequest.getDeviceId());
+                    for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
+                        if (entry.getValue().getDevicePosition() == bridgeId){
+                            queryDataRequest.setDeviceId(String.valueOf(entry.getValue().getDeviceId()));
+                            List<MongoSinkData> list = new ArrayList<>();
+                            list = querySinkDataService.sameBridgeTimeSlot(queryDataRequest);
+                            returnList.addAll(list);
+                        }
+                    }
                     break;
                 case 3: // 查询全部传感器最新数据
                     returnList = querySinkDataService.currentForAllBridge();
@@ -126,6 +134,7 @@ public class QueryDataController {
             return new QueryDataResponse(Constants.INTERNAL_ERROR_CODE, "[Internal query service error.] " + e.getMessage(), null);
         }
 
+        // 删除空元素
         List<MongoSinkData> newList = new ArrayList<>();
         for(MongoSinkData mon:returnList){
             if(null != mon){

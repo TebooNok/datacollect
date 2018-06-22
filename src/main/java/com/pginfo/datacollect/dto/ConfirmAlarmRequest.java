@@ -3,7 +3,7 @@ package com.pginfo.datacollect.dto;
 public class ConfirmAlarmRequest extends BaseRequest {
     private static final long serialVersionUID = -7928174696692883477L;
 
-    private int alarmDeviceId;
+    private String alarmPositions;
 
     // 1:通过；2:驳回
     private int alarmConfirmResult;
@@ -11,10 +11,6 @@ public class ConfirmAlarmRequest extends BaseRequest {
     private String alarmConfirmUser;
 
     private String alarmConfirmMessage;
-
-    public int getAlarmDeviceId() {
-        return alarmDeviceId;
-    }
 
     public int getAlarmConfirmResult() {
         return alarmConfirmResult;
@@ -24,8 +20,12 @@ public class ConfirmAlarmRequest extends BaseRequest {
         this.alarmConfirmResult = alarmConfirmResult;
     }
 
-    public void setAlarmDeviceId(int alarmDeviceId) {
-        this.alarmDeviceId = alarmDeviceId;
+    public String getAlarmPositions() {
+        return alarmPositions;
+    }
+
+    public void setAlarmPositions(String alarmPositions) {
+        this.alarmPositions = alarmPositions;
     }
 
     public String getAlarmConfirmUser() {

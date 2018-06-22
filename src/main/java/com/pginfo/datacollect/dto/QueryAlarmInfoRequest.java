@@ -16,7 +16,7 @@ public class QueryAlarmInfoRequest extends BaseRequest {
 
     private String alarmEndTime = null;
 
-    private int alarmDeviceId;
+    private int alarmDeviceId = 0;
 
     private int alarmPosition = 0;
 

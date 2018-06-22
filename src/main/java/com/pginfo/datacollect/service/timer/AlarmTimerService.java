@@ -53,7 +53,7 @@ public class AlarmTimerService {
             // 只有设备处于未报警时才检查
             if (alarmInfo.getAlarmStatus() == 4) {
                 // 用绝对值和阈值比较
-                if (Math.abs(height) > alarmThre.getAlarmLevel1()) {
+                if (Math.abs(height / 1000) > alarmThre.getAlarmLevel1()) {
                     AlarmInfo info = new AlarmInfo();
                     info.setAlarmDeviceId(id);
                     info.setAlarmLevel(1);
@@ -66,7 +66,7 @@ public class AlarmTimerService {
 
                     mongoAlarmInfoDao.saveCurrentAlarmInfo(info);
                 }
-                else if(Math.abs(height) > alarmThre.getAlarmLevel2())
+                else if(Math.abs(height / 1000) > alarmThre.getAlarmLevel2())
                 {
                     AlarmInfo info = new AlarmInfo();
                     info.setAlarmDeviceId(id);
@@ -80,7 +80,7 @@ public class AlarmTimerService {
 
                     mongoAlarmInfoDao.saveCurrentAlarmInfo(info);
                 }
-                else if(Math.abs(height) > alarmThre.getAlarmLevel3())
+                else if(Math.abs(height / 1000) > alarmThre.getAlarmLevel3())
                 {
                     AlarmInfo info = new AlarmInfo();
                     info.setAlarmDeviceId(id);

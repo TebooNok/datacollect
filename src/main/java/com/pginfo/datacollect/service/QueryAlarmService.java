@@ -53,7 +53,12 @@ public class QueryAlarmService {
         }
 
         if (!CollectionUtils.isEmpty(returnList)) {
-            returnList.sort((AlarmInfo o1, AlarmInfo o2) -> o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0);
+            returnList.sort((AlarmInfo o1, AlarmInfo o2) -> {
+                if(null == o1.getAlarmDateTime() || null == o2.getAlarmDateTime()){
+                    return 0;
+                }
+                else return o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0;
+            });
         }
 
         int resultSize = !CollectionUtils.isEmpty(resultList) ? resultList.size() : 0;
@@ -129,9 +134,9 @@ public class QueryAlarmService {
         }
 
         // 只有已确认的告警在mongo中，
-        if (alarmStatus == 3) {
-            resultList = mongoAlarmInfoDao.getByFilterByDescTime(request);
-        }
+        //if (alarmStatus == 3) {
+        resultList = mongoAlarmInfoDao.getByFilterByDescTime(request);
+        //}
 
         // 对缓存数据条件过滤一遍
         for (Map.Entry<Integer, AlarmInfo> entry : alarmInfoMap.entrySet()) {
@@ -141,12 +146,17 @@ public class QueryAlarmService {
             }
         }
 
-        if (!CollectionUtils.isEmpty(returnList)) {
-            returnList.sort((AlarmInfo o1, AlarmInfo o2) -> o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0);
+        if(!CollectionUtils.isEmpty(resultList)){
+            returnList.addAll(resultList);
         }
 
-        if (!CollectionUtils.isEmpty(resultList)) {
-            returnList.addAll(resultList);
+        if (!CollectionUtils.isEmpty(returnList)) {
+            returnList.sort((AlarmInfo o1, AlarmInfo o2) -> {
+                if(null == o1.getAlarmDateTime() || null == o2.getAlarmDateTime()){
+                    return 0;
+                }
+                else return o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0;
+            });
         }
 
         // 设置结果总数
@@ -183,6 +193,8 @@ public class QueryAlarmService {
         int alarmType = request.getAlarmType();
         int alarmLevel = request.getAlarmLevel();
         int alarmStatus = request.getAlarmStatus();
+        int alarmDevicePosition = request.getAlarmPosition();
+        int alarmDeviceDirection = request.getAlarmDirection();
 
         if(!StringUtils.isEmpty(alarmStartTime)){
             if(alarmInfo.getAlarmDateTime().compareTo(alarmStartTime) < 0){
@@ -198,6 +210,18 @@ public class QueryAlarmService {
 
         if(alarmDeviceId != 0){
             if(alarmInfo.getAlarmDeviceId() != alarmDeviceId){
+                return false;
+            }
+        }
+
+        if(alarmDevicePosition != 0){
+            if(alarmInfo.getAlarmDevicePosition() != alarmDevicePosition){
+                return false;
+            }
+        }
+
+        if(alarmDeviceDirection != 0){
+            if(alarmInfo.getAlarmDeviceDirection() != alarmDeviceDirection){
                 return false;
             }
         }
@@ -230,7 +254,12 @@ public class QueryAlarmService {
                 alarmInfoList.add(entry.getValue());
         }
 
-        alarmInfoList.sort((AlarmInfo o1, AlarmInfo o2) -> o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0);
+        alarmInfoList.sort((AlarmInfo o1, AlarmInfo o2) -> {
+            if(null == o1.getAlarmDateTime() || null == o2.getAlarmDateTime()){
+                return 0;
+            }
+            else return o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0;
+        });
 
         List<AlarmInfo> returnList = new ArrayList<>();
 

@@ -3,6 +3,7 @@ package com.pginfo.datacollect.service;
 import com.alibaba.fastjson.JSONObject;
 import com.pginfo.datacollect.dao.MongoSinkDataDao;
 import com.pginfo.datacollect.domain.MongoSinkData;
+import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.QueryDataRequest;
 import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.LocalUtils;
@@ -28,11 +29,14 @@ public class QuerySinkDataService {
 
     private final Map<Integer, Queue<MongoSinkData>> cacheDataQueueMap;
 
+    private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
+
     @Autowired
-    public QuerySinkDataService(MongoSinkDataDao mongoSinkDataDao, Map<Integer, MongoSinkData> cacheDataMap, Map<Integer, Queue<MongoSinkData>> cacheDataQueueMap) {
+    public QuerySinkDataService(MongoSinkDataDao mongoSinkDataDao, Map<Integer, MongoSinkData> cacheDataMap, Map<Integer, Queue<MongoSinkData>> cacheDataQueueMap, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
         this.mongoSinkDataDao = mongoSinkDataDao;
         this.cacheDataMap = cacheDataMap;
         this.cacheDataQueueMap = cacheDataQueueMap;
+        this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
 
     public List<MongoSinkData> currentOverHeight(QueryDataRequest queryDataRequest) {
@@ -152,13 +156,12 @@ public class QuerySinkDataService {
         int dataNum = Integer.parseInt(queryDataRequest.getTemplateType().split("_")[1]);
 
         double intervalMin = duraMin / (double)dataNum; // 步长
-
         // 取的数据量比分钟数多，从cacheMap中用秒为间隔返回; 这里只支持查询一小时内的数据
         if (intervalMin < 1) {
 
             // 检查时间起点是否在一小时以内
             Duration testDuration = Duration.between(LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime()), LocalDateTime.now());
-            if(testDuration.toMinutes() > 3600){
+            if(testDuration.toMinutes() > 60){
                 throw new Exception("Start time must during one hour when querying data by seconds.");
             }
 
@@ -168,6 +171,7 @@ public class QuerySinkDataService {
 
             // 从缓存map取出数组并将数组反转
             LinkedBlockingQueue<MongoSinkData> mongoSinkDataLinkedBlockingQueue = (LinkedBlockingQueue<MongoSinkData>) cacheDataQueueMap.get(Integer.parseInt(queryDataRequest.getDeviceId()));
+
             Object[] mongoSinkDataArr = mongoSinkDataLinkedBlockingQueue.toArray();
             List<Object> mongoSinkList = Arrays.asList(mongoSinkDataArr);
             Collections.reverse(mongoSinkList);
@@ -178,8 +182,17 @@ public class QuerySinkDataService {
             LocalDateTime startDateTime = LocalUtils.convertString2LocalDataTime(queryDataRequest.getStartDateTime());
             LocalDateTime endDateTime = LocalUtils.convertString2LocalDataTime(queryDataRequest.getEndDateTime());
 
-            int startIndex = length - (int)Math.abs(Duration.between(startDateTime, LocalDateTime.now()).toNanos() / 1000);
-            int endIndex = length - (int)Math.abs(Duration.between(endDateTime, LocalDateTime.now()).toNanos() / 1000);
+            int startIndex = length - (int)Math.abs(Duration.between(startDateTime, LocalDateTime.now()).toMillis() / 1000);
+            int endIndex = length - (int)Math.abs(Duration.between(endDateTime, LocalDateTime.now()).toMillis() / 1000);
+
+            if(endIndex < 0){
+                throw new Exception("System should run at least 1 hour.");
+            }
+
+            if(startIndex < 0){
+                startIndex = 0;
+            }
+
             double doubleIndex = startIndex;
 
             for(int i = 0; i < dataNum; i++)
@@ -190,6 +203,7 @@ public class QuerySinkDataService {
                 }
                 else
                 {
+                    // logger.info("Size = " + mongoSinkDataArr.length + " , startIndex = " + startIndex);
                     returnList.add((MongoSinkData) mongoSinkDataArr[startIndex]);
                     doubleIndex = doubleIndex + intervalSec;
                     startIndex = (int)(doubleIndex + 0.5); // 由于java默认取整，+0.5实现简单的四舍五入
@@ -222,17 +236,32 @@ public class QuerySinkDataService {
         String[] idList = queryDataRequest.getDeviceId().split("\\|");
         List<MongoSinkData> returnList = new ArrayList<>();
 
-        if(queryDataRequest.getStartDateTime().contains(""));
-
         for (String id : idList) {
-            returnList.add(mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getStartDateTime()), Integer.parseInt(id)));
+            for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
+                if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
+                    MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getStartDateTime()), entry.getValue().getDeviceId());
+                    returnList.add(data);
+                }
+            }
 
             if(!StringUtils.isEmpty(queryDataRequest.getSecondTime())){
-                returnList.add(mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getSecondTime()), Integer.parseInt(id)));
+                for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
+                    if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
+                        MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getSecondTime()), entry.getValue().getDeviceId());
+                        returnList.add(data);
+                        logger.info("data(second time) = " + JSONObject.toJSONString(data));
+                    }
+                }
             }
 
             if(!StringUtils.isEmpty(queryDataRequest.getThirdTime())){
-                returnList.add(mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getThirdTime()), Integer.parseInt(id)));
+                for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
+                    if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
+                        MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getThirdTime()), entry.getValue().getDeviceId());
+                        returnList.add(data);
+                        logger.info("data(third time) = " + JSONObject.toJSONString(data));
+                    }
+                }
             }
 
         }

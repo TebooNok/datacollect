@@ -9,6 +9,7 @@ public class QueryDataRequest extends BaseRequest {
     private int mode;
 
     // 指定传感器，“0”表示不指定；多个设备id用”|”分隔
+    // 该参数改为桥墩
     private String deviceId;
 
     // 指定沉降值，可用于查询达到报警线的传感器，0表示不使用，单位为微米μm

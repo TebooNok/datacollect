@@ -1,6 +1,7 @@
 package com.pginfo.datacollect.controller;
 
 import com.pginfo.datacollect.domain.AlarmThre;
+import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.*;
 import com.pginfo.datacollect.service.ManageAlarmService;
 import com.pginfo.datacollect.util.Constants;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ManageAlarmController {
@@ -23,24 +26,27 @@ public class ManageAlarmController {
 
     private final ManageAlarmService manageAlarmService;
 
+    private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
+
     @Autowired
-    public ManageAlarmController(AlarmThre alarmThre, ManageAlarmService manageAlarmService) {
+    public ManageAlarmController(AlarmThre alarmThre, ManageAlarmService manageAlarmService, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
         this.alarmThre = alarmThre;
         this.manageAlarmService = manageAlarmService;
+        this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
 
-    @ApiOperation(value="查询告警阈值", notes="查看告警阈值")
-    public QueryAlarmThreResponse queryAlarmThre(QueryAlarmThreRequest request){
+    @ApiOperation(value = "查询告警阈值", notes = "查看告警阈值")
+    public QueryAlarmThreResponse queryAlarmThre(QueryAlarmThreRequest request) {
         QueryAlarmThreResponse response = new QueryAlarmThreResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
 
         response.setAlarmLevel1(alarmThre.getAlarmLevel1());
         response.setAlarmLevel2(alarmThre.getAlarmLevel2());
         response.setAlarmLevel3(alarmThre.getAlarmLevel3());
 
-        return  response;
+        return response;
     }
 
-    @ApiOperation(value="修改告警阈值", notes="修改告警阈值")
+    @ApiOperation(value = "修改告警阈值", notes = "修改告警阈值")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "alarmLevel1", value = "一级告警阈值", dataType = "long", paramType = "path"),
             @ApiImplicitParam(name = "alarmLevel2", value = "二级告警阈值", dataType = "long", paramType = "path"),
@@ -65,13 +71,13 @@ public class ManageAlarmController {
 
             manageAlarmService.setAlarmThre(alarmThre);
             return new SetAlarmThreResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new SetAlarmThreResponse(Constants.INTERNAL_ERROR_CODE, "[Internal error in setting alarmThre]" + e.getMessage(), null);
         }
     }
 
     // 处理告警
-    @ApiOperation(value="告警处理", notes="传告警设备ID,告警处理人和处理备注")
+    @ApiOperation(value = "告警处理", notes = "传告警设备ID,告警处理人和处理备注")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "alarmDeviceId", value = "告警设备ID", required = true, dataType = "int", paramType = "path"),
             @ApiImplicitParam(name = "alarmProcessUser", value = "告警处理人", required = true, dataType = "int", paramType = "path"),
@@ -81,11 +87,18 @@ public class ManageAlarmController {
     @GetMapping("/require_role")
     @RequiresRoles("admin")
     public ProcessAlarmResponse processAlarm(ProcessAlarmRequest request) {
-
-        try{
-            manageAlarmService.processAlarm(request.getAlarmDeviceId(), request.getAlarmProcessUser(), request.getAlarmProcessMessage());
-        }
-        catch (Exception e){
+        try {
+            String[] positions = request.getAlarmPositions().split("\\|");
+            for (String position : positions) {
+                int devicePosition = Integer.parseInt(position.split("_")[0]);
+                int deviceDirection = Integer.parseInt(position.split("_")[1]);
+                for (Map.Entry<Integer, MonitorDeviceSetting> entry : monitorDeviceSettingMap.entrySet()) {
+                    if (entry.getValue().getDevicePosition() == devicePosition && entry.getValue().getDeviceDirection() == deviceDirection) {
+                        manageAlarmService.processAlarm(entry.getValue().getDeviceId(), request.getAlarmProcessUser(), request.getAlarmProcessMessage());
+                    }
+                }
+            }
+        } catch (Exception e) {
             return new ProcessAlarmResponse(Constants.INTERNAL_ERROR_CODE, "[Internal error in process alarm]" + e.getMessage(), null);
         }
 
@@ -93,7 +106,7 @@ public class ManageAlarmController {
     }
 
     // 确认告警
-    @ApiOperation(value="告警确认", notes="传告警设备ID,告警确认人和确认备注")
+    @ApiOperation(value = "告警确认", notes = "传告警设备ID,告警确认人和确认备注")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "alarmDeviceId", value = "告警设备ID", required = true, dataType = "int", paramType = "path"),
             @ApiImplicitParam(name = "alarmConfirmResult", value = "确认结果", required = true, dataType = "int", paramType = "path"),
@@ -104,11 +117,18 @@ public class ManageAlarmController {
     @GetMapping("/require_role")
     @RequiresRoles("admin")
     public ConfirmAlarmResponse confirmAlarm(ConfirmAlarmRequest request) {
-
-        try{
-            manageAlarmService.confirmAlarm(request.getAlarmConfirmResult(), request.getAlarmDeviceId(), request.getAlarmConfirmUser(), request.getAlarmConfirmMessage());
-        }
-        catch (Exception e){
+        try {
+            String[] positions = request.getAlarmPositions().split("\\|");
+            for (String position : positions) {
+                int devicePosition = Integer.parseInt(position.split("_")[0]);
+                int deviceDirection = Integer.parseInt(position.split("_")[1]);
+                for (Map.Entry<Integer, MonitorDeviceSetting> entry : monitorDeviceSettingMap.entrySet()) {
+                    if (entry.getValue().getDevicePosition() == devicePosition && entry.getValue().getDeviceDirection() == deviceDirection) {
+                        manageAlarmService.confirmAlarm(request.getAlarmConfirmResult(), entry.getValue().getDeviceId(), request.getAlarmConfirmUser(), request.getAlarmConfirmMessage());
+                    }
+                }
+            }
+        } catch (Exception e) {
             return new ConfirmAlarmResponse(Constants.INTERNAL_ERROR_CODE, "[Internal error in confirm alarm]" + e.getMessage(), null);
         }
 

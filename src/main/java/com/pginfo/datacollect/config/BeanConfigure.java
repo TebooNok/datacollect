@@ -95,6 +95,11 @@ public class BeanConfigure {
             for (MonitorDevice monitorDevice : monitorDeviceList) {
                 AlarmInfo alarmInfo = new AlarmInfo();
 
+                // 配置告警的位置信息
+                MonitorDeviceSetting setting = monitorDeviceSettingMap().get(alarmInfo.getAlarmDeviceId());
+                alarmInfo.setAlarmDevicePosition(setting.getDevicePosition());
+                alarmInfo.setAlarmDeviceDirection(setting.getDeviceDirection());
+
                 alarmInfo.setAlarmDeviceId(monitorDevice.getDeviceId());
                 // 无告警
                 alarmInfo.setAlarmStatus(4);

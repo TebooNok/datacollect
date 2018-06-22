@@ -108,28 +108,42 @@ public class QueryAlarmController {
             return new QueryAlarmInfoResponse(Constants.INTERNAL_ERROR_CODE, "[Internal query service error.] " + e.getMessage(), null);
         }
 
-        List<AlarmInfo> finalList = new ArrayList<>();
+        // 删除空元素
+        List<AlarmInfo> newList = new ArrayList<>();
+        for(AlarmInfo alr:returnList){
+            if(null != alr){
+                newList.add(alr);
+            }
+        }
+        returnList = newList;
+
+        // List<AlarmInfo> finalList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(returnList)) {
             // 按时间降序排序
-            returnList.sort((AlarmInfo o1, AlarmInfo o2) -> o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0);
+            returnList.sort((AlarmInfo o1, AlarmInfo o2) -> {
+                if(null == o1.getAlarmDateTime() || null == o2.getAlarmDateTime()){
+                    return 0;
+                }
+                else return o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0;
+            });
 
             // 传入位置信息
             for (AlarmInfo info : returnList) {
 
-                AlarmInfo finalAlarm = new AlarmInfo(info);
+                // AlarmInfo finalAlarm = new AlarmInfo(info);
 
                 MonitorDeviceSetting monitorDeviceSetting = monitorDeviceSettingMap.get(info.getAlarmDeviceId());
-                finalAlarm.setAlarmDeviceDirection(monitorDeviceSetting.getDeviceDirection());
-                finalAlarm.setAlarmDevicePosition(monitorDeviceSetting.getDevicePosition());
+                info.setAlarmDeviceDirection(monitorDeviceSetting.getDeviceDirection());
+                info.setAlarmDevicePosition(monitorDeviceSetting.getDevicePosition());
 
-                String dateTime = finalAlarm.getAlarmDateTime();
-                dateTime = String.valueOf(LocalUtils.convertString2LocalDataTime(dateTime).toInstant(ZoneOffset.of("+8")).toEpochMilli());
-                finalAlarm.setAlarmDateTime(dateTime);
-                finalList.add(finalAlarm);
+                // String dateTime = finalAlarm.getAlarmDateTime();
+                // dateTime = String.valueOf(LocalUtils.convertString2LocalDataTime(dateTime).toInstant(ZoneOffset.of("+8")).toEpochMilli());
+                // finalAlarm.setAlarmDateTime(dateTime);
+                // finalList.add(finalAlarm);
             }
         }
 
-        queryAlarmInfoResponse.setAlarmInfoList(finalList);
+        queryAlarmInfoResponse.setAlarmInfoList(returnList);
 
         return queryAlarmInfoResponse;
     }

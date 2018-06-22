@@ -95,6 +95,9 @@ public class MongoAlarmInfoDao {
         int alarmDeviceId = request.getAlarmDeviceId();
         int alarmType = request.getAlarmType();
         int alarmLevel = request.getAlarmLevel();
+        int alarmDevicePosition = request.getAlarmPosition();
+        int alarmDeviceDirection = request.getAlarmDirection();
+        int alarmStatus = request.getAlarmStatus();
 
         Query query = new Query();
 
@@ -106,8 +109,20 @@ public class MongoAlarmInfoDao {
             query.addCriteria(Criteria.where("alarmDateTime").lte(alarmEndTime));
         }
 
+        if(alarmStatus != 0){
+            query.addCriteria(Criteria.where("alarmStatus").is(alarmStatus));
+        }
+
         if(alarmDeviceId != 0){
             query.addCriteria(Criteria.where("alarmDeviceId").is(alarmDeviceId));
+        }
+
+        if(alarmDevicePosition != 0){
+            query.addCriteria(Criteria.where("alarmDevicePosition").is(alarmDevicePosition));
+        }
+
+        if(alarmDeviceDirection != 0){
+            query.addCriteria(Criteria.where("alarmDeviceDirection").is(alarmDeviceDirection));
         }
 
         if(alarmType != 0){

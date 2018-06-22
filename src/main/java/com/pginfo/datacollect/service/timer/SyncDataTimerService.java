@@ -137,6 +137,9 @@ public class SyncDataTimerService {
                 queue.poll();
                 queue.offer(temp);
             }
+            else{
+                queue.offer(temp);
+            }
         }
         // 只在缓存驻留，不进入Mongodb
 
