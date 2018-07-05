@@ -6,6 +6,7 @@ import com.pginfo.datacollect.domain.AlarmInfo;
 import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.QueryAlarmInfoRequest;
 import com.pginfo.datacollect.dto.QueryAlarmInfoResponse;
+import com.pginfo.datacollect.util.LocalUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,7 +105,7 @@ public class QueryAlarmService {
         List<AlarmInfo> returnList = mongoAlarmInfoDao.getSavedToday();
         for (Map.Entry<Integer, AlarmInfo> entry : alarmInfoMap.entrySet()) {
             AlarmInfo alarmInfo = entry.getValue();
-            if (alarmInfo.getAlarmStatus() != 4) {
+            if (alarmInfo.getAlarmStatus() != 4 && LocalUtils.timeIsToday(alarmInfo.getAlarmDateTime())) {
                 returnList.add(alarmInfo);
             }
         }
@@ -263,7 +264,7 @@ public class QueryAlarmService {
 
         List<AlarmInfo> returnList = new ArrayList<>();
 
-        if (!CollectionUtils.isEmpty(alarmInfoList))
+        if (!CollectionUtils.isEmpty(alarmInfoList) && LocalUtils.timeIsToday(alarmInfoList.get(0).getAlarmDateTime()))
             returnList.add(alarmInfoList.get(0));
 
         return returnList;

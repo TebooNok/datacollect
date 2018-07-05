@@ -330,7 +330,7 @@ public class BeanConfigure {
                 user.setPassword(userInfo[2]);
                 user.setRole(userInfo[3]);
 
-                if(CollectionUtils.isEmpty(userDao.getData(userInfo[1]))){
+                if(CollectionUtils.isEmpty(userDao.queryByFilter(userInfo[1], null))){
                     userDao.addUser(user);
                     logger.debug("Insert a user : " + user.getName());
                 }
@@ -339,7 +339,7 @@ public class BeanConfigure {
                 }
 
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("File userinit.properties not found." + e.getMessage());
             return null;
         }

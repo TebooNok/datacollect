@@ -1,4 +1,5 @@
 package com.pginfo.datacollect.service;
+import com.alibaba.fastjson.JSONObject;
 import com.pginfo.datacollect.dao.User;
 import com.pginfo.datacollect.dao.UserDao;
 import com.pginfo.datacollect.user.UserBean;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @Component
 @Service
 public class UserService {
-    Logger logger = LoggerFactory.getLogger(QuerySinkDataService.class);
+    Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserDao userDao;
 
     @Autowired
@@ -70,7 +71,7 @@ public class UserService {
         return userDao.queryAllUser();
     }
 
-    public List<User> queryByFilter(String id, String name) {
-        return userDao.queryByFilter(id, name);
+    public List<User> queryByFilter(String id, String role) {
+        return userDao.queryByFilter(id, role);
     }
 }

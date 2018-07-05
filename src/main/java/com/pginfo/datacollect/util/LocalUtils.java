@@ -56,4 +56,9 @@ public class LocalUtils {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.TIME_TODAY));
     }
 
+    // 如果是今天时间，则返回true
+    public static boolean timeIsToday(String alarmDateTime) {
+        String todayTime = formatCurrentTime();
+        return todayTime.substring(0, 10).equals(alarmDateTime.substring(0, 10));
+    }
 }

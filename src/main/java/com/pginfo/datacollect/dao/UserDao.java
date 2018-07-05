@@ -67,13 +67,13 @@ public class UserDao {
         return mongoTemplate.findAll(User.class,PREFIX);
     }
 
-    public List<User> queryByFilter(String id, String name) {
+    public List<User> queryByFilter(String id, String role) {
         Query query = new Query();
         if(!StringUtils.isEmpty(id)){
             query.addCriteria(Criteria.where("id").is(id));
         }
-        if(!StringUtils.isEmpty(name)){
-            query.addCriteria(Criteria.where("name").is(name));
+        if(!StringUtils.isEmpty(role)){
+            query.addCriteria(Criteria.where("role").is(role));
         }
         return mongoTemplate.find(query, User.class, PREFIX);
     }

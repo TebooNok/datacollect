@@ -9,6 +9,7 @@ import com.pginfo.datacollect.service.QuerySinkDataService;
 import com.pginfo.datacollect.util.ConvertUtil;
 import com.pginfo.datacollect.util.LocalUtils;
 import io.swagger.models.auth.In;
+import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -380,5 +381,14 @@ public class DatacollectApplicationTests {
 
         sTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(sTime)));
         System.out.println(sTime);
+    }
+
+    @Test
+    public void testEqualDay(){
+        String ald = "2018-07-06 12:10:55";
+        String td  = LocalUtils.formatCurrentTime();
+        System.out.println(ald.substring(0, 10));
+        System.out.println(td.substring(0, 10));
+        System.out.println(ald.substring(0, 10).equals(td.substring(0, 10)));
     }
 }

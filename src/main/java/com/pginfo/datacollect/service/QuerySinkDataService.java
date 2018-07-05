@@ -99,7 +99,7 @@ public class QuerySinkDataService {
                 if(mongoSinkData != null){
                     returnList.add(mongoSinkData);
                 }
-                localDateTime = LocalDateTime.now().plusHours(-1);
+                localDateTime = localDateTime.plusHours(-1);
             }
 
             return returnList;
@@ -244,22 +244,20 @@ public class QuerySinkDataService {
                 }
             }
 
-            if(!StringUtils.isEmpty(queryDataRequest.getSecondTime())){
+            if(!StringUtils.isEmpty(queryDataRequest.getSecondDateTime())){
                 for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
                     if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
-                        MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getSecondTime()), entry.getValue().getDeviceId());
+                        MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getSecondDateTime()), entry.getValue().getDeviceId());
                         returnList.add(data);
-                        logger.info("data(second time) = " + JSONObject.toJSONString(data));
                     }
                 }
             }
 
-            if(!StringUtils.isEmpty(queryDataRequest.getThirdTime())){
+            if(!StringUtils.isEmpty(queryDataRequest.getThirdDateTime())){
                 for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
                     if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
-                        MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getThirdTime()), entry.getValue().getDeviceId());
+                        MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getThirdDateTime()), entry.getValue().getDeviceId());
                         returnList.add(data);
-                        logger.info("data(third time) = " + JSONObject.toJSONString(data));
                     }
                 }
             }

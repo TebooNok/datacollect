@@ -9,6 +9,7 @@ import com.pginfo.datacollect.dto.QueryDataResponse;
 import com.pginfo.datacollect.service.QuerySinkDataService;
 import com.pginfo.datacollect.util.Constants;
 import com.pginfo.datacollect.util.FileUtils;
+import com.pginfo.datacollect.util.JWTUtil;
 import com.pginfo.datacollect.util.LocalUtils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -81,8 +82,8 @@ public class QueryDataController {
 
         String sTime = queryDataRequest.getStartDateTime();
         String eTime = queryDataRequest.getEndDateTime();
-        String secTime = queryDataRequest.getSecondTime();
-        String thrTime = queryDataRequest.getThirdTime();
+        String secTime = queryDataRequest.getSecondDateTime();
+        String thrTime = queryDataRequest.getThirdDateTime();
 
         if(!StringUtils.isEmpty(sTime)){
             sTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(sTime)));
@@ -94,11 +95,11 @@ public class QueryDataController {
         }
         if(!StringUtils.isEmpty(secTime)){
             secTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(secTime)));
-            queryDataRequest.setSecondTime(secTime);
+            queryDataRequest.setSecondDateTime(secTime);
         }
         if(!StringUtils.isEmpty(thrTime)){
             thrTime = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(thrTime)));
-            queryDataRequest.setThirdTime(thrTime);
+            queryDataRequest.setThirdDateTime(thrTime);
         }
         int mode = queryDataRequest.getMode();
 
@@ -180,9 +181,26 @@ public class QueryDataController {
             @ApiImplicitParam(name = "templateType", value = "模板", dataType = "String", paramType = "path")
     })
     @RequestMapping(value = "queryDataExcel.do", method = RequestMethod.GET)//, produces = "application/vnd.ms-excel")
-    @GetMapping("/require_auth")
-    @RequiresAuthentication
+    @GetMapping()//"/require_auth")
+    //@RequiresAuthentication
     public void exportExcel(QueryDataRequest request, HttpServletResponse response) {
+
+        String token = request.getToken();
+        logger.info("Token = " + request.getToken());
+
+        if(!StringUtils.isEmpty(token)) {
+            String userName = JWTUtil.getUsername(token);
+            if(StringUtils.isEmpty(userName)){
+                logger.error("Token not regist");
+                return;
+            }
+        }
+        else{
+            logger.error("Token is empty");
+            return;
+        }
+
+
         QueryDataResponse queryDataResponse = querySinkDataList(request);
         try {
 
@@ -195,7 +213,7 @@ public class QueryDataController {
 //            testList.add(new MongoSinkData(5, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
             //------------------- TEST -------------
 
-            FileUtils.exportExcel(queryDataResponse.getMongoSinkDataList(), "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据", response);
+            FileUtils.exportExcel(queryDataResponse.getMongoSinkDataList(), "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据.xls", response);
             // FileUtils.exportExcel(testList, "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据", response);
         } catch (Exception e) {
 

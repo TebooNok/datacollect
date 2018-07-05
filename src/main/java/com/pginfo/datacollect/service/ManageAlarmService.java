@@ -38,7 +38,7 @@ public class ManageAlarmService {
 
         // 只处理未处理的告警
         if(alarmInfo.getAlarmStatus() != 1){
-            throw new Exception("Can not process alarm that status is : " + alarmInfo.getAlarmStatus());
+            throw new Exception("Can not process alarm that status is not waiting for process.");
         }
         else{
             alarmInfo.setAlarmStatus(2);
@@ -56,7 +56,7 @@ public class ManageAlarmService {
 
         // 只确认待确认的告警
         if(alarmInfo.getAlarmStatus() != 2){
-            throw new Exception("Can not confirm alarm that status is : " + alarmInfo.getAlarmStatus());
+            throw new Exception("Can not confirm alarm that status is not wait for confirm.");
         }
         else{
 

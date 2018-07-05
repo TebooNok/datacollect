@@ -1,6 +1,7 @@
 package com.pginfo.datacollect.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.pginfo.datacollect.dao.User;
 import com.pginfo.datacollect.dto.ManageDeviceResponse;
 import com.pginfo.datacollect.dto.ManagerUserRequest;
@@ -9,6 +10,8 @@ import com.pginfo.datacollect.service.UserService;
 import com.pginfo.datacollect.util.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +24,9 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ManageUserController {
+
+    private Logger logger = LoggerFactory.getLogger(ManageUserController.class);
+
     private final UserService userService;
 
     @Autowired
@@ -75,12 +81,12 @@ public class ManageUserController {
         ManagerUserResponse response = new ManagerUserResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
         try {
             String id = request.getId();
-            String name = request.getUsername();
+            String role = request.getRole();
             List<User> userList = userService.queryAllUser();
 
-            // 如果要根据ID或名字查询 TODO
-            if(!StringUtils.isEmpty(id) || !StringUtils.isEmpty(name)){
-                userList = userService.queryByFilter(id, name);
+            // 如果要根据ID或权限查询 TODO
+            if(!StringUtils.isEmpty(id) || !StringUtils.isEmpty(role)){
+                userList = userService.queryByFilter(id, role);
             }
 
             // 查询时不返回密码

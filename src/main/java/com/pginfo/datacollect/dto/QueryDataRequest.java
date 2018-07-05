@@ -21,9 +21,12 @@ public class QueryDataRequest extends BaseRequest {
     // 指定时间段-结束时间，“0”表示不指定
     private String endDateTime;
 
-    private String secondTime;
+    private String secondDateTime;
 
-    private String thirdTime;
+    private String thirdDateTime;
+
+    // Token仅用于导出excel时
+    private String token;
 
     // 模板有[“Hour”,“Day”,"HalfDay",”Week”,”Month”,”Year”] 六种。 也可以用“Custom_xx”，表示使用自定义时间段和希望返回的数据条数。
     // Hours: 60（每分钟一条）, Day:72（20分钟一条）, HalfDay:12(一小时一条),Week:56（3小时一条）, Month: 60（12小时一条）, Year: 60(6天一条)
@@ -78,19 +81,27 @@ public class QueryDataRequest extends BaseRequest {
         this.templateType = templateType;
     }
 
-    public String getSecondTime() {
-        return secondTime;
+    public String getSecondDateTime() {
+        return secondDateTime;
     }
 
-    public void setSecondTime(String secondTime) {
-        this.secondTime = secondTime;
+    public void setSecondDateTime(String secondTime) {
+        this.secondDateTime = secondTime;
     }
 
-    public String getThirdTime() {
-        return thirdTime;
+    public String getThirdDateTime() {
+        return thirdDateTime;
     }
 
-    public void setThirdTime(String thirdTime) {
-        this.thirdTime = thirdTime;
+    public void setThirdDateTime(String thirdTime) {
+        this.thirdDateTime = thirdTime;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
