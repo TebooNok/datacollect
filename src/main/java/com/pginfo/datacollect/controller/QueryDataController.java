@@ -1,7 +1,6 @@
 package com.pginfo.datacollect.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.mongodb.Mongo;
+import com.pginfo.datacollect.domain.AlarmInfo;
 import com.pginfo.datacollect.domain.MongoSinkData;
 import com.pginfo.datacollect.domain.MonitorDeviceSetting;
 import com.pginfo.datacollect.dto.QueryDataRequest;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,11 +39,14 @@ public class QueryDataController {
 
     private final QuerySinkDataService querySinkDataService;
 
+    private final Map<Integer, AlarmInfo> alarmInfoMap;
+
     private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
 
     @Autowired
-    public QueryDataController(QuerySinkDataService querySinkDataService, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
+    public QueryDataController(QuerySinkDataService querySinkDataService, Map<Integer, AlarmInfo> alarmInfoMap, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap) {
         this.querySinkDataService = querySinkDataService;
+        this.alarmInfoMap = alarmInfoMap;
         this.monitorDeviceSettingMap = monitorDeviceSettingMap;
     }
 
@@ -212,6 +213,12 @@ public class QueryDataController {
 //            testList.add(new MongoSinkData(4, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
 //            testList.add(new MongoSinkData(5, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
             //------------------- TEST -------------
+
+            for(MongoSinkData data:queryDataResponse.getMongoSinkDataList()){
+                data.setDeviceStatus(alarmInfoMap.get(data.getDeviceId()).getAlarmStatus());
+                data.setdPosition(data.getDevicePosition() + "号桥墩");
+                data.setdDirection(data.getDeviceDirection() == 1?"上行":"下行");
+            }
 
             FileUtils.exportExcel(queryDataResponse.getMongoSinkDataList(), "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据.xls", response);
             // FileUtils.exportExcel(testList, "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据", response);

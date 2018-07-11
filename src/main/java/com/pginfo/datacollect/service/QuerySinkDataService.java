@@ -93,7 +93,7 @@ public class QuerySinkDataService {
 
             // 从当前一分钟以前向前推12条数据
             LocalDateTime localDateTime = LocalDateTime.now().plusMinutes(-1);
-            for(int i = 0; i <= 12; i++)
+            for(int i = 0; i <= 11; i++)
             {
                 MongoSinkData mongoSinkData = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatDataTimeIgnoreSec(localDateTime), Integer.parseInt(queryDataRequest.getDeviceId()));
                 if(mongoSinkData != null){

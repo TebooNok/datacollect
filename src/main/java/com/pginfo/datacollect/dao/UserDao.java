@@ -70,7 +70,7 @@ public class UserDao {
     public List<User> queryByFilter(String id, String role) {
         Query query = new Query();
         if(!StringUtils.isEmpty(id)){
-            query.addCriteria(Criteria.where("id").is(id));
+            query.addCriteria(Criteria.where("id").regex(id));
         }
         if(!StringUtils.isEmpty(role)){
             query.addCriteria(Criteria.where("role").is(role));

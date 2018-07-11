@@ -8,6 +8,8 @@ import com.pginfo.datacollect.dto.QueryAlarmInfoRequest;
 import com.pginfo.datacollect.dto.QueryAlarmInfoResponse;
 import com.pginfo.datacollect.util.LocalUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -24,6 +26,8 @@ public class QueryAlarmService {
     private final Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap;
 
     private final MongoAlarmInfoDao mongoAlarmInfoDao;
+
+    private Logger logger = LoggerFactory.getLogger(QueryAlarmService.class);
 
     @Autowired
     public QueryAlarmService(Map<Integer, AlarmInfo> alarmInfoMap, Map<Integer, MonitorDeviceSetting> monitorDeviceSettingMap, MongoAlarmInfoDao mongoAlarmInfoDao) {
@@ -137,7 +141,6 @@ public class QueryAlarmService {
         // 只有已确认的告警在mongo中，
         //if (alarmStatus == 3) {
         resultList = mongoAlarmInfoDao.getByFilterByDescTime(request);
-        //}
 
         // 对缓存数据条件过滤一遍
         for (Map.Entry<Integer, AlarmInfo> entry : alarmInfoMap.entrySet()) {
@@ -151,8 +154,23 @@ public class QueryAlarmService {
             returnList.addAll(resultList);
         }
 
-        if (!CollectionUtils.isEmpty(returnList)) {
-            returnList.sort((AlarmInfo o1, AlarmInfo o2) -> {
+        List<AlarmInfo> finalList = new ArrayList<>();
+
+        // 默认去掉未处理的告警
+        if(request.getAlarmStatus() != 4){
+            for (AlarmInfo info:returnList){
+                if (info.getAlarmStatus() != 4){
+                    finalList.add(info);
+                }
+            }
+        }
+        else
+        {
+            finalList = returnList;
+        }
+
+        if (!CollectionUtils.isEmpty(finalList)) {
+            finalList.sort((AlarmInfo o1, AlarmInfo o2) -> {
                 if(null == o1.getAlarmDateTime() || null == o2.getAlarmDateTime()){
                     return 0;
                 }
@@ -161,7 +179,7 @@ public class QueryAlarmService {
         }
 
         // 设置结果总数
-        queryAlarmInfoResponse.setTotal(returnList.size());
+        queryAlarmInfoResponse.setTotal(finalList.size());
 
         int page = request.getPage();
         int dataNum = request.getDataNum();
@@ -169,19 +187,19 @@ public class QueryAlarmService {
         // 启用分页
         if (page > 0) {
             int endIndex = (page) * dataNum;
-            int size = returnList.size();
+            int size = finalList.size();
             if ((page - 1) * dataNum > size) {
                 return new ArrayList<>();
             } else {
-                return returnList.subList((page - 1) * dataNum, endIndex > size ? size : endIndex);
+                return finalList.subList((page - 1) * dataNum, endIndex > size ? size : endIndex);
             }
         }
 
         // 不启用分页，返回前N条
-        if (returnList.size() > dataNum) {
-            return returnList.subList(0, dataNum);
+        if (finalList.size() > dataNum) {
+            return finalList.subList(0, dataNum);
         } else {
-            return returnList;
+            return finalList;
         }
     }
 
@@ -197,13 +215,13 @@ public class QueryAlarmService {
         int alarmDevicePosition = request.getAlarmPosition();
         int alarmDeviceDirection = request.getAlarmDirection();
 
-        if(!StringUtils.isEmpty(alarmStartTime)){
+        if(!StringUtils.isEmpty(alarmStartTime) && !StringUtils.isEmpty(alarmInfo.getAlarmDateTime())){
             if(alarmInfo.getAlarmDateTime().compareTo(alarmStartTime) < 0){
                 return false;
             }
         }
 
-        if(!StringUtils.isEmpty(alarmEndTime)){
+        if(!StringUtils.isEmpty(alarmEndTime) && !StringUtils.isEmpty(alarmInfo.getAlarmDateTime())){
             if(alarmInfo.getAlarmDateTime().compareTo(alarmEndTime) > 0){
                 return false;
             }

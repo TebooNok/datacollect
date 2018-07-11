@@ -36,16 +36,20 @@ public class MongoSinkData {
     private int deviceType;
 
     // 设备状态 0表示未初始化，1代表正常，-1代表不正常
-    @Excel(name = "设备状态", orderNum = "6")
+    // @Excel(name = "设备状态", orderNum = "6")
     private int deviceStatus;
 
     // 设备位置：哪个桥墩
-    @Excel(name = "桥墩编号", orderNum = "2")
     private int devicePosition;
 
+    @Excel(name = "桥墩编号", orderNum = "2")
+    private String dPosition;
+
     // 设备方向，1：上行 2：下行
-    @Excel(name = "上/下行", orderNum = "3")
     private int deviceDirection;
+
+    @Excel(name = "上/下行", orderNum = "3")
+    private String dDirection;
 
     public MongoSinkData(){};
 
@@ -122,5 +126,21 @@ public class MongoSinkData {
 
     public void setDeviceDirection(int deviceDirection) {
         this.deviceDirection = deviceDirection;
+    }
+
+    public String getdPosition() {
+        return dPosition;
+    }
+
+    public void setdPosition(String dPosition) {
+        this.dPosition = dPosition;
+    }
+
+    public String getdDirection() {
+        return dDirection;
+    }
+
+    public void setdDirection(String dDirection) {
+        this.dDirection = dDirection;
     }
 }

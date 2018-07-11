@@ -35,6 +35,11 @@ public class WebController {
     public ResponseBean login(@RequestParam("username") String username,
                               @RequestParam("password") String password) {
         UserBean userBean = userService.getUser(username);
+
+        if(null == userBean){
+            throw new UnauthorizedException();
+        }
+
         if (userBean.getPassword().equals(password)) {
             return new ResponseBean(200, "Login success", JWTUtil.sign(username, password));
         } else {

@@ -101,11 +101,15 @@ public class MongoAlarmInfoDao {
 
         Query query = new Query();
 
-        if(!StringUtils.isEmpty(alarmStartTime)){
+        if(!StringUtils.isEmpty(alarmStartTime) && !StringUtils.isEmpty(alarmEndTime)){
+            query.addCriteria(Criteria.where("alarmDateTime").gte(alarmStartTime).lte(alarmEndTime));
+        }
+
+        if(!StringUtils.isEmpty(alarmStartTime) && StringUtils.isEmpty(alarmEndTime)){
             query.addCriteria(Criteria.where("alarmDateTime").gte(alarmStartTime));
         }
 
-        if(!StringUtils.isEmpty(alarmEndTime)){
+        if(StringUtils.isEmpty(alarmStartTime) && !StringUtils.isEmpty(alarmEndTime)){
             query.addCriteria(Criteria.where("alarmDateTime").lte(alarmEndTime));
         }
 
