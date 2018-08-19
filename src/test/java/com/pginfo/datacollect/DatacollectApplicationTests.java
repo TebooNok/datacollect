@@ -1,6 +1,7 @@
 package com.pginfo.datacollect;
 
 import com.pginfo.datacollect.controller.QueryDataController;
+import com.pginfo.datacollect.domain.AlarmInfo;
 import com.pginfo.datacollect.domain.MongoSinkData;
 import com.pginfo.datacollect.domain.SinkData;
 import com.pginfo.datacollect.dto.QueryDataRequest;
@@ -27,6 +28,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.function.Consumer;
 
 // @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -390,5 +392,54 @@ public class DatacollectApplicationTests {
         System.out.println(ald.substring(0, 10));
         System.out.println(td.substring(0, 10));
         System.out.println(ald.substring(0, 10).equals(td.substring(0, 10)));
+    }
+
+    @Test
+    public void testSort()
+    {
+        List<AlarmInfo> returnList = new ArrayList<>();
+
+        AlarmInfo ali1 = new AlarmInfo();
+        AlarmInfo ali2 = new AlarmInfo();
+        AlarmInfo ali3 = new AlarmInfo();
+        AlarmInfo ali4 = new AlarmInfo();
+        AlarmInfo ali5 = new AlarmInfo();
+
+        ali1.setAlarmStatus(1);
+        ali2.setAlarmStatus(1);
+        ali3.setAlarmStatus(1);
+        ali4.setAlarmStatus(4);
+        ali5.setAlarmStatus(4);
+
+        ali1.setAlarmDeviceId(1);
+        ali2.setAlarmDeviceId(2);
+        ali3.setAlarmDeviceId(3);
+        ali4.setAlarmDeviceId(4);
+        ali5.setAlarmDeviceId(5);
+
+        System.out.println(LocalUtils.formatCurrentTime());
+
+        ali1.setAlarmDateTime("2018-08-09 04:39:00");
+        ali2.setAlarmDateTime("2018-08-10 10:44:00");
+        ali3.setAlarmDateTime("2018-08-09 01:39:00");
+        ali4.setAlarmDateTime("2018-08-10 10:39:00");
+        ali5.setAlarmDateTime("2018-08-09 20:39:00");
+
+        returnList.add(ali1);
+        returnList.add(ali2);
+        returnList.add(ali3);
+        returnList.add(ali4);
+        returnList.add(ali5);
+
+        returnList.sort((AlarmInfo o1, AlarmInfo o2) -> {
+            if(null == o1.getAlarmDateTime() || null == o2.getAlarmDateTime()){
+                return 0;
+            }
+            else return o1.getAlarmDateTime().compareTo(o2.getAlarmDateTime()) > 0 ? -1 : 0;
+        });
+
+        returnList.forEach(
+                System.out::println
+        );
     }
 }

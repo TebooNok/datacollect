@@ -51,50 +51,77 @@ public class AlarmTimerService {
             AlarmInfo alarmInfo = alarmInfoMap.get(id);
 
             // 只有设备处于未报警时才检查
-            if (alarmInfo.getAlarmStatus() == 4) {
+            //if (alarmInfo.getAlarmStatus() == 4) {
                 // 用绝对值和阈值比较
                 if (Math.abs(height) > alarmThre.getAlarmLevel1() * 1000) {
-                    AlarmInfo info = new AlarmInfo();
-                    info.setAlarmDeviceId(id);
-                    info.setAlarmLevel(1);
-                    info.setHeight(height);
-                    info.setAlarmDateTime(LocalUtils.formatCurrentTime());
-                    // 正数上浮，负数下沉
-                    info.setAlarmType(height>0?1:2);
-                    info.setAlarmStatus(1);
-                    alarmInfoMap.put(id, info);
+                    AlarmInfo info;
+                    info = alarmInfoMap.get(id);
+                    // 如果有未处理告警，则刷新级别和时间
+                    if(info.getAlarmStatus() == 1) {
+                        info.setAlarmLevel(1);
+                        info.setHeight(height);
+                        info.setAlarmDateTime(LocalUtils.formatCurrentTime());
+                    }
+                    else if (alarmInfo.getAlarmStatus() == 4){
+                        info.setAlarmDeviceId(id);
+                        info.setAlarmLevel(1);
+                        info.setHeight(height);
+                        info.setAlarmDateTime(LocalUtils.formatCurrentTime());
+                        // 正数上浮，负数下沉
+                        info.setAlarmType(height > 0 ? 1 : 2);
+                        info.setAlarmStatus(1);
+                    }
 
+                    alarmInfoMap.put(id, info);
                     mongoAlarmInfoDao.saveCurrentAlarmInfo(info);
                 }
                 else if(Math.abs(height) > alarmThre.getAlarmLevel2() * 1000)
                 {
-                    AlarmInfo info = new AlarmInfo();
-                    info.setAlarmDeviceId(id);
-                    info.setAlarmLevel(2);
-                    info.setHeight(height);
-                    info.setAlarmDateTime(LocalUtils.formatCurrentTime());
-                    // 正数上浮，负数下沉
-                    info.setAlarmType(height>0?1:2);
-                    info.setAlarmStatus(1);
-                    alarmInfoMap.put(id, info);
+                    AlarmInfo info;
+                    info = alarmInfoMap.get(id);
+                    // 如果有未处理告警，则刷新级别和时间
+                    if(info.getAlarmStatus() == 1) {
+                        info.setAlarmLevel(2);
+                        info.setHeight(height);
+                        info.setAlarmDateTime(LocalUtils.formatCurrentTime());
+                    }
+                    else if (alarmInfo.getAlarmStatus() == 4){
+                        info.setAlarmDeviceId(id);
+                        info.setAlarmLevel(2);
+                        info.setHeight(height);
+                        info.setAlarmDateTime(LocalUtils.formatCurrentTime());
+                        // 正数上浮，负数下沉
+                        info.setAlarmType(height > 0 ? 1 : 2);
+                        info.setAlarmStatus(1);
+                    }
 
+                    alarmInfoMap.put(id, info);
                     mongoAlarmInfoDao.saveCurrentAlarmInfo(info);
                 }
                 else if(Math.abs(height) > alarmThre.getAlarmLevel3() * 1000)
                 {
-                    AlarmInfo info = new AlarmInfo();
-                    info.setAlarmDeviceId(id);
-                    info.setAlarmLevel(3);
-                    info.setHeight(height);
-                    info.setAlarmDateTime(LocalUtils.formatCurrentTime());
-                    // 正数上浮，负数下沉
-                    info.setAlarmType(height>0?1:2);
-                    info.setAlarmStatus(1);
-                    alarmInfoMap.put(id, info);
+                    AlarmInfo info;
+                    info = alarmInfoMap.get(id);
+                    // 如果有未处理告警，则刷新级别和时间
+                    if(info.getAlarmStatus() == 1) {
+                        info.setAlarmLevel(3);
+                        info.setHeight(height);
+                        info.setAlarmDateTime(LocalUtils.formatCurrentTime());
+                    }
+                    else if (alarmInfo.getAlarmStatus() == 4){
+                        info.setAlarmDeviceId(id);
+                        info.setAlarmLevel(3);
+                        info.setHeight(height);
+                        info.setAlarmDateTime(LocalUtils.formatCurrentTime());
+                        // 正数上浮，负数下沉
+                        info.setAlarmType(height > 0 ? 1 : 2);
+                        info.setAlarmStatus(1);
+                    }
 
+                    alarmInfoMap.put(id, info);
                     mongoAlarmInfoDao.saveCurrentAlarmInfo(info);
                 }
-            }
+            //}
         }
     }
 }

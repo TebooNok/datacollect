@@ -13,10 +13,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +33,7 @@ public class ManageUserController {
 
     //TODO: 3 interfaces
     @PostMapping("/addUser.do")
-    @RequiresRoles("admin")
+    @RequiresRoles(value = {"system"})
     public ManagerUserResponse addUser(ManagerUserRequest request) {
 
         try {
@@ -50,9 +47,9 @@ public class ManageUserController {
 
 
     @PostMapping("/updateUser.do")
-    @RequiresRoles("admin")
+    @RequiresRoles(value = {"system"})
     public ManagerUserResponse updateUser(ManagerUserRequest request) {
-
+        logger.info(JSONObject.toJSONString(request));
         try {
             userService.UpdateUser(request.getId(), request.getUsername(), request.getPassword(), request.getRole());
         } catch (Exception e) {
@@ -63,7 +60,7 @@ public class ManageUserController {
     }
 
     @PostMapping("/deleteUser.do")
-    @RequiresRoles("admin")
+    @RequiresRoles(value = {"system"})
     public ManagerUserResponse deleteUser(ManagerUserRequest request) {
 
         try {
@@ -75,8 +72,8 @@ public class ManageUserController {
         return new ManagerUserResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
     }
 
-    @GetMapping("/queryUser.do")
-    @RequiresRoles("admin")
+    @RequestMapping(value = "/queryUser.do", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping("/require_auth")
     public ManagerUserResponse queryUser(ManagerUserRequest request) {
         ManagerUserResponse response = new ManagerUserResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
         try {

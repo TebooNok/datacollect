@@ -7,6 +7,7 @@ import com.pginfo.datacollect.util.Constants;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,7 +40,7 @@ public class ManageDeviceController {
     })
     @RequestMapping(value = "manageMonitorDevice.do", method = RequestMethod.POST, produces = "application/json")
     @GetMapping("/require_role")
-    @RequiresRoles("admin")
+    @RequiresRoles(value = {"system","admin"}, logical = Logical.OR)
     public ManageDeviceResponse manageMonitorDevice(ManageDeviceRequest request) {
 
         try{

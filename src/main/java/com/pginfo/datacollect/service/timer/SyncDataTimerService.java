@@ -78,14 +78,14 @@ public class SyncDataTimerService {
                 mapMongoSinkData.setTemperature(mongoSinkData.getTemperature());
 
                 // 检查是否有基准传感器,有则在此处理减值
-                int base = monitorDeviceSettingMap.get(sinkData.getDeviceId()).getDeviceBase();
-                if(0 != base){
-                    mapMongoSinkData.setHeight(mongoSinkData.getHeight() - cacheDataMap.get(base).getHeight());
-                }
-                else{
-                    mapMongoSinkData.setHeight(mongoSinkData.getHeight());
-                }
-
+//                int base = monitorDeviceSettingMap.get(sinkData.getDeviceId()).getDeviceBase();
+//                if(0 != base){
+//                    mapMongoSinkData.setHeight(mongoSinkData.getHeight() - cacheDataMap.get(base).getHeight());
+//                }
+//                else{
+//                    mapMongoSinkData.setHeight(mongoSinkData.getHeight());
+//                }
+                mapMongoSinkData.setHeight(mongoSinkData.getHeight());
                 //cacheDataMap.put(mongoSinkData.getDeviceId(), mapMongoSinkData);
             }
 

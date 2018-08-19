@@ -40,21 +40,40 @@ public class QueryAlarmService {
         List<AlarmInfo> alarmInfoList = new ArrayList<>();
 
         for (Map.Entry<Integer, AlarmInfo> entry : alarmInfoMap.entrySet()) {
-            alarmInfoList.add(entry.getValue());
+            if(monitorDeviceSettingMap.get(entry.getKey()).getDeviceType() != 1)
+            {
+                alarmInfoList.add(entry.getValue());
+            }
         }
 
         return alarmInfoList;
     }
 
     public List<AlarmInfo> sixAlarmList() {
+
         List<AlarmInfo> resultList = mongoAlarmInfoDao.getSavedByDescTime();
+        List<AlarmInfo> tmpResult = new ArrayList<>();
+        for(AlarmInfo info:resultList)
+        {
+            if(monitorDeviceSettingMap.get(info.getAlarmDeviceId()).getDeviceType() != 1 )
+            {
+                tmpResult.add(info);
+            }
+        }
+        resultList = tmpResult;
+
         List<AlarmInfo> returnList = new ArrayList<>();
 
         for (Map.Entry<Integer, AlarmInfo> entry : alarmInfoMap.entrySet()) {
             AlarmInfo alarmInfo = entry.getValue();
-            if (alarmInfo.getAlarmStatus() != 4) {
+            if (alarmInfo.getAlarmStatus() != 4 && monitorDeviceSettingMap.get(entry.getKey()).getDeviceType() != 1 ) {
                 returnList.add(alarmInfo);
             }
+        }
+
+        if(!CollectionUtils.isEmpty(resultList))
+        {
+            returnList.addAll(resultList);
         }
 
         if (!CollectionUtils.isEmpty(returnList)) {
@@ -66,7 +85,6 @@ public class QueryAlarmService {
             });
         }
 
-        int resultSize = !CollectionUtils.isEmpty(resultList) ? resultList.size() : 0;
         int returnSize = !CollectionUtils.isEmpty(returnList) ? returnList.size() : 0;
 
         if (returnSize > 6) {
@@ -77,31 +95,6 @@ public class QueryAlarmService {
             return returnList;
         }
 
-        if (returnSize > 0) {
-            if (resultSize == 0) {
-                return returnList;
-            }
-
-            if (resultSize + returnSize <= 6) {
-                returnList.addAll(resultList);
-            }
-
-            if (resultSize + returnSize > 6) {
-                returnList.addAll(resultList);
-                return returnList.subList(0, 6);
-            }
-        } else {
-            if (resultSize == 0) {
-                return returnList;
-            }
-
-            if (resultSize <= 6) {
-                return resultList;
-            } else {
-                return resultList.subList(0, 6);
-            }
-        }
-
         return returnList;
     }
 
@@ -109,7 +102,7 @@ public class QueryAlarmService {
         List<AlarmInfo> returnList = mongoAlarmInfoDao.getSavedToday();
         for (Map.Entry<Integer, AlarmInfo> entry : alarmInfoMap.entrySet()) {
             AlarmInfo alarmInfo = entry.getValue();
-            if (alarmInfo.getAlarmStatus() != 4 && LocalUtils.timeIsToday(alarmInfo.getAlarmDateTime())) {
+            if (alarmInfo.getAlarmStatus() != 4 && LocalUtils.timeIsToday(alarmInfo.getAlarmDateTime()) && monitorDeviceSettingMap.get(entry.getKey()).getDeviceType() != 1 ) {
                 returnList.add(alarmInfo);
             }
         }
@@ -156,7 +149,7 @@ public class QueryAlarmService {
 
         List<AlarmInfo> finalList = new ArrayList<>();
 
-        // 默认去掉未处理的告警
+        // 默认去掉未处理的告警和基准设备
         if(request.getAlarmStatus() != 4){
             for (AlarmInfo info:returnList){
                 if (info.getAlarmStatus() != 4){
@@ -168,6 +161,16 @@ public class QueryAlarmService {
         {
             finalList = returnList;
         }
+
+        List<AlarmInfo> tmpResult = new ArrayList<>();
+        for(AlarmInfo info:finalList)
+        {
+            if(monitorDeviceSettingMap.get(info.getAlarmDeviceId()).getDeviceType() != 1 )
+            {
+                tmpResult.add(info);
+            }
+        }
+        finalList = tmpResult;
 
         if (!CollectionUtils.isEmpty(finalList)) {
             finalList.sort((AlarmInfo o1, AlarmInfo o2) -> {
@@ -269,7 +272,7 @@ public class QueryAlarmService {
 
         // 只看未处理告警
         for (Map.Entry<Integer, AlarmInfo> entry : alarmInfoMap.entrySet()) {
-            if (entry.getValue().getAlarmStatus() == 1)
+            if (entry.getValue().getAlarmStatus() == 1 && monitorDeviceSettingMap.get(entry.getKey()).getDeviceType() != 1)
                 alarmInfoList.add(entry.getValue());
         }
 

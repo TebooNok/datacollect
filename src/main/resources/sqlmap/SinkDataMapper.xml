@@ -9,11 +9,11 @@
     </resultMap>
 
     <select id="selectSinkDataById" resultMap="DataResultMap" parameterType="java.lang.Integer" >
-        select * from yk_api where id = #{deviceId} order by time desc limit 100
+        select * from yk_api_copy where id = #{deviceId} order by time desc limit 100
     </select>
 
     <select id="selectSinkDataByTime" resultMap="DataResultMap" parameterType="java.sql.Timestamp" >
-        select * from yk_api where 1=1
+        select * from yk_api_copy where 1=1
         <if test="startDate != null">
             AND time &gt;= #{startDate}
         </if>
@@ -23,7 +23,7 @@
     </select>
 
     <select id="selectSinkDataByHeight" resultMap="DataResultMap" parameterType="java.lang.Long" >
-        select * from yk_api where 1=1
+        select * from yk_api_copy where 1=1
         <if test="height != null">
             and deformation &gt;= #{height}
         </if>
@@ -31,12 +31,12 @@
 
     <!-- 每分钟刷新一次最新数据 -->
     <select id="selectLatestSinkData" resultMap="DataResultMap" >
-        select * from yk_api t join (select MAX(time) as vtime, id as vid from yk_api group by id) v on t.id=v.vid and t.time=v.vtime;
+        select * from yk_api_copy t join (select MAX(time) as vtime, id as vid from yk_api group by id) v on t.id=v.vid and t.time=v.vtime;
     </select>
 
     <!-- 全量数据刷新,时间递减，最多1000条 -->
     <select id="selectAllSinkData" resultMap="DataResultMap" >
-        select * from yk_api
+        select * from yk_api_copy
     </select>
 
 </mapper>

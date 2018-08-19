@@ -1,5 +1,6 @@
 package com.pginfo.datacollect.domain;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.poi.openxml4j.opc.PackagingURIHelper;
 
 public class AlarmInfo {
@@ -177,5 +178,10 @@ public class AlarmInfo {
 
     public void setAlarmDeviceDirection(int alarmDeviceDirection) {
         this.alarmDeviceDirection = alarmDeviceDirection;
+    }
+
+    @Override
+    public String toString(){
+        return JSONObject.toJSONString(this);
     }
 }

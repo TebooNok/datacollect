@@ -8,6 +8,8 @@ import com.pginfo.datacollect.util.Constants;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +38,7 @@ public class ManageAlarmController {
     }
 
     @ApiOperation(value = "查询告警阈值", notes = "查看告警阈值")
+    @RequiresAuthentication
     public QueryAlarmThreResponse queryAlarmThre(QueryAlarmThreRequest request) {
         QueryAlarmThreResponse response = new QueryAlarmThreResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
 
@@ -54,7 +57,7 @@ public class ManageAlarmController {
     })
     @RequestMapping(value = "setAlarmThre.do", method = RequestMethod.POST, produces = "application/json")
     @GetMapping("/require_role")
-    @RequiresRoles("admin")
+    @RequiresRoles(value = {"system","admin"}, logical = Logical.OR)
     public SetAlarmThreResponse setAlarmThre(SetAlarmThreRequest setAlarmThreRequest) {
 
         try {
@@ -85,7 +88,7 @@ public class ManageAlarmController {
     })
     @RequestMapping(value = "processAlarm.do", method = RequestMethod.POST, produces = "application/json")
     @GetMapping("/require_role")
-    @RequiresRoles("admin")
+    @RequiresRoles(value = {"system","admin","user1","user2"}, logical = Logical.OR)
     public ProcessAlarmResponse processAlarm(ProcessAlarmRequest request) {
         try {
             String[] positions = request.getAlarmPositions().split("\\|");
@@ -115,7 +118,7 @@ public class ManageAlarmController {
     })
     @RequestMapping(value = "confirmAlarm.do", method = RequestMethod.POST, produces = "application/json")
     @GetMapping("/require_role")
-    @RequiresRoles("admin")
+    @RequiresRoles(value = {"system","admin","user1"}, logical = Logical.OR)
     public ConfirmAlarmResponse confirmAlarm(ConfirmAlarmRequest request) {
         try {
             String[] positions = request.getAlarmPositions().split("\\|");
