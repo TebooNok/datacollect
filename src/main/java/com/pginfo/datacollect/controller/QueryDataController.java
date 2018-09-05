@@ -98,9 +98,9 @@ public class QueryDataController {
         if(!StringUtils.isEmpty(queryDataRequest.getMultiDateTime()))
         {
             multiDateTimeArr = queryDataRequest.getMultiDateTime().split("\\|");
-            for(String str:multiDateTimeArr)
+            for(int i = 0; i < multiDateTimeArr.length; i++)
             {
-                str = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(str)));
+                multiDateTimeArr[i] = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(multiDateTimeArr[i])));
             }
         }
 
@@ -227,107 +227,99 @@ public class QueryDataController {
             return;
         }
 
-
         QueryDataResponse queryDataResponse = querySinkDataList(request);
-        try {
 
-            //------------------- TEST -------------
+        try {
+            if(request.getMode() == 1) {
+                //------------------- TEST -------------
 //            List<MongoSinkData> testList = new ArrayList<>();
 //            testList.add(new MongoSinkData(1, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
 //            testList.add(new MongoSinkData(2, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
 //            testList.add(new MongoSinkData(3, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
 //            testList.add(new MongoSinkData(4, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
 //            testList.add(new MongoSinkData(5, 2, LocalUtils.formatCurrentTime(), 22.4, 2, 1, 1, 2));
-            //------------------- TEST -------------
+                //------------------- TEST -------------
 
-            for(MongoSinkData data:queryDataResponse.getMongoSinkDataList()){
-                data.setDeviceStatus(alarmInfoMap.get(data.getDeviceId()).getAlarmStatus());
-                data.setdPosition(data.getDevicePosition() + "号桥墩");
-                data.setdDirection(data.getDeviceDirection() == 1?"上行":"下行");
-            }
+//                for (MongoSinkData data : queryDataResponse.getMongoSinkDataList()) {
+//                    data.setDeviceStatus(alarmInfoMap.get(data.getDeviceId()).getAlarmStatus());
+//                    data.setdPosition(data.getDevicePosition() + "号桥墩");
+//                    data.setdDirection(data.getDeviceDirection() == 1 ? "上行" : "下行");
+//                }
 
-            String[] multiDateTimeArr = null;
+                String[] multiDateTimeArr = null;
 
-            // 时间段查询支持多个时间点
-            if(!StringUtils.isEmpty(request.getMultiDateTime()))
-            {
-                multiDateTimeArr = request.getMultiDateTime().split("\\|");
-                for(String str:multiDateTimeArr)
-                {
-                    str = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(str)));
-                    str = LocalUtils.formatIgnoreSeconds(str);
+                // 时间点查询支持多个时间点
+                if (!StringUtils.isEmpty(request.getMultiDateTime())) {
+                    multiDateTimeArr = request.getMultiDateTime().split("\\|");
+                    for (int i = 0; i < multiDateTimeArr.length; i++) {
+                        multiDateTimeArr[i] = LocalUtils.convertTimestamp2String(new Timestamp(Long.parseLong(multiDateTimeArr[i])));
+                        multiDateTimeArr[i] = LocalUtils.formatIgnoreSeconds(multiDateTimeArr[i]);
+                    }
                 }
-            }
 
-            // 导出excel
-            HSSFWorkbook wb = new HSSFWorkbook();
+                // 导出excel
+                HSSFWorkbook wb = new HSSFWorkbook();
+                // 两个Sheet
+                HSSFSheet sheetUp = wb.createSheet("上行");
+                HSSFSheet sheetDown = wb.createSheet("下行");
 
-            // 两个Sheet
-            HSSFSheet sheetUp = wb.createSheet("上行");
-            HSSFSheet sheetDown = wb.createSheet("下行");
+                // 两个Sheet的首行
+                HSSFRow rowUp = sheetUp.createRow(0);
+                HSSFRow rowDown = sheetDown.createRow(0);
 
-            // 两个Sheet的首行
-            HSSFRow rowUp = sheetUp.createRow(0);
-            HSSFRow rowDown = sheetDown.createRow(0);
+                //  时间\测点
+                HSSFCell cell;
+                cell = rowUp.createCell(0);
+                cell.setCellValue("时间\\测点");
+                cell = rowDown.createCell(0);
+                cell.setCellValue("时间\\测点");
 
-            //  时间\测点
-            HSSFCell cell;
-            cell = rowUp.createCell(0);
-            cell.setCellValue("时间\\测点");
-            cell = rowDown.createCell(0);
-            cell.setCellValue("时间\\测点");
+                // 存放cell位置和桥墩号对应关系 Entry<Id, CellPos>
+                Map<String, Integer> cellMap = new HashMap<>();
 
-            // 存放cell位置和桥墩号对应关系 Entry<Id, CellPos>
-            Map<String,Integer> cellMap = new HashMap<>();
+                // 假设 3|4|5|6|7 七个桥墩, 两个Sheet首行初始化
+                String[] posList = request.getDeviceId().split("\\|");
+                for (int i = 1; i <= posList.length; i++) {
+                    cellMap.put(posList[i-1], i);
+                    HSSFCell cellsUp = rowUp.createCell(i);
+                    cellsUp.setCellValue("上行" + posList[i-1] + "#桥墩");
+                    HSSFCell cellsDown = rowDown.createCell(i);
+                    cellsDown.setCellValue("下行" + posList[i-1] + "#桥墩");
+                }
 
-            // 假设 3|4|5|6|7 七个桥墩, 两个Sheet首行初始化
-            String[] posList = request.getDeviceId().split("\\|");
-            for(int i = 1; i <= posList.length; i++)
-            {
-                cellMap.put(posList[i], i);
-                HSSFCell cellsUp = rowUp.createCell(i);
-                cellsUp.setCellValue("上行" + posList[i] + "#桥墩");
-                HSSFCell cellsDown = rowDown.createCell(i);
-                cellsDown.setCellValue("下行" + posList[i] + "#桥墩");
-            }
+                for (int i = 1; i <= multiDateTimeArr.length; i++) {
+                    // 每个时间建立一行
+                    String time = multiDateTimeArr[i - 1];
+                    HSSFRow rowUpTemp = sheetUp.createRow(i);
+                    HSSFRow rowDownTemp = sheetDown.createRow(i);
 
-            for(int i = 1; i <= multiDateTimeArr.length; i++)
-            {
-                // 每个时间建立一行
-                String time = multiDateTimeArr[i-1];
-                HSSFRow rowUpTemp = sheetUp.createRow(i);
-                HSSFRow rowDownTemp = sheetDown.createRow(i);
+                    // 每行第一个元素是时间
+                    HSSFCell cellsUp = rowUpTemp.createCell(0);
+                    cellsUp.setCellValue(time);
+                    HSSFCell cellsDown = rowDownTemp.createCell(0);
+                    cellsDown.setCellValue(time);
 
-                // 每行第一个元素是时间
-                HSSFCell cellsUp = rowUpTemp.createCell(0);
-                cellsUp.setCellValue(time);
-                HSSFCell cellsDown = rowDownTemp.createCell(0);
-                cellsDown.setCellValue(time);
+                    // 遍历结果集，将对应的时间放置到对应的格子里
+                    for (MongoSinkData data : queryDataResponse.getMongoSinkDataList()) {
+                        boolean isUp = data.getDeviceDirection() == 1;
 
-                // 遍历结果集，将对应的时间放置到对应的格子里
-                for(MongoSinkData data:queryDataResponse.getMongoSinkDataList())
-                {
-                    boolean isUp = data.getDeviceDirection() == 1;
-
-                    // 该条数据属于当前行
-                    if(data.getDateTime().equals(time)){
-                        // 上行数据
-                        if(isUp)
-                        {
-                            HSSFCell cellTemp = rowUpTemp.createCell(cellMap.get(data.getdPosition()));
-                            cellTemp.setCellValue(((double) data.getHeight()) / 1000);
-                        }
-                        // 下行数据
-                        else
-                        {
-                            HSSFCell cellTemp = rowDownTemp.createCell(cellMap.get(data.getdPosition()));
-                            cellTemp.setCellValue(((double) data.getHeight()) / 1000);
+                        // 该条数据属于当前行
+                        if (data.getDateTime().equals(time)) {
+                            // 上行数据
+                            if (isUp) {
+                                HSSFCell cellTemp = rowUpTemp.createCell(cellMap.get(String.valueOf(data.getDevicePosition())));
+                                cellTemp.setCellValue(((double) data.getHeight()) / 1000);
+                            }
+                            // 下行数据
+                            else {
+                                HSSFCell cellTemp = rowDownTemp.createCell(cellMap.get(String.valueOf(data.getDevicePosition())));
+                                cellTemp.setCellValue(((double) data.getHeight()) / 1000);
+                            }
                         }
                     }
                 }
-            }
 
-            // ===================注释修改前方法=============
+                // ===================注释修改前方法=============
 //            String sTime = LocalUtils.formatIgnoreSeconds(request.getStartDateTime());
 //            String secondTime = null;
 //            String thirdTime = null;
@@ -388,18 +380,34 @@ public class QueryDataController {
 //                }
 //            }
 
-            response.setCharacterEncoding("UTF-8");
-            response.setHeader("content-Type", "application/vnd.ms-excel");
-            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("沉降数据.xls", "UTF-8"));
-            wb.write(response.getOutputStream());
+                response.setCharacterEncoding("UTF-8");
+                response.setHeader("content-Type", "application/vnd.ms-excel");
+                response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("沉降数据.xls", "UTF-8"));
+                wb.write(response.getOutputStream());
 
-            // FileUtils.exportExcel(queryDataResponse.getMongoSinkDataList(), "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据.xls", response);
-            // FileUtils.exportExcel(testList, "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据", response);
+                // FileUtils.exportExcel(queryDataResponse.getMongoSinkDataList(), "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据.xls", response);
+                // FileUtils.exportExcel(testList, "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据", response);
+            }
+            else
+            {
+                for(MongoSinkData data:queryDataResponse.getMongoSinkDataList())
+                {
+                    data.setHeightDouble(((double)data.getHeight() / 1000));
+                }
+                for (MongoSinkData data : queryDataResponse.getMongoSinkDataList()) {
+                    data.setDeviceStatus(alarmInfoMap.get(data.getDeviceId()).getAlarmStatus());
+                    data.setdPosition(data.getDevicePosition() + "号桥墩");
+                    data.setdDirection(data.getDeviceDirection() == 1 ? "上行" : "下行");
+                }
+                FileUtils.exportExcel(queryDataResponse.getMongoSinkDataList(), "沉降数据", "Sheet1", MongoSinkData.class, "沉降数据.xls", response);
+            }
         } catch (Exception e) {
 
             logger.error("[Internal error at export excel file.]");
+            e.printStackTrace();
             //return new QueryDataResponse(Constants.INTERNAL_ERROR_CODE, "[Internal error at export excel file.]" + e.getMessage(), null);
         }
+
 
         //return new QueryDataResponse(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG, null);
     }
@@ -415,8 +423,8 @@ public class QueryDataController {
             case 3:
                 return null;
             case 1:
-                if (StringUtils.isEmpty(queryDataRequest.getStartDateTime())) {
-                    return "Time point can`t be null when search point.";
+                if (StringUtils.isEmpty(queryDataRequest.getMultiDateTime())) {
+                    return "Time points can`t be null when search point.";
                 }
                 if (StringUtils.isEmpty(queryDataRequest.getDeviceId())) {
                     return "DeviceId can`t be null when search point.";

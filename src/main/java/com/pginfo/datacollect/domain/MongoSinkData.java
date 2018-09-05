@@ -22,8 +22,10 @@ public class MongoSinkData {
     @Excel(name = "传感器编号", orderNum = "0")
     private int deviceId;
 
-    @Excel(name = "监测值", orderNum = "4")
     private long height;
+
+    @Excel(name = "监测值", orderNum = "4")
+    private double heightDouble;
 
     // 此处相当于格式化TimeStamp
     @Excel(name = "时间", orderNum = "1")
@@ -142,5 +144,13 @@ public class MongoSinkData {
 
     public void setdDirection(String dDirection) {
         this.dDirection = dDirection;
+    }
+
+    public double getHeightDouble() {
+        return heightDouble;
+    }
+
+    public void setHeightDouble(double heightDouble) {
+        this.heightDouble = heightDouble;
     }
 }
