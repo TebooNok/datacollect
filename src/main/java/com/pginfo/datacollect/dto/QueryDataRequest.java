@@ -25,6 +25,8 @@ public class QueryDataRequest extends BaseRequest {
 
     private String thirdDateTime;
 
+    private String multiDateTime;
+
     // Token仅用于导出excel时
     private String token;
 
@@ -104,4 +106,13 @@ public class QueryDataRequest extends BaseRequest {
     public void setToken(String token) {
         this.token = token;
     }
+
+    public String getMultiDateTime() {
+        return multiDateTime;
+    }
+
+    public void setMultiDateTime(String multiDateTime) {
+        this.multiDateTime = multiDateTime;
+    }
+
 }

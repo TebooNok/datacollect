@@ -72,6 +72,12 @@ public class ManageAlarmService {
 
                 // 确认完毕后归档，状态调为无告警
                 alarmInfo.setAlarmStatus(4);
+                alarmInfo.setAlarmProcessMessage(null);
+                alarmInfo.setAlarmProcessTime(null);
+                alarmInfo.setAlarmProcessUser(null);
+                alarmInfo.setAlarmConfirmMessage(null);
+                alarmInfo.setAlarmConfirmUser(null);
+                alarmInfo.setAlarmConfirmTime(null);
             }
             else{
                 alarmInfo.setAlarmStatus(1);

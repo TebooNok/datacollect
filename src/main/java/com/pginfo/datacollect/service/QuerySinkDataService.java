@@ -231,39 +231,69 @@ public class QuerySinkDataService {
 
     }
 
-    public List<MongoSinkData> sameTimeMultiBridge(QueryDataRequest queryDataRequest) {
+    public List<MongoSinkData> sameTimeMultiBridge(QueryDataRequest queryDataRequest, String[] multiDateTimeArr) {
 
         String[] idList = queryDataRequest.getDeviceId().split("\\|");
         List<MongoSinkData> returnList = new ArrayList<>();
 
-        for (String id : idList) {
-            for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
-                if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
-                    MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getStartDateTime()), entry.getValue().getDeviceId());
-                    returnList.add(data);
-                }
-            }
+        Map.Entry<Integer, MonitorDeviceSetting> upEntry = null;
+        Map.Entry<Integer, MonitorDeviceSetting> downEntry = null;
 
-            if(!StringUtils.isEmpty(queryDataRequest.getSecondDateTime())){
-                for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
-                    if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
-                        MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getSecondDateTime()), entry.getValue().getDeviceId());
-                        returnList.add(data);
+        for(String time:multiDateTimeArr) {
+            for (String id : idList) {
+                for (Map.Entry<Integer, MonitorDeviceSetting> entry : monitorDeviceSettingMap.entrySet()) {
+                    if (entry.getValue().getDevicePosition() == Integer.parseInt(id)) {
+                        if (entry.getValue().getDeviceDirection() == 1) {
+                            upEntry = entry;
+                        } else {
+                            downEntry = entry;
+                        }
                     }
                 }
+                MongoSinkData data1 = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(time), upEntry.getValue().getDeviceId());
+                MongoSinkData data2 = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(time), downEntry.getValue().getDeviceId());
+                returnList.add(data1);
+                returnList.add(data2);
             }
-
-            if(!StringUtils.isEmpty(queryDataRequest.getThirdDateTime())){
-                for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
-                    if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
-                        MongoSinkData data = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getThirdDateTime()), entry.getValue().getDeviceId());
-                        returnList.add(data);
-                    }
-                }
-            }
-
         }
 
+//        if (!StringUtils.isEmpty(queryDataRequest.getSecondDateTime())) {
+//            for (String id : idList) {
+//                for (Map.Entry<Integer, MonitorDeviceSetting> entry : monitorDeviceSettingMap.entrySet()) {
+//                    if (entry.getValue().getDevicePosition() == Integer.parseInt(id)) {
+//                        if(entry.getValue().getDeviceDirection() == 1) {
+//                            upEntry = entry;
+//                        }
+//                        else {
+//                            downEntry = entry;
+//                        }
+//                    }
+//                }
+//                MongoSinkData data1 = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getSecondDateTime()), upEntry.getValue().getDeviceId());
+//                MongoSinkData data2 = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getSecondDateTime()), downEntry.getValue().getDeviceId());
+//                returnList.add(data1);
+//                returnList.add(data2);
+//            }
+//        }
+//
+//        if(!StringUtils.isEmpty(queryDataRequest.getThirdDateTime())){
+//            for (String id : idList) {
+//                for(Map.Entry<Integer, MonitorDeviceSetting> entry:monitorDeviceSettingMap.entrySet()){
+//                    if (entry.getValue().getDevicePosition() == Integer.parseInt(id)){
+//                        if(entry.getValue().getDeviceDirection() == 1) {
+//                            upEntry = entry;
+//                        }
+//                        else {
+//                            downEntry = entry;
+//                        }
+//                    }
+//                }
+//                MongoSinkData data1 = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getThirdDateTime()), upEntry.getValue().getDeviceId());
+//                MongoSinkData data2 = mongoSinkDataDao.getSinkDataByTime(LocalUtils.formatIgnoreSeconds(queryDataRequest.getThirdDateTime()), downEntry.getValue().getDeviceId());
+//                returnList.add(data1);
+//                returnList.add(data2);
+//            }
+//        }
 
         return returnList;
     }
